@@ -14,6 +14,9 @@
 		F1894A922560ED62006FC3E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1894A912560ED62006FC3E6 /* Assets.xcassets */; };
 		F1894A952560ED62006FC3E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1894A932560ED62006FC3E6 /* LaunchScreen.storyboard */; };
 		F1894A9D2560EE6E006FC3E6 /* BackgroundGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894A9C2560EE6E006FC3E6 /* BackgroundGradient.swift */; };
+		F1894A9F2560F581006FC3E6 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1894A9E2560F581006FC3E6 /* Montserrat-Regular.ttf */; };
+		F1894AA12560F58D006FC3E6 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1894AA02560F58D006FC3E6 /* Montserrat-Bold.ttf */; };
+		F1894AA42560F827006FC3E6 /* Montserrat-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1894AA32560F827006FC3E6 /* Montserrat-Italic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		F1894A942560ED62006FC3E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F1894A962560ED62006FC3E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1894A9C2560EE6E006FC3E6 /* BackgroundGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundGradient.swift; sourceTree = "<group>"; };
+		F1894A9E2560F581006FC3E6 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		F1894AA02560F58D006FC3E6 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		F1894AA32560F827006FC3E6 /* Montserrat-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Italic.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +72,19 @@
 				F1894A912560ED62006FC3E6 /* Assets.xcassets */,
 				F1894A932560ED62006FC3E6 /* LaunchScreen.storyboard */,
 				F1894A962560ED62006FC3E6 /* Info.plist */,
+				F1894AA22560F5AE006FC3E6 /* fonts */,
 			);
 			path = "CSE438S-Egyptian-Rat-Tap";
+			sourceTree = "<group>";
+		};
+		F1894AA22560F5AE006FC3E6 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F1894A9E2560F581006FC3E6 /* Montserrat-Regular.ttf */,
+				F1894AA02560F58D006FC3E6 /* Montserrat-Bold.ttf */,
+				F1894AA32560F827006FC3E6 /* Montserrat-Italic.ttf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,7 +145,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1894AA12560F58D006FC3E6 /* Montserrat-Bold.ttf in Resources */,
+				F1894A9F2560F581006FC3E6 /* Montserrat-Regular.ttf in Resources */,
 				F1894A952560ED62006FC3E6 /* LaunchScreen.storyboard in Resources */,
+				F1894AA42560F827006FC3E6 /* Montserrat-Italic.ttf in Resources */,
 				F1894A922560ED62006FC3E6 /* Assets.xcassets in Resources */,
 				F1894A902560ED60006FC3E6 /* Main.storyboard in Resources */,
 			);
