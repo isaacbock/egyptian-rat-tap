@@ -13,6 +13,7 @@
 		F1894A902560ED60006FC3E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1894A8E2560ED60006FC3E6 /* Main.storyboard */; };
 		F1894A922560ED62006FC3E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1894A912560ED62006FC3E6 /* Assets.xcassets */; };
 		F1894A952560ED62006FC3E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1894A932560ED62006FC3E6 /* LaunchScreen.storyboard */; };
+		F1894A9D2560EE6E006FC3E6 /* BackgroundGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894A9C2560EE6E006FC3E6 /* BackgroundGradient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		F1894A912560ED62006FC3E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F1894A942560ED62006FC3E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F1894A962560ED62006FC3E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1894A9C2560EE6E006FC3E6 /* BackgroundGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundGradient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				F1894A8A2560ED60006FC3E6 /* SceneDelegate.swift */,
 				F1894A8C2560ED60006FC3E6 /* ViewController.swift */,
 				F1894A8E2560ED60006FC3E6 /* Main.storyboard */,
+				F1894A9C2560EE6E006FC3E6 /* BackgroundGradient.swift */,
 				F1894A912560ED62006FC3E6 /* Assets.xcassets */,
 				F1894A932560ED62006FC3E6 /* LaunchScreen.storyboard */,
 				F1894A962560ED62006FC3E6 /* Info.plist */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1894A8D2560ED60006FC3E6 /* ViewController.swift in Sources */,
+				F1894A9D2560EE6E006FC3E6 /* BackgroundGradient.swift in Sources */,
 				F1894A892560ED60006FC3E6 /* AppDelegate.swift in Sources */,
 				F1894A8B2560ED60006FC3E6 /* SceneDelegate.swift in Sources */,
 			);
