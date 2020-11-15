@@ -17,6 +17,11 @@
 		F1894A9F2560F581006FC3E6 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1894A9E2560F581006FC3E6 /* Montserrat-Regular.ttf */; };
 		F1894AA12560F58D006FC3E6 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1894AA02560F58D006FC3E6 /* Montserrat-Bold.ttf */; };
 		F1894AA42560F827006FC3E6 /* Montserrat-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1894AA32560F827006FC3E6 /* Montserrat-Italic.ttf */; };
+		F1894AA625610438006FC3E6 /* CreateGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AA525610438006FC3E6 /* CreateGameViewController.swift */; };
+		F1894AA82561056F006FC3E6 /* JoinGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AA72561056F006FC3E6 /* JoinGameViewController.swift */; };
+		F1894AAA25610686006FC3E6 /* BeginSinglePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AA925610686006FC3E6 /* BeginSinglePlayerViewController.swift */; };
+		F1894AAC25611F68006FC3E6 /* BeginMultiplayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AAB25611F68006FC3E6 /* BeginMultiplayerViewController.swift */; };
+		F1894AAE256120E5006FC3E6 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AAD256120E5006FC3E6 /* PlayViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +37,11 @@
 		F1894A9E2560F581006FC3E6 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		F1894AA02560F58D006FC3E6 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		F1894AA32560F827006FC3E6 /* Montserrat-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Italic.ttf"; sourceTree = "<group>"; };
+		F1894AA525610438006FC3E6 /* CreateGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGameViewController.swift; sourceTree = "<group>"; };
+		F1894AA72561056F006FC3E6 /* JoinGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGameViewController.swift; sourceTree = "<group>"; };
+		F1894AA925610686006FC3E6 /* BeginSinglePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginSinglePlayerViewController.swift; sourceTree = "<group>"; };
+		F1894AAB25611F68006FC3E6 /* BeginMultiplayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginMultiplayerViewController.swift; sourceTree = "<group>"; };
+		F1894AAD256120E5006FC3E6 /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +76,13 @@
 			children = (
 				F1894A882560ED60006FC3E6 /* AppDelegate.swift */,
 				F1894A8A2560ED60006FC3E6 /* SceneDelegate.swift */,
-				F1894A8C2560ED60006FC3E6 /* ViewController.swift */,
 				F1894A8E2560ED60006FC3E6 /* Main.storyboard */,
+				F1894A8C2560ED60006FC3E6 /* ViewController.swift */,
+				F1894AA525610438006FC3E6 /* CreateGameViewController.swift */,
+				F1894AA72561056F006FC3E6 /* JoinGameViewController.swift */,
+				F1894AAB25611F68006FC3E6 /* BeginMultiplayerViewController.swift */,
+				F1894AA925610686006FC3E6 /* BeginSinglePlayerViewController.swift */,
+				F1894AAD256120E5006FC3E6 /* PlayViewController.swift */,
 				F1894A9C2560EE6E006FC3E6 /* BackgroundGradient.swift */,
 				F1894A912560ED62006FC3E6 /* Assets.xcassets */,
 				F1894A932560ED62006FC3E6 /* LaunchScreen.storyboard */,
@@ -162,9 +177,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1894A8D2560ED60006FC3E6 /* ViewController.swift in Sources */,
+				F1894AAE256120E5006FC3E6 /* PlayViewController.swift in Sources */,
 				F1894A9D2560EE6E006FC3E6 /* BackgroundGradient.swift in Sources */,
+				F1894AAA25610686006FC3E6 /* BeginSinglePlayerViewController.swift in Sources */,
+				F1894AAC25611F68006FC3E6 /* BeginMultiplayerViewController.swift in Sources */,
 				F1894A892560ED60006FC3E6 /* AppDelegate.swift in Sources */,
 				F1894A8B2560ED60006FC3E6 /* SceneDelegate.swift in Sources */,
+				F1894AA82561056F006FC3E6 /* JoinGameViewController.swift in Sources */,
+				F1894AA625610438006FC3E6 /* CreateGameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
