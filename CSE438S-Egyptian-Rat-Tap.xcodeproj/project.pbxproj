@@ -22,6 +22,8 @@
 		F1894AAA25610686006FC3E6 /* BeginSinglePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AA925610686006FC3E6 /* BeginSinglePlayerViewController.swift */; };
 		F1894AAC25611F68006FC3E6 /* BeginMultiplayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AAB25611F68006FC3E6 /* BeginMultiplayerViewController.swift */; };
 		F1894AAE256120E5006FC3E6 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AAD256120E5006FC3E6 /* PlayViewController.swift */; };
+		F1894AB025612A44006FC3E6 /* PlayingCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1894AAF25612A44006FC3E6 /* PlayingCard.xib */; };
+		F1894AB4256137A1006FC3E6 /* PlayingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AB3256137A1006FC3E6 /* PlayingCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		F1894AA925610686006FC3E6 /* BeginSinglePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginSinglePlayerViewController.swift; sourceTree = "<group>"; };
 		F1894AAB25611F68006FC3E6 /* BeginMultiplayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginMultiplayerViewController.swift; sourceTree = "<group>"; };
 		F1894AAD256120E5006FC3E6 /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
+		F1894AAF25612A44006FC3E6 /* PlayingCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayingCard.xib; sourceTree = "<group>"; };
+		F1894AB3256137A1006FC3E6 /* PlayingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,8 @@
 				F1894AAB25611F68006FC3E6 /* BeginMultiplayerViewController.swift */,
 				F1894AA925610686006FC3E6 /* BeginSinglePlayerViewController.swift */,
 				F1894AAD256120E5006FC3E6 /* PlayViewController.swift */,
+				F1894AB3256137A1006FC3E6 /* PlayingCard.swift */,
+				F1894AAF25612A44006FC3E6 /* PlayingCard.xib */,
 				F1894A9C2560EE6E006FC3E6 /* BackgroundGradient.swift */,
 				F1894A912560ED62006FC3E6 /* Assets.xcassets */,
 				F1894A932560ED62006FC3E6 /* LaunchScreen.storyboard */,
@@ -163,6 +169,7 @@
 				F1894AA12560F58D006FC3E6 /* Montserrat-Bold.ttf in Resources */,
 				F1894A9F2560F581006FC3E6 /* Montserrat-Regular.ttf in Resources */,
 				F1894A952560ED62006FC3E6 /* LaunchScreen.storyboard in Resources */,
+				F1894AB025612A44006FC3E6 /* PlayingCard.xib in Resources */,
 				F1894AA42560F827006FC3E6 /* Montserrat-Italic.ttf in Resources */,
 				F1894A922560ED62006FC3E6 /* Assets.xcassets in Resources */,
 				F1894A902560ED60006FC3E6 /* Main.storyboard in Resources */,
@@ -176,6 +183,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1894AB4256137A1006FC3E6 /* PlayingCard.swift in Sources */,
 				F1894A8D2560ED60006FC3E6 /* ViewController.swift in Sources */,
 				F1894AAE256120E5006FC3E6 /* PlayViewController.swift in Sources */,
 				F1894A9D2560EE6E006FC3E6 /* BackgroundGradient.swift in Sources */,
