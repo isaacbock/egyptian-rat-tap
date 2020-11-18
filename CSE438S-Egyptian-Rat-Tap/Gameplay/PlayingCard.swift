@@ -11,16 +11,15 @@ import UIKit
 // Reusable xib view via https://stackoverflow.com/a/40104211
 @IBDesignable
 class PlayingCard: UIView {
+    
+    var rank: String?
+    var suit: String?
 
     var contentView : UIView!
-    
     @IBOutlet weak var cardLabelTop: UILabel!
     @IBOutlet weak var cardLabelBottom: UILabel!
     @IBOutlet weak var cardSuitImageTop: UIImageView!
     @IBOutlet weak var cardSuitImageBottom: UIImageView!
-    
-    var rank: String?
-    var suit: String?
     
     init(rank: String?, suit: String?, frame: CGRect = CGRect(x: 0, y: 0, width: 120, height: 180)) {
         super.init(frame: frame)

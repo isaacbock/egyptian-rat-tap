@@ -59,6 +59,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F118E4B52565D093005BAF24 /* Multiplayer */ = {
+			isa = PBXGroup;
+			children = (
+				F1894AA525610438006FC3E6 /* CreateGameViewController.swift */,
+				F1894AA72561056F006FC3E6 /* JoinGameViewController.swift */,
+				F1894AAB25611F68006FC3E6 /* BeginMultiplayerViewController.swift */,
+			);
+			path = Multiplayer;
+			sourceTree = "<group>";
+		};
+		F118E4B62565D09B005BAF24 /* Single player */ = {
+			isa = PBXGroup;
+			children = (
+				F1894AA925610686006FC3E6 /* BeginSinglePlayerViewController.swift */,
+			);
+			path = "Single player";
+			sourceTree = "<group>";
+		};
+		F118E4B72565D0B7005BAF24 /* Gameplay */ = {
+			isa = PBXGroup;
+			children = (
+				F1894AAD256120E5006FC3E6 /* PlayViewController.swift */,
+				F1894AAF25612A44006FC3E6 /* PlayingCard.xib */,
+				F1894AB3256137A1006FC3E6 /* PlayingCard.swift */,
+			);
+			path = Gameplay;
+			sourceTree = "<group>";
+		};
 		F1894A7C2560ED60006FC3E6 = {
 			isa = PBXGroup;
 			children = (
@@ -82,13 +110,9 @@
 				F1894A8A2560ED60006FC3E6 /* SceneDelegate.swift */,
 				F1894A8E2560ED60006FC3E6 /* Main.storyboard */,
 				F1894A8C2560ED60006FC3E6 /* ViewController.swift */,
-				F1894AA525610438006FC3E6 /* CreateGameViewController.swift */,
-				F1894AA72561056F006FC3E6 /* JoinGameViewController.swift */,
-				F1894AAB25611F68006FC3E6 /* BeginMultiplayerViewController.swift */,
-				F1894AA925610686006FC3E6 /* BeginSinglePlayerViewController.swift */,
-				F1894AAD256120E5006FC3E6 /* PlayViewController.swift */,
-				F1894AB3256137A1006FC3E6 /* PlayingCard.swift */,
-				F1894AAF25612A44006FC3E6 /* PlayingCard.xib */,
+				F118E4B52565D093005BAF24 /* Multiplayer */,
+				F118E4B62565D09B005BAF24 /* Single player */,
+				F118E4B72565D0B7005BAF24 /* Gameplay */,
 				F1894A9C2560EE6E006FC3E6 /* BackgroundGradient.swift */,
 				F1894A912560ED62006FC3E6 /* Assets.xcassets */,
 				F1894A932560ED62006FC3E6 /* LaunchScreen.storyboard */,

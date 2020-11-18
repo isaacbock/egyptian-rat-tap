@@ -14,7 +14,7 @@ class PlayViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        // Create 3 test cards
+        // Create 3 test cards and add them to the screen. Update: yay, it works! 
         let card3 = PlayingCard(rank: "10", suit: "spade")
         card3.center = CGPoint(x: self.view.center.x - 30, y: self.view.center.y - 30);
         view.addSubview(card3)
