@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA69012F2568922D006308B5 /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA69012E2568922D006308B5 /* Deck.swift */; };
 		F1894A892560ED60006FC3E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894A882560ED60006FC3E6 /* AppDelegate.swift */; };
 		F1894A8B2560ED60006FC3E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894A8A2560ED60006FC3E6 /* SceneDelegate.swift */; };
 		F1894A8D2560ED60006FC3E6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894A8C2560ED60006FC3E6 /* ViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EA69012E2568922D006308B5 /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		F1894A852560ED60006FC3E6 /* CSE438S-Egyptian-Rat-Tap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CSE438S-Egyptian-Rat-Tap.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1894A882560ED60006FC3E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1894A8A2560ED60006FC3E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				F1894AAD256120E5006FC3E6 /* PlayViewController.swift */,
 				F1894AAF25612A44006FC3E6 /* PlayingCard.xib */,
 				F1894AB3256137A1006FC3E6 /* PlayingCard.swift */,
+				EA69012E2568922D006308B5 /* Deck.swift */,
 			);
 			path = Gameplay;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				F1894A892560ED60006FC3E6 /* AppDelegate.swift in Sources */,
 				F1894A8B2560ED60006FC3E6 /* SceneDelegate.swift in Sources */,
 				F1894AA82561056F006FC3E6 /* JoinGameViewController.swift in Sources */,
+				EA69012F2568922D006308B5 /* Deck.swift in Sources */,
 				F1894AA625610438006FC3E6 /* CreateGameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

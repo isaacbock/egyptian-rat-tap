@@ -26,6 +26,7 @@ class PlayViewController: UIViewController {
         let card1 = PlayingCard(rank: "K", suit: "club")
         card1.center = CGPoint(x: self.view.center.x + 30, y: self.view.center.y + 30);
         view.addSubview(card1)
+
     }
 
 }
