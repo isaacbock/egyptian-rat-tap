@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A5FFCBC256C17A800E170D1 /* GameKitActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5FFCBB256C17A700E170D1 /* GameKitActions.swift */; };
+		7A5FFCBE256CC34000E170D1 /* PlayMultiplayerGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5FFCBD256CC34000E170D1 /* PlayMultiplayerGameViewController.swift */; };
+		7A5FFCC1256CC3E700E170D1 /* RatTapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5FFCC0256CC3E700E170D1 /* RatTapModel.swift */; };
+		7A5FFCC3256CC40E00E170D1 /* RatTapPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5FFCC2256CC40E00E170D1 /* RatTapPlayer.swift */; };
+		7AF15159256AE1BE00CD11AE /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF15158256AE1BE00CD11AE /* GameKit.framework */; };
 		EA69012F2568922D006308B5 /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA69012E2568922D006308B5 /* Deck.swift */; };
 		F1894A892560ED60006FC3E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894A882560ED60006FC3E6 /* AppDelegate.swift */; };
 		F1894A8B2560ED60006FC3E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894A8A2560ED60006FC3E6 /* SceneDelegate.swift */; };
@@ -28,6 +33,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7A5FFCBB256C17A700E170D1 /* GameKitActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameKitActions.swift; sourceTree = "<group>"; };
+		7A5FFCBD256CC34000E170D1 /* PlayMultiplayerGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayMultiplayerGameViewController.swift; sourceTree = "<group>"; };
+		7A5FFCC0256CC3E700E170D1 /* RatTapModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatTapModel.swift; sourceTree = "<group>"; };
+		7A5FFCC2256CC40E00E170D1 /* RatTapPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatTapPlayer.swift; sourceTree = "<group>"; };
+		7AF15158256AE1BE00CD11AE /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		EA69012E2568922D006308B5 /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		F1894A852560ED60006FC3E6 /* CSE438S-Egyptian-Rat-Tap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CSE438S-Egyptian-Rat-Tap.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1894A882560ED60006FC3E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -55,18 +65,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AF15159256AE1BE00CD11AE /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A5FFCBF256CC3CD00E170D1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7A5FFCC0256CC3E700E170D1 /* RatTapModel.swift */,
+				7A5FFCC2256CC40E00E170D1 /* RatTapPlayer.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7AF15157256AE1BE00CD11AE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7AF15158256AE1BE00CD11AE /* GameKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F118E4B52565D093005BAF24 /* Multiplayer */ = {
 			isa = PBXGroup;
 			children = (
 				F1894AA525610438006FC3E6 /* CreateGameViewController.swift */,
 				F1894AA72561056F006FC3E6 /* JoinGameViewController.swift */,
 				F1894AAB25611F68006FC3E6 /* BeginMultiplayerViewController.swift */,
+				7A5FFCBB256C17A700E170D1 /* GameKitActions.swift */,
 			);
 			path = Multiplayer;
 			sourceTree = "<group>";
@@ -86,6 +115,7 @@
 				F1894AAF25612A44006FC3E6 /* PlayingCard.xib */,
 				F1894AB3256137A1006FC3E6 /* PlayingCard.swift */,
 				EA69012E2568922D006308B5 /* Deck.swift */,
+				7A5FFCBD256CC34000E170D1 /* PlayMultiplayerGameViewController.swift */,
 			);
 			path = Gameplay;
 			sourceTree = "<group>";
@@ -95,6 +125,7 @@
 			children = (
 				F1894A872560ED60006FC3E6 /* CSE438S-Egyptian-Rat-Tap */,
 				F1894A862560ED60006FC3E6 /* Products */,
+				7AF15157256AE1BE00CD11AE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,6 +140,7 @@
 		F1894A872560ED60006FC3E6 /* CSE438S-Egyptian-Rat-Tap */ = {
 			isa = PBXGroup;
 			children = (
+				7A5FFCBF256CC3CD00E170D1 /* Model */,
 				F1894A882560ED60006FC3E6 /* AppDelegate.swift */,
 				F1894A8A2560ED60006FC3E6 /* SceneDelegate.swift */,
 				F1894A8E2560ED60006FC3E6 /* Main.storyboard */,
@@ -212,13 +244,17 @@
 			files = (
 				F1894AB4256137A1006FC3E6 /* PlayingCard.swift in Sources */,
 				F1894A8D2560ED60006FC3E6 /* ViewController.swift in Sources */,
+				7A5FFCBC256C17A800E170D1 /* GameKitActions.swift in Sources */,
+				7A5FFCBE256CC34000E170D1 /* PlayMultiplayerGameViewController.swift in Sources */,
 				F1894AAE256120E5006FC3E6 /* PlayViewController.swift in Sources */,
 				F1894A9D2560EE6E006FC3E6 /* BackgroundGradient.swift in Sources */,
 				F1894AAA25610686006FC3E6 /* BeginSinglePlayerViewController.swift in Sources */,
 				F1894AAC25611F68006FC3E6 /* BeginMultiplayerViewController.swift in Sources */,
+				7A5FFCC3256CC40E00E170D1 /* RatTapPlayer.swift in Sources */,
 				F1894A892560ED60006FC3E6 /* AppDelegate.swift in Sources */,
 				F1894A8B2560ED60006FC3E6 /* SceneDelegate.swift in Sources */,
 				F1894AA82561056F006FC3E6 /* JoinGameViewController.swift in Sources */,
+				7A5FFCC1256CC3E700E170D1 /* RatTapModel.swift in Sources */,
 				EA69012F2568922D006308B5 /* Deck.swift in Sources */,
 				F1894AA625610438006FC3E6 /* CreateGameViewController.swift in Sources */,
 			);
