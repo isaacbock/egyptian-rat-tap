@@ -11,5 +11,6 @@ import UIKit
 
 struct RatTapPlayer: Codable {
     var name: String
-    var cards: Int = 0
+    var playerDeck: [Card] = []
+    
 }

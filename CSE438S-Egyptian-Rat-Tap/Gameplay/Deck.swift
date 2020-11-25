@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Rank{
+enum Rank: String, Codable{
     case two, three, four, five, six, seven, eight, nine, ten
     case jack, queen, king, ace
     
@@ -24,16 +24,16 @@ enum Rank{
     }
 }
     
-enum Suit{
+enum Suit: String, Codable{
     case spades, hearts, diamonds, clubs
 }
     
-struct Card {
+struct Card: Codable {
     var rank: Rank
     var suit: Suit
 }
     
-struct Deck {
+struct Deck: Codable {
     var deck: [Card] = []
     
     //stackoverflow.com/questions/24109691/add-a-method-to-card-that-creates-a-full-deck-of-cards-with-one-card-of-each-co

@@ -45,5 +45,32 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         guard let model = RatTapModel.decode(data: data) else { return }
         ratTapModel = model
     }
+    
+    private func savePlayers() {
+        guard let player2Name = match?.players.first?.displayName else { return }
+        
+        let wholeDeck = Deck().deck
+        let numOfCards = wholeDeck.count/2
+        
+        var player1Deck: [Card] = []
+        var player2Deck: [Card] = []
+        for i in 0...numOfCards{
+            player1Deck.append(wholeDeck[i])
+        }
+        for i in numOfCards...wholeDeck.count {
+            player2Deck.append(wholeDeck[i])
+        }
+        
+        let player1 = RatTapPlayer(name: GKLocalPlayer.local.displayName, playerDeck: player1Deck)
+        let player2 = RatTapPlayer(name: player2Name, playerDeck: player2Deck)
+        
+        ratTapModel.players = [player1, player2]
+        
+        ratTapModel.players.sort { (player1, player2) -> Bool in
+            player1.name < player2.name
+        }
+        
+        sendData()
+    }
 
 }
