@@ -10,23 +10,32 @@ import UIKit
 
 class PlayViewController: UIViewController {
 
+    var pDeck:[Card] = []
+    var comDeck:[Card] = []
+    var pile:[Card] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        let deck = Deck()
+        
+        let playerDecks = deck.splitDeck()
+        pDeck = playerDecks[0]
+        comDeck = playerDecks[1]
         
         // Create 3 test cards and add them to the screen. Update: yay, it works! 
-        let card3 = PlayingCard(rank: "10", suit: "spade")
-        card3.center = CGPoint(x: self.view.center.x - 30, y: self.view.center.y - 30);
-        view.addSubview(card3)
+//        let card3 = PlayingCard(rank: "10", suit: "spade")
+//        card3.center = CGPoint(x: self.view.center.x - 30, y: self.view.center.y - 30);
+//        view.addSubview(card3)
+//
+//        let card2 = PlayingCard(rank: "3", suit: "diamond")
+//        card2.center = CGPoint(x: self.view.center.x - 0, y: self.view.center.y - 0);
+//        view.addSubview(card2)
+//
+//        let card1 = PlayingCard(rank: "K", suit: "club")
+//        card1.center = CGPoint(x: self.view.center.x + 30, y: self.view.center.y + 30);
+//        view.addSubview(card1)
         
-        let card2 = PlayingCard(rank: "3", suit: "diamond")
-        card2.center = CGPoint(x: self.view.center.x - 0, y: self.view.center.y - 0);
-        view.addSubview(card2)
-        
-        let card1 = PlayingCard(rank: "K", suit: "club")
-        card1.center = CGPoint(x: self.view.center.x + 30, y: self.view.center.y + 30);
-        view.addSubview(card1)
-
     }
 
 }

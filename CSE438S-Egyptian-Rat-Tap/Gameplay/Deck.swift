@@ -47,6 +47,18 @@ struct Deck {
         }
         deck.shuffle()
     }
-    
+    func splitDeck() -> [[Card]]{
+        var p1Deck: [Card] = []
+        var p2Deck: [Card] = []
+        let numCards = deck.count
+        
+        for i in 0...numCards/2{
+            p1Deck[i] = deck[i]
+        }
+        for i in numCards/2...numCards{
+            p2Deck[i] = deck[i]
+        }
+        return [p1Deck, p2Deck]
+    }
 }
 
