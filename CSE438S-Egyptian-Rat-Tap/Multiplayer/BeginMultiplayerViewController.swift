@@ -25,6 +25,7 @@ class BeginMultiplayerViewController: UIViewController, GKLocalPlayerListener {
     }
         
     @IBAction func userReady(_ sender: Any) {
+        gameKitActions?.presentMatchmaker()
         // TO-DO:
         // update some variable to track that current user is ready
         
