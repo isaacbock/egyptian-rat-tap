@@ -15,26 +15,26 @@ class PlayViewController: UIViewController {
     var fullPile:[Card] = []
     var pile:[PlayingCard] = []
     var yourTurn:Bool = true
+    var slappable:Bool = false
+    var gestureRecognizerPile: UITapGestureRecognizer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         let deck = Deck()
         
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.flipCard(_:)))
+        let gestureRecognizerDeck = UITapGestureRecognizer(target: self, action: #selector(self.flipCard(_:)))
+        
+        gestureRecognizerPile = UITapGestureRecognizer(target: self, action: #selector(self.humanSlapped(_:)))
         
         let playerDecks = deck.splitDeck()
         pDeck = playerDecks[0]
         comDeck = playerDecks[1]
         
-//        while pDeck.count != 0 && comDeck.count != 0 {
-//
-//        }
-        
         // Create a card:
          let pCard = PlayingCard(rank: "10", suit: "spade")
-//
-//         Set initial card location:
+
+//        Set initial card location:
          pCard.center = CGPoint(x: self.view.center.x, y: self.view.center.y + 250);
          view.addSubview(pCard)
         
@@ -43,7 +43,7 @@ class PlayViewController: UIViewController {
         comCard.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 250);
         view.addSubview(comCard)
         
-        pCard.addGestureRecognizer(gestureRecognizer)
+        pCard.addGestureRecognizer(gestureRecognizerDeck)
 //
 ////         Animate card to different locations:
 //         UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
@@ -58,9 +58,7 @@ class PlayViewController: UIViewController {
     
     @objc func flipCard(_ sender: UITapGestureRecognizer) {
         if yourTurn {
-            guard let pop = pDeck.popLast() else{
-                return
-            }
+            let pop = pDeck.removeFirst()
             let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
             
             print(pop.description)
@@ -82,15 +80,18 @@ class PlayViewController: UIViewController {
             fullPile.append(pop)
             pile.append(card)
             
+            guard let gesture = gestureRecognizerPile else {
+                return
+            }
+            card.addGestureRecognizer(gesture)
+            
             checkPile(card: card)
         }
     }
     
     func playComp() {
-        if !yourTurn {
-            guard let pop = comDeck.popLast() else{
-                return
-            }
+        if !yourTurn && !slappable {
+            let pop = comDeck.removeFirst()
             let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
             
             print(pop.description)
@@ -105,8 +106,14 @@ class PlayViewController: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                card.flip()
             }
+            
             fullPile.append(pop)
             pile.append(card)
+            
+            guard let gesture = gestureRecognizerPile else {
+                return
+            }
+            card.addGestureRecognizer(gesture)
             
             checkPile(card: card)
             
@@ -121,11 +128,22 @@ class PlayViewController: UIViewController {
                     self.pile[i].center = CGPoint(x: self.view.center.x - CGFloat(50*(self.pile.count-1-i)), y: self.view.center.y)
                 })
             }
+            guard let gesture = gestureRecognizerPile else {return}
+            if (pile.count == 2){
+                pile[0].removeGestureRecognizer(gesture)
+            }else if (pile.count == 3){
+                pile[1].removeGestureRecognizer(gesture)
+            }
         }
         
         if pile.count > 3{
             pile[0].removeFromSuperview()
             pile.remove(at: 0)
+            
+            guard let gesture = gestureRecognizerPile else{
+                return
+            }
+            pile[1].removeGestureRecognizer(gesture)
             
             UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
                 self.pile[0].center = CGPoint(x: self.view.center.x-100, y: self.view.center.y)
@@ -139,10 +157,71 @@ class PlayViewController: UIViewController {
                 self.pile[2].center = CGPoint(x: self.view.center.x, y: self.view.center.y)
             })
         }
+        slappable = checkSlap()
+        
+        if slappable{
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+                self.slap(isHuman: false)
+            }
+        }
+        
+        print(slappable)
     }
     
-    func checkSlap() {
-        
+    func checkSlap() -> Bool {
+        if(pile.count == 1){
+            return false
+        } else if (pile.count>2 && pile[0].rank==pile[2].rank){ //sandwich
+            return true
+        } else{
+            let card0 = pile[pile.count-2].rank
+            let card1 = pile[pile.count-1].rank
+            
+            if(card0 == card1){ //doubles
+                return true
+            } else if (card0=="K" && card1=="Q" || card0=="Q" && card1=="K"){ //marriage
+                return true
+            } else if (card0 != nil && card1 != nil){
+                let card0Num = Int(card0!) ?? 11
+                let card1Num = Int(card1!) ?? 11
+                if (card0Num + card1Num == 10){
+                    return true
+                }
+            }
+        }
+        return false
     }
-
+    
+    @objc func humanSlapped(_ sender: UITapGestureRecognizer){
+        slap(isHuman: true)
+    }
+    
+    func slap(isHuman: Bool) {
+        if(slappable){
+            
+            slappable = false
+            
+            if(isHuman){
+                pDeck.append(contentsOf: fullPile)
+                yourTurn = true
+                fullPile.removeAll()
+                for i in 0..<pile.count{
+                    pile[i].removeFromSuperview()
+                }
+                pile.removeAll()
+                print("player slap!")
+            }else {
+                comDeck.append(contentsOf: fullPile)
+                yourTurn = false
+                print("computer slap!")
+                fullPile.removeAll()
+                for i in 0..<pile.count{
+                    pile[i].removeFromSuperview()
+                }
+                pile.removeAll()
+                playComp()
+            }
+        }
+    }
+    
 }

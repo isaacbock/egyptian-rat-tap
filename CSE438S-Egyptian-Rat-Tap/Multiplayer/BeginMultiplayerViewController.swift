@@ -22,6 +22,8 @@ class BeginMultiplayerViewController: UIViewController, GKLocalPlayerListener {
         gameKitActions?.delegate = self
         gameKitActions?.authenticatePlayer()
         gameKitActions?.presentMatchmaker()
+        
+        
     }
         
     @IBAction func userReady(_ sender: Any) {
