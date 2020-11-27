@@ -29,7 +29,7 @@
 		F1894AA82561056F006FC3E6 /* JoinGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AA72561056F006FC3E6 /* JoinGameViewController.swift */; };
 		F1894AAA25610686006FC3E6 /* BeginSinglePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AA925610686006FC3E6 /* BeginSinglePlayerViewController.swift */; };
 		F1894AAC25611F68006FC3E6 /* BeginMultiplayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AAB25611F68006FC3E6 /* BeginMultiplayerViewController.swift */; };
-		F1894AAE256120E5006FC3E6 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AAD256120E5006FC3E6 /* PlayViewController.swift */; };
+		F1894AAE256120E5006FC3E6 /* PlaySingleplayerGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AAD256120E5006FC3E6 /* PlaySingleplayerGameViewController.swift */; };
 		F1894AB025612A44006FC3E6 /* PlayingCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1894AAF25612A44006FC3E6 /* PlayingCard.xib */; };
 		F1894AB4256137A1006FC3E6 /* PlayingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AB3256137A1006FC3E6 /* PlayingCard.swift */; };
 /* End PBXBuildFile section */
@@ -59,7 +59,7 @@
 		F1894AA72561056F006FC3E6 /* JoinGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGameViewController.swift; sourceTree = "<group>"; };
 		F1894AA925610686006FC3E6 /* BeginSinglePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginSinglePlayerViewController.swift; sourceTree = "<group>"; };
 		F1894AAB25611F68006FC3E6 /* BeginMultiplayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginMultiplayerViewController.swift; sourceTree = "<group>"; };
-		F1894AAD256120E5006FC3E6 /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
+		F1894AAD256120E5006FC3E6 /* PlaySingleplayerGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySingleplayerGameViewController.swift; sourceTree = "<group>"; };
 		F1894AAF25612A44006FC3E6 /* PlayingCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayingCard.xib; sourceTree = "<group>"; };
 		F1894AB3256137A1006FC3E6 /* PlayingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,7 +117,7 @@
 			children = (
 				EA69012E2568922D006308B5 /* Deck.swift */,
 				EAD5219D25718BB90036B394 /* PlayFunctions.swift */,
-				F1894AAD256120E5006FC3E6 /* PlayViewController.swift */,
+				F1894AAD256120E5006FC3E6 /* PlaySingleplayerGameViewController.swift */,
 				7A5FFCBD256CC34000E170D1 /* PlayMultiplayerGameViewController.swift */,
 			);
 			path = Gameplay;
@@ -261,7 +261,7 @@
 				7A5FFCBC256C17A800E170D1 /* GameKitActions.swift in Sources */,
 				7A5FFCBE256CC34000E170D1 /* PlayMultiplayerGameViewController.swift in Sources */,
 				EAD5219E25718BB90036B394 /* PlayFunctions.swift in Sources */,
-				F1894AAE256120E5006FC3E6 /* PlayViewController.swift in Sources */,
+				F1894AAE256120E5006FC3E6 /* PlaySingleplayerGameViewController.swift in Sources */,
 				F1894A9D2560EE6E006FC3E6 /* BackgroundGradient.swift in Sources */,
 				F1894AAA25610686006FC3E6 /* BeginSinglePlayerViewController.swift in Sources */,
 				F1894AAC25611F68006FC3E6 /* BeginMultiplayerViewController.swift in Sources */,

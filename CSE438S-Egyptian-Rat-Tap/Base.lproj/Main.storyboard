@@ -251,7 +251,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="INb-GW-DhC">
-                                        <rect key="frame" x="121" y="541" width="132" height="76"/>
+                                        <rect key="frame" x="121.66666666666669" y="541" width="132" height="76"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqw-wi-5Rj">
                                                 <rect key="frame" x="5.3333333333333286" y="0.0" width="121" height="24.666666666666668"/>

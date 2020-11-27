@@ -83,7 +83,7 @@ class PlayingCard: UIView {
                 cardLabelTop.textColor = .red
                 cardLabelBottom.textColor = .red
             }
-            else if suit == "diamond" || suit == "dimaonds" {
+            else if suit == "diamond" || suit == "diamonds" {
                 cardSuitImageTop.image = UIImage(systemName: "suit.diamond.fill")
                 cardSuitImageBottom.image = UIImage(systemName: "suit.diamond.fill")
                 cardSuitImageTop.tintColor = .red
