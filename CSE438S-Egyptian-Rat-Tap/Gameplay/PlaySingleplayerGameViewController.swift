@@ -140,5 +140,9 @@ class PlayViewController: UIViewController {
             })
         }
     }
+    
+    func checkSlap() {
+        
+    }
 
 }
