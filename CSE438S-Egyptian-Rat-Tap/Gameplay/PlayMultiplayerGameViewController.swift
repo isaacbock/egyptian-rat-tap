@@ -24,6 +24,8 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         ratTapModel = RatTapModel()
         match?.delegate = self
         // Do any additional setup after loading the view.
+        
+        setUpGame()
     }
     
     private func updateUI() {
@@ -46,7 +48,7 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         ratTapModel = model
     }
     
-    private func savePlayers() {
+    private func setUpGame() {
         guard let player2Name = match?.players.first?.displayName else { return }
         
         let wholeDeck = Deck().deck
@@ -54,10 +56,10 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         
         var player1Deck: [Card] = []
         var player2Deck: [Card] = []
-        for i in 0...numOfCards{
+        for i in 0..<numOfCards{
             player1Deck.append(wholeDeck[i])
         }
-        for i in numOfCards...wholeDeck.count {
+        for i in numOfCards..<wholeDeck.count {
             player2Deck.append(wholeDeck[i])
         }
         
@@ -67,9 +69,27 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         ratTapModel.players = [player1, player2]
         
         ratTapModel.players.sort { (player1, player2) -> Bool in
-            player1.name < player2.name
+    player1.name < player2.name
         }
-        
+
+        sendData()
+    }
+    
+    private func getLocalPlayerType() -> PlayerType {
+        if ratTapModel.players.first?.name == GKLocalPlayer.local.displayName {
+            return .one
+        } else {
+            return .two
+        }
+    }
+    
+    private func addCardToPile(){
+        let localPlayer = getLocalPlayerType()
+    
+        let flippingCard = ratTapModel.players[localPlayer.index()].playerDeck.popLast()
+        guard let card = flippingCard else{return }
+        ratTapModel.pile.append(card)
+        print(ratTapModel.players[localPlayer.index()].playerDeck.count)
         sendData()
     }
 

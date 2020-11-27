@@ -14,3 +14,17 @@ struct RatTapPlayer: Codable {
     var playerDeck: [Card] = []
     
 }
+
+enum PlayerType: String, Codable, CaseIterable {
+    case one
+    case two
+    
+    func index() -> Int {
+        switch self {
+case .one:
+    return 0
+case .two:
+    return 1
+    }
+    }
+}
