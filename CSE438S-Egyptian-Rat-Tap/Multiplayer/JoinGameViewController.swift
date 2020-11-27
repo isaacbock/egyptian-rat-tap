@@ -8,11 +8,21 @@
 
 import UIKit
 
-class JoinGameViewController: UIViewController {
+class JoinGameViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var playerName: UITextField!
+    @IBOutlet weak var gameCode: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.playerName.delegate = self
+        self.gameCode.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 
 }

@@ -21,7 +21,9 @@ class PlayingCard: UIView {
     @IBOutlet weak var cardSuitImageTop: UIImageView!
     @IBOutlet weak var cardSuitImageBottom: UIImageView!
     
-    init(rank: String?, suit: String?, frame: CGRect = CGRect(x: 0, y: 0, width: 120, height: 180)) {
+    private var shadowLayer: CAShapeLayer!
+    
+    init(rank: String?, suit: String?, frame: CGRect = CGRect(x: 0, y: 0, width: 120, height: 170)) {
         super.init(frame: frame)
         self.rank = rank
         self.suit = suit
@@ -48,8 +50,8 @@ class PlayingCard: UIView {
         }
         else {
             print("Card missing rank.")
-            cardLabelTop.text = "?"
-            cardLabelBottom.text = "?"
+            cardLabelTop.text = ""
+            cardLabelBottom.text = ""
         }
         if let suit = self.suit {
             if suit == "club" || suit == "clubs" {
@@ -86,8 +88,8 @@ class PlayingCard: UIView {
             }
             else {
                 print("Card has invalid suit.")
-                cardSuitImageTop.image = UIImage(systemName: "questionmark")
-                cardSuitImageBottom.image = UIImage(systemName: "questionmark")
+                cardSuitImageTop.image = UIImage()
+                cardSuitImageBottom.image = UIImage()
                 cardSuitImageTop.tintColor = .black
                 cardSuitImageBottom.tintColor = .black
                 cardLabelTop.textColor = .black
@@ -96,8 +98,8 @@ class PlayingCard: UIView {
         }
         else {
             print("Card missing suit.")
-            cardSuitImageTop.image = UIImage(systemName: "questionmark")
-            cardSuitImageBottom.image = UIImage(systemName: "questionmark")
+            cardSuitImageTop.image = UIImage()
+            cardSuitImageBottom.image = UIImage()
             cardSuitImageTop.tintColor = .black
             cardSuitImageBottom.tintColor = .black
             cardLabelTop.textColor = .black
@@ -109,12 +111,26 @@ class PlayingCard: UIView {
         cardSuitImageBottom.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
         cardLabelBottom.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
         
-        // Border
-        contentView.layer.borderWidth = 1
-        contentView.layer.borderColor = UIColor.black.cgColor
 
-        // use bounds not frame or it'll be offset
         contentView.frame = bounds
+        layer.backgroundColor = UIColor.clear.cgColor
+        // Card shadow via https://medium.com/bytes-of-bits/swift-tips-adding-rounded-corners-and-shadows-to-a-uiview-691f67b83e4a
+        if shadowLayer == nil {
+            shadowLayer = CAShapeLayer()
+            shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: 15).cgPath
+            shadowLayer.fillColor = UIColor.black.cgColor
+            shadowLayer.shadowColor = UIColor.black.cgColor
+            shadowLayer.shadowPath = shadowLayer.path
+            shadowLayer.shadowOffset = CGSize(width: 2, height: 2)
+            shadowLayer.shadowOpacity = 1.0
+            shadowLayer.shadowRadius = 5
+            layer.insertSublayer(shadowLayer, at: 0)
+        }
+        
+        contentView.layer.cornerRadius = 15
+//        contentView.layer.borderWidth = 1
+//        contentView.layer.borderColor = UIColor.black.cgColor
+        contentView.layer.masksToBounds = true
 
         // Make the view stretch with containing view
         contentView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
@@ -132,4 +148,5 @@ class PlayingCard: UIView {
 
         return view
     }
+    
 }

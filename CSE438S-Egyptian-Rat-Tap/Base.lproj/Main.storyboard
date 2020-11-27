@@ -26,7 +26,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="lnP-S1-pNP">
                                         <rect key="frame" x="119" y="555" width="137" height="157"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I9Z-Tj-4S9">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I9Z-Tj-4S9" customClass="RoundedButton" customModule="CSE438S_Egyptian_Rat_Tap" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="137" height="37"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
                                                 <state key="normal" title="Create Game">
@@ -36,7 +36,7 @@
                                                     <segue destination="CCV-Oc-Mmf" kind="show" id="oWd-Uq-Cwx"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Uh-cB-jFX">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Uh-cB-jFX" customClass="RoundedButton" customModule="CSE438S_Egyptian_Rat_Tap" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="60" width="137" height="37"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
                                                 <state key="normal" title="Join Game">
@@ -46,7 +46,7 @@
                                                     <segue destination="GIt-nA-mP6" kind="show" id="Nym-pd-om3"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghE-BF-r6e">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghE-BF-r6e" customClass="RoundedButton" customModule="CSE438S_Egyptian_Rat_Tap" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="120" width="137" height="37"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
                                                 <state key="normal" title="Single Player">
@@ -100,6 +100,29 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RHL-9G-gA8" customClass="BackgroundGradient" customModule="CSE438S_Egyptian_Rat_Tap" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="lAl-H8-KSE">
+                                        <rect key="frame" x="128" y="534" width="119" height="75"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My name is" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEN-h8-R1M">
+                                                <rect key="frame" x="0.0" y="0.0" width="119" height="24.666666666666668"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Player 1" textAlignment="center" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="GQh-xS-txV">
+                                                <rect key="frame" x="0.0" y="37.666666666666629" width="119" height="37.333333333333343"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="30"/>
+                                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="GQh-xS-txV" firstAttribute="leading" secondItem="lAl-H8-KSE" secondAttribute="leading" id="q2p-Te-l6L"/>
+                                            <constraint firstAttribute="trailing" secondItem="GQh-xS-txV" secondAttribute="trailing" id="tuJ-7a-UXu"/>
+                                            <constraint firstAttribute="height" constant="75" id="wSS-p1-ICQ"/>
+                                        </constraints>
+                                    </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BhV-xf-clf">
                                         <rect key="frame" x="320" y="62.666666666666657" width="30" height="25"/>
                                         <constraints>
@@ -115,83 +138,54 @@
                                             <segue destination="loa-Hb-gPN" kind="unwind" unwindAction="unwind:" id="bxa-dY-WN6"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="58" translatesAutoresizingMaskIntoConstraints="NO" id="BcR-UC-pHh">
-                                        <rect key="frame" x="50" y="437" width="275" height="300"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="lAl-H8-KSE">
-                                                <rect key="frame" x="0.0" y="0.0" width="275" height="75"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My name is" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEN-h8-R1M">
-                                                        <rect key="frame" x="78" y="0.0" width="119" height="24.666666666666668"/>
-                                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Player 1" textAlignment="center" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="GQh-xS-txV">
-                                                        <rect key="frame" x="0.0" y="37.666666666666686" width="275" height="37.333333333333343"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="30"/>
-                                                        <textInputTraits key="textInputTraits" textContentType="name"/>
-                                                    </textField>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="GQh-xS-txV" firstAttribute="leading" secondItem="lAl-H8-KSE" secondAttribute="leading" id="q2p-Te-l6L"/>
-                                                    <constraint firstAttribute="trailing" secondItem="GQh-xS-txV" secondAttribute="trailing" id="tuJ-7a-UXu"/>
-                                                    <constraint firstAttribute="height" constant="75" id="wSS-p1-ICQ"/>
-                                                </constraints>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Ye8-my-lGm">
-                                                <rect key="frame" x="0.0" y="133" width="275" height="75"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3W-mh-7pU">
-                                                        <rect key="frame" x="0.0" y="0.0" width="275" height="23.666666666666668"/>
-                                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ABCDEF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6x2-rc-zd5">
-                                                        <rect key="frame" x="0.0" y="39.666666666666629" width="275" height="35.333333333333343"/>
-                                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="31"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="75" id="BuX-3E-A0z"/>
-                                                </constraints>
-                                            </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="juW-Go-JpM">
-                                                <rect key="frame" x="0.0" y="266" width="275" height="34"/>
-                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
-                                                <state key="normal" title="Create Game">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <segue destination="Fkh-gM-y3T" kind="show" id="ZBn-Lu-h8b"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="300" id="Zwi-lj-0SA"/>
-                                        </constraints>
-                                    </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CREATE GAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eza-S9-nfT">
                                         <rect key="frame" x="97.000000000000014" y="257" width="181.33333333333337" height="30"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
                                         <color key="textColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="juW-Go-JpM" customClass="RoundedButton" customModule="CSE438S_Egyptian_Rat_Tap" customModuleProvider="target">
+                                        <rect key="frame" x="119.66666666666669" y="700" width="136" height="37"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
+                                        <state key="normal" title="Create Game">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="Fkh-gM-y3T" kind="show" id="ZBn-Lu-h8b"/>
+                                        </connections>
+                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Ye8-my-lGm">
+                                        <rect key="frame" x="119.33333333333333" y="375" width="136.66666666666669" height="75"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3W-mh-7pU">
+                                                <rect key="frame" x="0.0" y="0.0" width="136.66666666666666" height="23.666666666666668"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ABCDEF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6x2-rc-zd5">
+                                                <rect key="frame" x="0.0" y="39.666666666666686" width="136.66666666666666" height="35.333333333333343"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="31"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="75" id="BuX-3E-A0z"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="BcR-UC-pHh" secondAttribute="trailing" constant="50" id="1ya-we-saB"/>
+                                    <constraint firstItem="lAl-H8-KSE" firstAttribute="centerX" secondItem="RHL-9G-gA8" secondAttribute="centerX" id="1MM-MY-Yxo"/>
                                     <constraint firstItem="BhV-xf-clf" firstAttribute="top" secondItem="RHL-9G-gA8" secondAttribute="top" constant="60" id="2Mx-Xf-Gki"/>
-                                    <constraint firstAttribute="bottom" secondItem="BcR-UC-pHh" secondAttribute="bottom" constant="75" id="6Dh-th-xvV"/>
-                                    <constraint firstItem="BcR-UC-pHh" firstAttribute="centerX" secondItem="RHL-9G-gA8" secondAttribute="centerX" id="FtS-c3-Vwc"/>
                                     <constraint firstItem="eza-S9-nfT" firstAttribute="centerX" secondItem="RHL-9G-gA8" secondAttribute="centerX" id="JeN-1X-I70"/>
-                                    <constraint firstItem="BcR-UC-pHh" firstAttribute="leading" secondItem="RHL-9G-gA8" secondAttribute="leading" constant="50" id="c5p-HN-aDb"/>
-                                    <constraint firstItem="BcR-UC-pHh" firstAttribute="top" secondItem="eza-S9-nfT" secondAttribute="bottom" constant="150" id="o7N-XO-URB"/>
+                                    <constraint firstItem="lAl-H8-KSE" firstAttribute="top" secondItem="Ye8-my-lGm" secondAttribute="bottom" constant="84" id="St7-wd-EtO"/>
+                                    <constraint firstItem="eza-S9-nfT" firstAttribute="top" secondItem="RHL-9G-gA8" secondAttribute="top" constant="257" id="UCL-7Y-Oqk"/>
+                                    <constraint firstItem="juW-Go-JpM" firstAttribute="centerX" secondItem="RHL-9G-gA8" secondAttribute="centerX" id="VKD-vA-mKc"/>
+                                    <constraint firstAttribute="bottom" secondItem="juW-Go-JpM" secondAttribute="bottom" constant="75" id="pY5-Uh-KOP"/>
+                                    <constraint firstItem="juW-Go-JpM" firstAttribute="top" secondItem="lAl-H8-KSE" secondAttribute="bottom" constant="91" id="rNs-X0-srw"/>
+                                    <constraint firstItem="Ye8-my-lGm" firstAttribute="centerX" secondItem="RHL-9G-gA8" secondAttribute="centerX" id="th0-jI-VGQ"/>
                                     <constraint firstAttribute="trailing" secondItem="BhV-xf-clf" secondAttribute="trailing" constant="25" id="vHB-u0-JZa"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -214,6 +208,10 @@
                         <viewLayoutGuide key="safeArea" id="LuK-ig-ocJ"/>
                     </view>
                     <navigationItem key="navigationItem" id="Yaa-CF-JRI"/>
+                    <connections>
+                        <outlet property="gameCode" destination="6x2-rc-zd5" id="Oxq-X1-reL"/>
+                        <outlet property="playerName" destination="GQh-xS-txV" id="0wX-V2-P1h"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xrS-oe-2cf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="loa-Hb-gPN" userLabel="Exit" sceneMemberID="exit"/>
@@ -246,85 +244,79 @@
                                             <segue destination="Obj-tL-3jF" kind="unwind" unwindAction="unwind:" id="rYL-El-bdu"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="55" translatesAutoresizingMaskIntoConstraints="NO" id="1SK-OH-ixb">
-                                        <rect key="frame" x="50" y="437" width="275" height="300"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="hOC-gI-44w">
-                                                <rect key="frame" x="0.0" y="0.0" width="275" height="75"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My name is" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="91c-dJ-AXj">
-                                                        <rect key="frame" x="78" y="0.0" width="119" height="24.666666666666668"/>
-                                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Player 1" textAlignment="center" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="4Oh-gw-igc">
-                                                        <rect key="frame" x="0.0" y="37.666666666666686" width="275" height="37.333333333333343"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="30"/>
-                                                        <textInputTraits key="textInputTraits" textContentType="name"/>
-                                                    </textField>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="4Oh-gw-igc" firstAttribute="leading" secondItem="hOC-gI-44w" secondAttribute="leading" id="Wut-pR-I0g"/>
-                                                    <constraint firstAttribute="trailing" secondItem="4Oh-gw-igc" secondAttribute="trailing" id="fpF-l0-R2V"/>
-                                                    <constraint firstAttribute="height" constant="75" id="uMt-k9-yZ0"/>
-                                                </constraints>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ASD-rO-BtK">
-                                                <rect key="frame" x="0.0" y="130" width="275" height="75"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BtV-hl-bzz">
-                                                        <rect key="frame" x="0.0" y="0.0" width="275" height="23.333333333333332"/>
-                                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ABCDEF" textAlignment="center" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="9oi-7o-oJt">
-                                                        <rect key="frame" x="0.0" y="39.333333333333371" width="275" height="35.666666666666657"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="30"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                                                    </textField>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="75" id="6sV-5W-c6o"/>
-                                                </constraints>
-                                            </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cQp-SJ-hqK">
-                                                <rect key="frame" x="0.0" y="260" width="275" height="40"/>
-                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
-                                                <state key="normal" title="Join Game">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <segue destination="Fkh-gM-y3T" kind="show" id="Xoy-yx-GyL"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="300" id="O0m-8d-59U"/>
-                                        </constraints>
-                                    </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JOIN GAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D3u-AM-hGn">
                                         <rect key="frame" x="117.00000000000001" y="257" width="141.33333333333337" height="30"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
                                         <color key="textColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="INb-GW-DhC">
+                                        <rect key="frame" x="121" y="541" width="132" height="76"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqw-wi-5Rj">
+                                                <rect key="frame" x="5.3333333333333286" y="0.0" width="121" height="24.666666666666668"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ABCDEF" textAlignment="center" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="l6m-Mz-8L2">
+                                                <rect key="frame" x="0.0" y="37.666666666666629" width="132" height="38.333333333333343"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="30"/>
+                                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="l6m-Mz-8L2" secondAttribute="trailing" id="Xhp-hZ-GiL"/>
+                                            <constraint firstItem="l6m-Mz-8L2" firstAttribute="leading" secondItem="INb-GW-DhC" secondAttribute="leading" id="kIf-np-W28"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cQp-SJ-hqK" customClass="RoundedButton" customModule="CSE438S_Egyptian_Rat_Tap" customModuleProvider="target">
+                                        <rect key="frame" x="132" y="700" width="111" height="37"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
+                                        <state key="normal" title="Join Game">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="Fkh-gM-y3T" kind="show" id="Xoy-yx-GyL"/>
+                                        </connections>
+                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="hOC-gI-44w">
+                                        <rect key="frame" x="128" y="371" width="119" height="76"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My name is" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="91c-dJ-AXj">
+                                                <rect key="frame" x="0.0" y="0.0" width="119" height="24.666666666666668"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Player 1" textAlignment="center" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="4Oh-gw-igc">
+                                                <rect key="frame" x="0.0" y="37.666666666666686" width="119" height="38.333333333333343"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="30"/>
+                                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="4Oh-gw-igc" firstAttribute="leading" secondItem="hOC-gI-44w" secondAttribute="leading" id="Wut-pR-I0g"/>
+                                            <constraint firstAttribute="trailing" secondItem="4Oh-gw-igc" secondAttribute="trailing" id="fpF-l0-R2V"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
+                                    <constraint firstItem="INb-GW-DhC" firstAttribute="top" secondItem="hOC-gI-44w" secondAttribute="bottom" constant="94" id="4UX-T3-Cii"/>
                                     <constraint firstAttribute="trailing" secondItem="jx4-Bf-Ypl" secondAttribute="trailing" constant="25" id="8TC-2H-pGj"/>
-                                    <constraint firstItem="1SK-OH-ixb" firstAttribute="centerX" secondItem="B2e-Lc-CZ2" secondAttribute="centerX" id="99X-he-ncA"/>
-                                    <constraint firstAttribute="bottom" secondItem="1SK-OH-ixb" secondAttribute="bottom" constant="75" id="9Dz-GO-2UJ"/>
+                                    <constraint firstItem="cQp-SJ-hqK" firstAttribute="centerX" secondItem="B2e-Lc-CZ2" secondAttribute="centerX" id="ATo-6c-OXZ"/>
                                     <constraint firstItem="jx4-Bf-Ypl" firstAttribute="top" secondItem="B2e-Lc-CZ2" secondAttribute="top" constant="60" id="AjI-Yi-IE1"/>
-                                    <constraint firstItem="1SK-OH-ixb" firstAttribute="leading" secondItem="B2e-Lc-CZ2" secondAttribute="leading" constant="50" id="FyZ-FI-pOu"/>
-                                    <constraint firstItem="1SK-OH-ixb" firstAttribute="top" secondItem="D3u-AM-hGn" secondAttribute="bottom" constant="150" id="JiM-cL-QS1"/>
+                                    <constraint firstItem="hOC-gI-44w" firstAttribute="centerX" secondItem="B2e-Lc-CZ2" secondAttribute="centerX" id="BPu-mK-OGE"/>
+                                    <constraint firstItem="INb-GW-DhC" firstAttribute="centerX" secondItem="B2e-Lc-CZ2" secondAttribute="centerX" id="DX2-gc-DOb"/>
                                     <constraint firstItem="D3u-AM-hGn" firstAttribute="centerX" secondItem="B2e-Lc-CZ2" secondAttribute="centerX" id="Ls1-cA-MBt"/>
-                                    <constraint firstAttribute="trailing" secondItem="1SK-OH-ixb" secondAttribute="trailing" constant="50" id="Mtu-3p-8vb"/>
+                                    <constraint firstItem="cQp-SJ-hqK" firstAttribute="top" secondItem="INb-GW-DhC" secondAttribute="bottom" constant="83" id="YCm-7i-T5e"/>
+                                    <constraint firstAttribute="bottom" secondItem="cQp-SJ-hqK" secondAttribute="bottom" constant="75" id="awE-iP-wjY"/>
+                                    <constraint firstItem="D3u-AM-hGn" firstAttribute="top" secondItem="B2e-Lc-CZ2" secondAttribute="top" constant="257" id="lYQ-JN-dMG"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
@@ -346,6 +338,10 @@
                         <viewLayoutGuide key="safeArea" id="mDG-AQ-m5v"/>
                     </view>
                     <navigationItem key="navigationItem" id="sEV-xB-NX1"/>
+                    <connections>
+                        <outlet property="gameCode" destination="l6m-Mz-8L2" id="hau-oF-nsE"/>
+                        <outlet property="playerName" destination="4Oh-gw-igc" id="X0N-Mf-VlE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jnl-IU-Ekp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="Obj-tL-3jF" userLabel="Exit" sceneMemberID="exit"/>
@@ -378,21 +374,11 @@
                                             <segue destination="xEQ-cI-pX6" kind="unwind" unwindAction="unwind:" id="KXr-NQ-5SO"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ocp-DI-sug" customClass="PlayingCard" customModule="CSE438S_Egyptian_Rat_Tap" customModuleProvider="target">
-                                        <rect key="frame" x="127.66666666666669" y="316" width="120" height="180"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="120" id="SUU-au-K6G"/>
-                                            <constraint firstAttribute="height" constant="180" id="yxV-5X-MIT"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstItem="ocp-DI-sug" firstAttribute="centerY" secondItem="AQz-L1-F7H" secondAttribute="centerY" id="42M-H2-Qlc"/>
                                     <constraint firstItem="fN4-TW-myH" firstAttribute="top" secondItem="AQz-L1-F7H" secondAttribute="top" constant="60" id="BoM-Wc-MvR"/>
                                     <constraint firstAttribute="trailing" secondItem="fN4-TW-myH" secondAttribute="trailing" constant="25" id="XtQ-Dg-tao"/>
-                                    <constraint firstItem="ocp-DI-sug" firstAttribute="centerX" secondItem="AQz-L1-F7H" secondAttribute="centerX" id="jvO-22-p5s"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
@@ -454,7 +440,7 @@
                                             <segue destination="5FG-L4-Kv6" kind="unwind" unwindAction="unwind:" id="e79-cv-EBD"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fa3-dg-ZoB">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fa3-dg-ZoB" customClass="RoundedButton" customModule="CSE438S_Egyptian_Rat_Tap" customModuleProvider="target">
                                         <rect key="frame" x="148.66666666666666" y="700" width="78" height="37"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
                                         <state key="normal" title="Ready?">
@@ -465,7 +451,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ABCDEF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rw2-po-sQm">
-                                        <rect key="frame" x="50" y="522.66666666666663" width="275" height="38"/>
+                                        <rect key="frame" x="119.33333333333333" y="522.66666666666663" width="136.66666666666669" height="38"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="31"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -520,14 +506,13 @@
                                     <constraint firstItem="Rw2-po-sQm" firstAttribute="top" secondItem="UJG-2H-JSa" secondAttribute="bottom" constant="200" id="9pw-MQ-gfs"/>
                                     <constraint firstItem="CFF-Xd-vHZ" firstAttribute="leading" secondItem="jlM-vp-qFh" secondAttribute="leading" constant="50" id="CYr-PA-8K9"/>
                                     <constraint firstItem="CFF-Xd-vHZ" firstAttribute="top" secondItem="Rw2-po-sQm" secondAttribute="bottom" constant="20" id="NAf-9I-73n"/>
-                                    <constraint firstAttribute="trailing" secondItem="Rw2-po-sQm" secondAttribute="trailing" constant="50" id="NLb-MT-Fdd"/>
-                                    <constraint firstItem="Rw2-po-sQm" firstAttribute="leading" secondItem="jlM-vp-qFh" secondAttribute="leading" constant="50" id="RYB-LM-JOU"/>
                                     <constraint firstAttribute="trailing" secondItem="ECn-ef-seN" secondAttribute="trailing" constant="50" id="hjf-09-mvd"/>
                                     <constraint firstAttribute="trailing" secondItem="CFF-Xd-vHZ" secondAttribute="trailing" constant="50" id="n7d-db-dJ1"/>
                                     <constraint firstItem="qh0-ts-B6m" firstAttribute="top" secondItem="jlM-vp-qFh" secondAttribute="top" constant="60" id="qG4-gI-Kv4"/>
                                     <constraint firstItem="ECn-ef-seN" firstAttribute="top" secondItem="CFF-Xd-vHZ" secondAttribute="bottom" constant="20" id="qUd-zi-9J4"/>
                                     <constraint firstAttribute="bottom" secondItem="fa3-dg-ZoB" secondAttribute="bottom" constant="75" id="qvh-z8-2zR"/>
                                     <constraint firstItem="fa3-dg-ZoB" firstAttribute="centerX" secondItem="jlM-vp-qFh" secondAttribute="centerX" id="rrH-YO-SKZ"/>
+                                    <constraint firstItem="Rw2-po-sQm" firstAttribute="centerX" secondItem="jlM-vp-qFh" secondAttribute="centerX" id="s0q-VW-2Zn"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
@@ -584,7 +569,7 @@
                                             <segue destination="0ff-bd-9Cp" kind="unwind" unwindAction="unwind:" id="DkH-5P-U5f"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJ6-So-0Se">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJ6-So-0Se" customClass="RoundedButton" customModule="CSE438S_Egyptian_Rat_Tap" customModuleProvider="target">
                                         <rect key="frame" x="148.66666666666666" y="700" width="78" height="37"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
                                         <state key="normal" title="Ready?">
@@ -709,21 +694,23 @@
                                             <segue destination="jUv-5V-HUd" kind="unwind" unwindAction="unwind:" id="6qf-fX-XI4"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AuG-VK-Pgs" customClass="PlayingCard" customModule="CSE438S_Egyptian_Rat_Tap" customModuleProvider="target">
-                                        <rect key="frame" x="127.66666666666669" y="316" width="120" height="180"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THE ACTUAL GAME PART, MULTIPLAYER" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8nB-tN-qte">
+                                        <rect key="frame" x="23" y="236" width="329" height="96"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="180" id="iIy-kU-iQJ"/>
-                                            <constraint firstAttribute="width" constant="120" id="tV3-Lv-1Jf"/>
+                                            <constraint firstAttribute="height" constant="96" id="fzw-PP-xhq"/>
                                         </constraints>
-                                    </view>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
+                                        <color key="textColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="5V9-pb-7FY" secondAttribute="trailing" constant="25" id="3d3-cP-Xau"/>
-                                    <constraint firstItem="AuG-VK-Pgs" firstAttribute="centerX" secondItem="55e-6O-Uuw" secondAttribute="centerX" id="DJK-YG-Vz0"/>
                                     <constraint firstItem="5V9-pb-7FY" firstAttribute="top" secondItem="55e-6O-Uuw" secondAttribute="top" constant="60" id="HCJ-qK-hjl"/>
-                                    <constraint firstItem="AuG-VK-Pgs" firstAttribute="centerY" secondItem="55e-6O-Uuw" secondAttribute="centerY" id="YO4-SN-cVb"/>
+                                    <constraint firstItem="8nB-tN-qte" firstAttribute="top" secondItem="55e-6O-Uuw" secondAttribute="top" constant="236" id="KDg-Ac-g4j"/>
+                                    <constraint firstItem="8nB-tN-qte" firstAttribute="leading" secondItem="55e-6O-Uuw" secondAttribute="leading" constant="23" id="jtS-g1-Iy7"/>
+                                    <constraint firstItem="8nB-tN-qte" firstAttribute="centerX" secondItem="55e-6O-Uuw" secondAttribute="centerX" id="s5q-Jl-RA3"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
@@ -734,18 +721,10 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="THE ACTUAL GAME PART, MULTIPLAYER" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NLN-9e-Ph4">
-                                <rect key="frame" x="16" y="150" width="343" height="93"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
-                                <color key="textColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="55e-6O-Uuw" firstAttribute="trailing" secondItem="pzt-1C-uAg" secondAttribute="trailing" id="2sK-xc-uoI"/>
-                            <constraint firstItem="NLN-9e-Ph4" firstAttribute="centerX" secondItem="nZo-F0-qJV" secondAttribute="centerX" id="68c-X5-QMn"/>
-                            <constraint firstItem="NLN-9e-Ph4" firstAttribute="top" secondItem="nZo-F0-qJV" secondAttribute="top" constant="150" id="6Nx-Hm-GLj"/>
                             <constraint firstItem="55e-6O-Uuw" firstAttribute="leading" secondItem="pzt-1C-uAg" secondAttribute="leading" id="F05-lY-3i6"/>
                             <constraint firstAttribute="bottom" secondItem="55e-6O-Uuw" secondAttribute="bottom" id="UxZ-Vo-6LN"/>
                             <constraint firstItem="55e-6O-Uuw" firstAttribute="top" secondItem="nZo-F0-qJV" secondAttribute="top" id="diH-fk-hRs"/>
@@ -757,11 +736,11 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AxI-WL-SAg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="jUv-5V-HUd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3778" y="485"/>
+            <point key="canvasLocation" x="3776.8000000000002" y="484.72906403940891"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Xoy-yx-GyL"/>
+        <segue reference="ZBn-Lu-h8b"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="xmark" catalog="system" width="128" height="113"/>

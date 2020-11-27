@@ -25,11 +25,8 @@
             <rect key="frame" x="0.0" y="0.0" width="129" height="185"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n8g-5e-xLR">
-                    <rect key="frame" x="0.0" y="0.0" width="129" height="185"/>
-                </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5ck-qq-I4a">
-                    <rect key="frame" x="8" y="4" width="17" height="44.5"/>
+                    <rect key="frame" x="12" y="8" width="17" height="44.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="K" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="OGZ-BU-kCO">
                             <rect key="frame" x="0.0" y="0.0" width="17" height="24.5"/>
@@ -50,7 +47,7 @@
                     </constraints>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Cm9-My-rv2">
-                    <rect key="frame" x="104" y="136.5" width="17" height="44.5"/>
+                    <rect key="frame" x="100" y="132.5" width="17" height="44.5"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="suit.club.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ans-AF-9bZ">
                             <rect key="frame" x="0.0" y="1" width="17" height="18"/>
@@ -72,16 +69,12 @@
                     </constraints>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="n8g-5e-xLR" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="0L7-xy-3gW"/>
-                <constraint firstItem="5ck-qq-I4a" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="AC5-xq-sTG"/>
-                <constraint firstItem="n8g-5e-xLR" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="GT6-CV-Pkq"/>
-                <constraint firstAttribute="bottom" secondItem="n8g-5e-xLR" secondAttribute="bottom" id="JcP-8O-K0n"/>
-                <constraint firstItem="5ck-qq-I4a" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="L3R-VR-iMD"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Cm9-My-rv2" secondAttribute="bottom" constant="4" id="YIw-Rc-YY9"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Cm9-My-rv2" secondAttribute="trailing" constant="8" id="lD1-uV-bI5"/>
-                <constraint firstItem="n8g-5e-xLR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="qVB-TQ-CcZ"/>
+                <constraint firstItem="5ck-qq-I4a" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="AC5-xq-sTG"/>
+                <constraint firstItem="5ck-qq-I4a" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="12" id="L3R-VR-iMD"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Cm9-My-rv2" secondAttribute="bottom" constant="8" id="YIw-Rc-YY9"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Cm9-My-rv2" secondAttribute="trailing" constant="12" id="lD1-uV-bI5"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
