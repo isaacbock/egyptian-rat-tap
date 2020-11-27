@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 // Reusable xib view via https://stackoverflow.com/a/40104211
 @IBDesignable
@@ -15,7 +16,11 @@ class PlayingCard: UIView {
     var rank: String?
     var suit: String?
 
-    var contentView : UIView!
+    var cardFront: UIView!
+    var cardBack: UIImageView!
+    
+    var showingBack = true
+    
     @IBOutlet weak var cardLabelTop: UILabel!
     @IBOutlet weak var cardLabelBottom: UILabel!
     @IBOutlet weak var cardSuitImageTop: UIImageView!
@@ -41,7 +46,7 @@ class PlayingCard: UIView {
     }
 
     func xibSetup() {
-        contentView = loadViewFromNib()
+        cardFront = loadViewFromNib()
         
         // Update card elements
         if let rank = self.rank {
@@ -111,33 +116,38 @@ class PlayingCard: UIView {
         cardSuitImageBottom.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
         cardLabelBottom.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
         
-
-        contentView.frame = bounds
+        cardFront.frame = bounds
         layer.backgroundColor = UIColor.clear.cgColor
-        // Card shadow via https://medium.com/bytes-of-bits/swift-tips-adding-rounded-corners-and-shadows-to-a-uiview-691f67b83e4a
-        if shadowLayer == nil {
-            shadowLayer = CAShapeLayer()
-            shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: 15).cgPath
-            shadowLayer.fillColor = UIColor.black.cgColor
-            shadowLayer.shadowColor = UIColor.black.cgColor
-            shadowLayer.shadowPath = shadowLayer.path
-            shadowLayer.shadowOffset = CGSize(width: 2, height: 2)
-            shadowLayer.shadowOpacity = 1.0
-            shadowLayer.shadowRadius = 5
-            layer.insertSublayer(shadowLayer, at: 0)
-        }
         
-        contentView.layer.cornerRadius = 15
-//        contentView.layer.borderWidth = 1
-//        contentView.layer.borderColor = UIColor.black.cgColor
-        contentView.layer.masksToBounds = true
+        // Card shadow via https://medium.com/bytes-of-bits/swift-tips-adding-rounded-corners-and-shadows-to-a-uiview-691f67b83e4a
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 2, height: 2)
+        layer.shadowOpacity = 1
+        layer.shadowRadius = 5
+        cardFront.layer.cornerRadius = 15
+        cardFront.layer.masksToBounds = true
+        
 
         // Make the view stretch with containing view
-        contentView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+        cardFront.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+        
+        // Default to hiding front of card (so we start by viewing the back, until it is eventually flipped over via .flip() )
+        cardFront.isHidden = true
 
         // Adding custom subview on top of our view
-        addSubview(contentView)
+        addSubview(cardFront)
         
+        // Create back of card
+        let cardBackImage = UIImage(named: "cardBack")
+        cardBack = UIImageView()
+        cardBack.contentMode = UIView.ContentMode.scaleAspectFit
+        cardBack.frame = bounds
+        cardBack.center = self.center
+        cardBack.image = cardBackImage
+        cardBack.layer.cornerRadius = 15
+        cardBack.layer.masksToBounds = true
+        cardBack.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+        addSubview(cardBack)
     }
 
     func loadViewFromNib() -> UIView! {
@@ -149,4 +159,22 @@ class PlayingCard: UIView {
         return view
     }
     
+    // card flipping animation adapted from https://www.hackingwithswift.com/example-code/uikit/how-to-flip-a-uiview-with-a-3d-effect-transitionwith
+    @objc func flip() {
+        let transitionOptions: UIView.AnimationOptions = [.transitionFlipFromRight, .showHideTransitionViews]
+        
+        // flip & show/hide card back
+        UIView.transition(with: cardBack, duration: 1.0, options: transitionOptions, animations: {})
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.cardBack.isHidden = self.showingBack
+        }
+        // flip & show/hide card front
+        UIView.transition(with: cardFront, duration: 1.0, options: transitionOptions, animations: {})
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.cardFront.isHidden = !self.showingBack
+            self.showingBack = !self.showingBack
+        }
+        
+    }
+
 }

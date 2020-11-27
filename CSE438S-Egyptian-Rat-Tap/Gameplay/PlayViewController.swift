@@ -23,18 +23,22 @@ class PlayViewController: UIViewController {
         pDeck = playerDecks[0]
         comDeck = playerDecks[1]
         
-        // Create 3 test cards and add them to the screen. Update: yay, it works! 
-//        let card3 = PlayingCard(rank: "10", suit: "spade")
-//        card3.center = CGPoint(x: self.view.center.x - 30, y: self.view.center.y - 30);
-//        view.addSubview(card3)
-//
-//        let card2 = PlayingCard(rank: "3", suit: "diamond")
-//        card2.center = CGPoint(x: self.view.center.x - 0, y: self.view.center.y - 0);
-//        view.addSubview(card2)
-//
-//        let card1 = PlayingCard(rank: "K", suit: "club")
-//        card1.center = CGPoint(x: self.view.center.x + 30, y: self.view.center.y + 30);
-//        view.addSubview(card1)
+        // Create a card:
+        // let card = PlayingCard(rank: "10", suit: "spade")
+        
+        // Set initial card location:
+        // card.center = CGPoint(x: self.view.center.x, y: self.view.center.y);
+        // view.addSubview(card)
+        
+        // Animate card to different locations:
+        // UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+        //     card.center = CGPoint(x: self.view.center.x + 100, y: self.view.center.y + 100)
+        // })
+        
+        // Flip card over (to face up) halfway through the animation:
+        // DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        //    card.flip()
+        // }
         
     }
 
