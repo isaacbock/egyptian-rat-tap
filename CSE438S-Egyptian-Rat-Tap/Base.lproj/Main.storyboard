@@ -374,10 +374,26 @@
                                             <segue destination="xEQ-cI-pX6" kind="unwind" unwindAction="unwind:" id="KXr-NQ-5SO"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Card Count:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQr-fv-6KH">
+                                        <rect key="frame" x="109.33333333333333" y="750" width="156.33333333333337" height="20"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Computer Card Count:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qPP-0k-Ifn">
+                                        <rect key="frame" x="93.666666666666686" y="42" width="188" height="20"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
+                                    <constraint firstItem="ZQr-fv-6KH" firstAttribute="centerX" secondItem="AQz-L1-F7H" secondAttribute="centerX" id="BAd-vC-8kG"/>
                                     <constraint firstItem="fN4-TW-myH" firstAttribute="top" secondItem="AQz-L1-F7H" secondAttribute="top" constant="60" id="BoM-Wc-MvR"/>
+                                    <constraint firstItem="qPP-0k-Ifn" firstAttribute="top" secondItem="AQz-L1-F7H" secondAttribute="top" constant="42" id="Dhs-71-SxB"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZQr-fv-6KH" secondAttribute="bottom" constant="42" id="IeP-SW-RyF"/>
+                                    <constraint firstItem="ZQr-fv-6KH" firstAttribute="centerX" secondItem="qPP-0k-Ifn" secondAttribute="centerX" id="Msj-LA-Zut"/>
                                     <constraint firstAttribute="trailing" secondItem="fN4-TW-myH" secondAttribute="trailing" constant="25" id="XtQ-Dg-tao"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -400,11 +416,15 @@
                         <viewLayoutGuide key="safeArea" id="OUs-tw-PhJ"/>
                     </view>
                     <navigationItem key="navigationItem" id="w5B-qv-pqE"/>
+                    <connections>
+                        <outlet property="comCardCountLabel" destination="qPP-0k-Ifn" id="iA1-uN-bHI"/>
+                        <outlet property="pCardCountLabel" destination="ZQr-fv-6KH" id="rb7-JS-gZR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oIQ-jQ-eOP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="xEQ-cI-pX6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3097" y="1460"/>
+            <point key="canvasLocation" x="3096.8000000000002" y="1459.3596059113302"/>
         </scene>
         <!--Begin Multiplayer View Controller-->
         <scene sceneID="r4K-In-7fy">

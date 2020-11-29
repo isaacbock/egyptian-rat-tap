@@ -17,6 +17,11 @@ class PlayViewController: UIViewController {
     var yourTurn:Bool = true
     var slappable:Bool = false
     var gestureRecognizerPile: UITapGestureRecognizer?
+    var comCardCount: Int = 26
+    var pCardCount: Int = 26
+    
+    @IBOutlet weak var comCardCountLabel: UILabel!
+    @IBOutlet weak var pCardCountLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +49,9 @@ class PlayViewController: UIViewController {
         view.addSubview(comCard)
         
         pCard.addGestureRecognizer(gestureRecognizerDeck)
+        
+        pCardCountLabel.text = "Player Card Count: \(pCardCount)"
+        comCardCountLabel.text = "Computer Card Count: \(comCardCount)"
 //
 ////         Animate card to different locations:
 //         UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
@@ -60,6 +68,8 @@ class PlayViewController: UIViewController {
         if yourTurn {
             let pop = pDeck.removeFirst()
             let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
+            pCardCount -= 1
+            pCardCountLabel.text = "Player Card Count: \(pCardCount)"
             
             print(pop.description)
             
@@ -93,6 +103,8 @@ class PlayViewController: UIViewController {
         if !yourTurn && !slappable {
             let pop = comDeck.removeFirst()
             let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
+            comCardCount -= 1
+            comCardCountLabel.text = "Computer Card Count: \(comCardCount)"
             
             print(pop.description)
             
@@ -201,7 +213,13 @@ class PlayViewController: UIViewController {
             
             slappable = false
             
+            let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+            let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
+            let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
+            
             if(isHuman){
+                pCardCount += fullPile.count
+                pCardCountLabel.text = "Player Card Count: \(pCardCount)"
                 pDeck.append(contentsOf: fullPile)
                 yourTurn = true
                 fullPile.removeAll()
@@ -209,16 +227,33 @@ class PlayViewController: UIViewController {
                     pile[i].removeFromSuperview()
                 }
                 pile.removeAll()
-                print("player slap!")
-            }else {
+                
+                let attributedTitle = NSMutableAttributedString(string: "You slapped!", attributes: titleFont)
+                let attributedMessage = NSMutableAttributedString(string: "You now have \(pCardCount) cards. You need \(52-pCardCount) more cards to win.", attributes: messageFont)
+                alert.setValue(attributedTitle, forKey: "attributedTitle")
+                alert.setValue(attributedMessage, forKey: "attributedMessage")
+                alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { action in
+                    print("player slap!")
+                }))
+                present(alert, animated:true)
+            } else {
+                comCardCount += fullPile.count
+                comCardCountLabel.text = "Computer Card Count: \(comCardCount)"
                 comDeck.append(contentsOf: fullPile)
                 yourTurn = false
-                print("computer slap!")
                 fullPile.removeAll()
                 for i in 0..<pile.count{
                     pile[i].removeFromSuperview()
                 }
                 pile.removeAll()
+                let attributedTitle = NSMutableAttributedString(string: "Your opponent slapped!", attributes: titleFont)
+                let attributedMessage = NSMutableAttributedString(string: "They now have \(comCardCount) cards.", attributes: messageFont)
+                alert.setValue(attributedTitle, forKey: "attributedTitle")
+                alert.setValue(attributedMessage, forKey: "attributedMessage")
+                alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { action in
+                    print("computer slap!")
+                }))
+                present(alert, animated:true)
                 playComp()
             }
         }
