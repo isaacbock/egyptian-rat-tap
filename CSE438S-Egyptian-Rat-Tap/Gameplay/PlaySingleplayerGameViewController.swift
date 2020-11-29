@@ -19,6 +19,7 @@ class PlayViewController: UIViewController {
     var gestureRecognizerPile: UITapGestureRecognizer?
     var comCardCount: Int = 26
     var pCardCount: Int = 26
+    var faceCardCounter: Int = 0
     
     @IBOutlet weak var comCardCountLabel: UILabel!
     @IBOutlet weak var pCardCountLabel: UILabel!
@@ -52,16 +53,7 @@ class PlayViewController: UIViewController {
         
         pCardCountLabel.text = "Player Card Count: \(pCardCount)"
         comCardCountLabel.text = "Computer Card Count: \(comCardCount)"
-//
-////         Animate card to different locations:
-//         UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
-//             card.center = CGPoint(x: self.view.center.x + 100, y: self.view.center.y + 100)
-//         })
-////
-////         Flip card over (to face up) halfway through the animation:
-//         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//            card.flip()
-//         }
+
     }
     
     @objc func flipCard(_ sender: UITapGestureRecognizer) {
@@ -81,12 +73,18 @@ class PlayViewController: UIViewController {
             })
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-               card.flip()
-                self.yourTurn = false
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    self.playComp()
-                }
+                card.flip()
             }
+            
+            if self.faceCardCounter > 0{
+                               self.faceCardCounter -= 1
+                           }else{
+                               self.yourTurn = false
+                               DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                   self.playComp()
+                               }
+                           }
+            
             fullPile.append(pop)
             pile.append(card)
             
@@ -100,6 +98,8 @@ class PlayViewController: UIViewController {
     }
     
     func playComp() {
+        //Add in burn boolean to stop computer from playing if you burn a card.
+        
         if !yourTurn && !slappable {
             let pop = comDeck.removeFirst()
             let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
@@ -127,9 +127,15 @@ class PlayViewController: UIViewController {
             }
             card.addGestureRecognizer(gesture)
             
+            if self.faceCardCounter > 0{
+                self.faceCardCounter -= 1
+                playComp()
+            }else{
+                self.yourTurn = true
+            }
+            
             checkPile(card: card)
             
-            yourTurn = true
         }
     }
     
@@ -176,8 +182,10 @@ class PlayViewController: UIViewController {
                 self.slap(isHuman: false)
             }
         }
-        
         print(slappable)
+        print(faceCardCounter)
+//        faceCard()
+        print(faceCardCounter)
     }
     
     func checkSlap() -> Bool {
@@ -210,12 +218,8 @@ class PlayViewController: UIViewController {
     
     func slap(isHuman: Bool) {
         if(slappable){
-            
+            faceCardCounter = 0
             slappable = false
-            
-            let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
-            let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
-            let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
             
             if(isHuman){
                 pCardCount += fullPile.count
@@ -227,15 +231,8 @@ class PlayViewController: UIViewController {
                     pile[i].removeFromSuperview()
                 }
                 pile.removeAll()
+                slapMessage(isHuman: isHuman)
                 
-                let attributedTitle = NSMutableAttributedString(string: "You slapped!", attributes: titleFont)
-                let attributedMessage = NSMutableAttributedString(string: "You now have \(pCardCount) cards. You need \(52-pCardCount) more cards to win.", attributes: messageFont)
-                alert.setValue(attributedTitle, forKey: "attributedTitle")
-                alert.setValue(attributedMessage, forKey: "attributedMessage")
-                alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { action in
-                    print("player slap!")
-                }))
-                present(alert, animated:true)
             } else {
                 comCardCount += fullPile.count
                 comCardCountLabel.text = "Computer Card Count: \(comCardCount)"
@@ -246,42 +243,88 @@ class PlayViewController: UIViewController {
                     pile[i].removeFromSuperview()
                 }
                 pile.removeAll()
-                let attributedTitle = NSMutableAttributedString(string: "Your opponent slapped!", attributes: titleFont)
-                let attributedMessage = NSMutableAttributedString(string: "They now have \(comCardCount) cards.", attributes: messageFont)
-                alert.setValue(attributedTitle, forKey: "attributedTitle")
-                alert.setValue(attributedMessage, forKey: "attributedMessage")
-                alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { action in
-                    print("computer slap!")
-                }))
-                present(alert, animated:true)
-                playComp()
+                slapMessage(isHuman: isHuman)
             }
         } else if (isHuman){
-//            burn()
+            pCardCount-=1
+            pCardCountLabel.text = "Player Card Count: \(pCardCount)"
+            burnMessage()
         }
     }
     
-//    func burn(){
-//        print("player burns card!!")
-//        let pop = pDeck.removeFirst()
-//        let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
-//
-//        print(pop.description)
-//
-//        card.center = CGPoint(x: self.view.center.x, y: self.view.center.y + 250);
-//        view.addSubview(card)
-//
-//        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
-//        card.center = CGPoint(x: self.view.center.x-100, y: self.view.center.y)
-//        })
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//           card.flip()
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-//                card.removeFromSuperview()
-//            }
+    func slapMessage(isHuman:Bool) {
+        let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
+        let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
+        
+        if(isHuman){
+            let attributedTitle = NSMutableAttributedString(string: "You slapped!", attributes: titleFont)
+            let attributedMessage = NSMutableAttributedString(string: "You now have \(pCardCount) cards. You need \(52-pCardCount) more cards to win.", attributes: messageFont)
+            alert.setValue(attributedTitle, forKey: "attributedTitle")
+            alert.setValue(attributedMessage, forKey: "attributedMessage")
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { action in
+                print("player slap!")
+            }))
+        }else{
+            let attributedTitle = NSMutableAttributedString(string: "Your opponent slapped!", attributes: titleFont)
+            let attributedMessage = NSMutableAttributedString(string: "They now have \(comCardCount) cards.", attributes: messageFont)
+            alert.setValue(attributedTitle, forKey: "attributedTitle")
+            alert.setValue(attributedMessage, forKey: "attributedMessage")
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { action in
+                print("computer slap!")
+                self.playComp()
+            }))
+        }
+        
+        present(alert, animated:true)
+    }
+    
+    func burnMessage(){
+        let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
+        let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
+        
+        let attributedTitle = NSMutableAttributedString(string: "Incorrect slap!", attributes: titleFont)
+        let attributedMessage = NSMutableAttributedString(string: "You have to burn a card.", attributes: messageFont)
+        alert.setValue(attributedTitle, forKey: "attributedTitle")
+        alert.setValue(attributedMessage, forKey: "attributedMessage")
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { action in
+           print("player burn!")
+           self.burn()
+           self.playComp()
+        }))
+        
+        present(alert, animated:true)
+    }
+    
+    func burn(){
+        let pop = pDeck.removeFirst()
+        let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
+
+        card.center = CGPoint(x: self.view.center.x, y: self.view.center.y + 250);
+        view.addSubview(card)
+        
+        view.insertSubview(card, belowSubview: pile[0])
+        
+        card.flip()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+            card.center = CGPoint(x: self.view.center.x, y: self.view.center.y)})
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                card.removeFromSuperview()
+            }
+        }
+        fullPile.insert(pop, at: 0)
+    }
+    
+//    func faceCard() {
+//        let lastCard = fullPile[fullPile.count-1]
+//        if(Int(lastCard.rank.rankOnCard)==nil){
+//            faceCardCounter = lastCard.rank.numOfFlips
 //        }
-//        fullPile.insert(pop, at: 0)
+//
 //    }
+    
     
 }
