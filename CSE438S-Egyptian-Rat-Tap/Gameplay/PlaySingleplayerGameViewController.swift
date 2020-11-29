@@ -221,7 +221,32 @@ class PlayViewController: UIViewController {
                 pile.removeAll()
                 playComp()
             }
+        } else if (isHuman){
+//            burn()
         }
     }
+    
+//    func burn(){
+//        print("player burns card!!")
+//        let pop = pDeck.removeFirst()
+//        let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
+//
+//        print(pop.description)
+//
+//        card.center = CGPoint(x: self.view.center.x, y: self.view.center.y + 250);
+//        view.addSubview(card)
+//
+//        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+//        card.center = CGPoint(x: self.view.center.x-100, y: self.view.center.y)
+//        })
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//           card.flip()
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+//                card.removeFromSuperview()
+//            }
+//        }
+//        fullPile.insert(pop, at: 0)
+//    }
     
 }
