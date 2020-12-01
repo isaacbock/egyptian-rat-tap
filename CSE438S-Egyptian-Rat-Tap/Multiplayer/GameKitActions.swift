@@ -21,7 +21,7 @@ final class GameKitActions: NSObject, GKLocalPlayerListener {
     weak var delegate: GameKitActionsDelegate?
     
     private let minPlayers: Int = 2
-    private let maxPlayers: Int = 2
+    private let maxPlayers: Int = 3
     private let inviteMessage = "Welcome to Egyptian Rat Tap"
     
     private var currentVC: GKMatchmakerViewController?
@@ -38,7 +38,7 @@ final class GameKitActions: NSObject, GKLocalPlayerListener {
                 self.delegate?.presentGameCenterAuth(viewController: gameCenterAuthViewController)
                 return
             }
-
+            print("registering...")
             GKLocalPlayer.local.register(self)
         }
     }
