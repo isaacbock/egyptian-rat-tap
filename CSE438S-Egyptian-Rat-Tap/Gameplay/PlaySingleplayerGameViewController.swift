@@ -26,45 +26,44 @@ class PlayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        //set up decks
         let deck = Deck()
-        
-        let gestureRecognizerDeck = UITapGestureRecognizer(target: self, action: #selector(self.flipCard(_:)))
-        
-        gestureRecognizerPile = UITapGestureRecognizer(target: self, action: #selector(self.humanSlapped(_:)))
-        
         let playerDecks = deck.splitDeck()
         pDeck = playerDecks[0]
         comDeck = playerDecks[1]
+    
+        //used to recognize a slap
+        gestureRecognizerPile = UITapGestureRecognizer(target: self, action: #selector(self.humanSlapped(_:)))
         
-        // Create a card:
-         let pCard = PlayingCard(rank: "10", suit: "spade")
-
-//        Set initial card location:
-         pCard.center = CGPoint(x: self.view.center.x, y: self.view.center.y + 250);
-         view.addSubview(pCard)
-        
-        let comCard = PlayingCard(rank: "10", suit: "spade")
-        
-        comCard.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 250);
-        view.addSubview(comCard)
-        
+        // Create a dummy card to look like player's deck:
+        let pCard = PlayingCard(rank: "10", suit: "spade")
+        pCard.center = CGPoint(x: self.view.center.x, y: self.view.center.y + 250);
+        view.addSubview(pCard)
+        let gestureRecognizerDeck = UITapGestureRecognizer(target: self, action: #selector(self.flipCard(_:)))
         pCard.addGestureRecognizer(gestureRecognizerDeck)
         
+        // Create a dummy card to look like computers's deck:
+        let comCard = PlayingCard(rank: "10", suit: "spade")
+        comCard.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 250);
+        view.addSubview(comCard)
+    
         pCardCountLabel.text = "Player Card Count: \(pCardCount)"
         comCardCountLabel.text = "Computer Card Count: \(comCardCount)"
 
     }
     
+    //when a player plays a card (i.e., flips a card from their deck to the main pile)
     @objc func flipCard(_ sender: UITapGestureRecognizer) {
         if yourTurn {
+            //get card from your deck
             let pop = pDeck.removeFirst()
-            let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
             pCardCount -= 1
             pCardCountLabel.text = "Player Card Count: \(pCardCount)"
-            
             print(pop.description)
             
+            //create and animate PlayingCard
+            let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
             card.center = CGPoint(x: self.view.center.x, y: self.view.center.y + 250);
             view.addSubview(card)
             
@@ -76,38 +75,44 @@ class PlayViewController: UIViewController {
                 card.flip()
             }
             
+            //logic for face cards TO DO
             if self.faceCardCounter > 0{
-                               self.faceCardCounter -= 1
-                           }else{
-                               self.yourTurn = false
-                               DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                   self.playComp()
-                               }
-                           }
+               self.faceCardCounter -= 1
+           }else{
+               self.yourTurn = false
+               DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                   self.playComp()
+               }
+           }
             
+            //add card to pile in middle
             fullPile.append(pop)
             pile.append(card)
             
+            //add gesture to card
             guard let gesture = gestureRecognizerPile else {
                 return
             }
             card.addGestureRecognizer(gesture)
             
+            //checks pile
             checkPile(card: card)
         }
     }
     
+    //computer plays a card
     func playComp() {
-        //Add in burn boolean to stop computer from playing if you burn a card.
+        //TO DO: Add in burn boolean to stop computer from playing if you burn a card.
         
         if !yourTurn && !slappable {
+            //get card from comp deck
             let pop = comDeck.removeFirst()
-            let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
             comCardCount -= 1
             comCardCountLabel.text = "Computer Card Count: \(comCardCount)"
-            
             print(pop.description)
             
+            //create and animate PlayingCard
+            let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
             card.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 250);
             view.addSubview(card)
             
@@ -119,14 +124,17 @@ class PlayViewController: UIViewController {
                card.flip()
             }
             
+            //add card to pile in middle
             fullPile.append(pop)
             pile.append(card)
             
+            //add gesture to card
             guard let gesture = gestureRecognizerPile else {
                 return
             }
             card.addGestureRecognizer(gesture)
             
+            //face card logic
             if self.faceCardCounter > 0{
                 self.faceCardCounter -= 1
                 playComp()
@@ -134,18 +142,25 @@ class PlayViewController: UIViewController {
                 self.yourTurn = true
             }
             
+            //check pile
             checkPile(card: card)
             
         }
     }
     
+    
+    // this function check to see if adjustments need to be made to pile after a card is added
     func checkPile(card: PlayingCard) {
+        //case 1: first three cards
         if (pile.count <= 3){
+            //moves cards to the left
             for i in 0..<pile.count{
                 UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
                     self.pile[i].center = CGPoint(x: self.view.center.x - CGFloat(50*(self.pile.count-1-i)), y: self.view.center.y)
                 })
             }
+            
+            //removes recognizer from bottom cards so only the top card has the recognizer
             guard let gesture = gestureRecognizerPile else {return}
             if (pile.count == 2){
                 pile[0].removeGestureRecognizer(gesture)
@@ -154,15 +169,19 @@ class PlayViewController: UIViewController {
             }
         }
         
+        //case 2: more than three cards have been played
         if pile.count > 3{
+            //remove old card
             pile[0].removeFromSuperview()
             pile.remove(at: 0)
             
+            //removes recognizer from bottom card so only the top card has the recognizer
             guard let gesture = gestureRecognizerPile else{
                 return
             }
             pile[1].removeGestureRecognizer(gesture)
             
+            //shifts cards to the left
             UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
                 self.pile[0].center = CGPoint(x: self.view.center.x-100, y: self.view.center.y)
             })
@@ -175,19 +194,25 @@ class PlayViewController: UIViewController {
                 self.pile[2].center = CGPoint(x: self.view.center.x, y: self.view.center.y)
             })
         }
+        
+        //checks if pile is slappable
         slappable = checkSlap()
         
         if slappable{
             DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+                //computer slaps if human doesn't slap in time
                 self.slap(isHuman: false)
             }
         }
         print(slappable)
+        
+        //TO DO: face card logic
         print(faceCardCounter)
 //        faceCard()
         print(faceCardCounter)
     }
     
+    //checks if pile is slappable
     func checkSlap() -> Bool {
         if(pile.count == 1){
             return false
@@ -222,30 +247,43 @@ class PlayViewController: UIViewController {
             slappable = false
             
             if(isHuman){
-                pCardCount += fullPile.count
-                pCardCountLabel.text = "Player Card Count: \(pCardCount)"
+                //add cards to your deck
                 pDeck.append(contentsOf: fullPile)
                 yourTurn = true
+                
+                //change card count
+                pCardCount += fullPile.count
+                pCardCountLabel.text = "Player Card Count: \(pCardCount)"
+                
+                //remove cards
                 fullPile.removeAll()
                 for i in 0..<pile.count{
                     pile[i].removeFromSuperview()
                 }
                 pile.removeAll()
+                
                 slapMessage(isHuman: isHuman)
                 
             } else {
-                comCardCount += fullPile.count
-                comCardCountLabel.text = "Computer Card Count: \(comCardCount)"
+                //add cards to comp deck
                 comDeck.append(contentsOf: fullPile)
                 yourTurn = false
+                
+                //change card count
+                comCardCount += fullPile.count
+                comCardCountLabel.text = "Computer Card Count: \(comCardCount)"
+                
+                //remove cards
                 fullPile.removeAll()
                 for i in 0..<pile.count{
                     pile[i].removeFromSuperview()
                 }
                 pile.removeAll()
+                
                 slapMessage(isHuman: isHuman)
             }
         } else if (isHuman){
+            //burn a card
             pCardCount-=1
             pCardCountLabel.text = "Player Card Count: \(pCardCount)"
             burnMessage()
@@ -297,7 +335,9 @@ class PlayViewController: UIViewController {
         present(alert, animated:true)
     }
     
+    //when a player misslaps, they have to burn a card
     func burn(){
+        //get card and animate
         let pop = pDeck.removeFirst()
         let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
 
@@ -315,6 +355,8 @@ class PlayViewController: UIViewController {
                 card.removeFromSuperview()
             }
         }
+        
+        //add to main pile
         fullPile.insert(pop, at: 0)
     }
     
