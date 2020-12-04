@@ -706,13 +706,16 @@
                                             <segue destination="jUv-5V-HUd" kind="unwind" unwindAction="unwind:" id="6qf-fX-XI4"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THE ACTUAL GAME PART, MULTIPLAYER" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8nB-tN-qte">
-                                        <rect key="frame" x="23" y="236" width="329" height="96"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="96" id="fzw-PP-xhq"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
-                                        <color key="textColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Card Count:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zVa-X6-s0d">
+                                        <rect key="frame" x="116.66666666666669" y="750" width="142" height="20"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opponent Card Count:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TrR-IR-0oj">
+                                        <rect key="frame" x="93" y="44" width="189" height="20"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -720,9 +723,12 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="5V9-pb-7FY" secondAttribute="trailing" constant="25" id="3d3-cP-Xau"/>
                                     <constraint firstItem="5V9-pb-7FY" firstAttribute="top" secondItem="55e-6O-Uuw" secondAttribute="top" constant="60" id="HCJ-qK-hjl"/>
-                                    <constraint firstItem="8nB-tN-qte" firstAttribute="top" secondItem="55e-6O-Uuw" secondAttribute="top" constant="236" id="KDg-Ac-g4j"/>
-                                    <constraint firstItem="8nB-tN-qte" firstAttribute="leading" secondItem="55e-6O-Uuw" secondAttribute="leading" constant="23" id="jtS-g1-Iy7"/>
-                                    <constraint firstItem="8nB-tN-qte" firstAttribute="centerX" secondItem="55e-6O-Uuw" secondAttribute="centerX" id="s5q-Jl-RA3"/>
+                                    <constraint firstAttribute="bottom" secondItem="TrR-IR-0oj" secondAttribute="bottom" constant="748" id="I5x-A5-dTj"/>
+                                    <constraint firstAttribute="bottom" secondItem="zVa-X6-s0d" secondAttribute="bottom" constant="42" id="LeL-Pc-i5i"/>
+                                    <constraint firstItem="TrR-IR-0oj" firstAttribute="centerX" secondItem="55e-6O-Uuw" secondAttribute="centerX" id="Oei-iV-vF9"/>
+                                    <constraint firstItem="zVa-X6-s0d" firstAttribute="centerX" secondItem="55e-6O-Uuw" secondAttribute="centerX" id="RpH-Oj-8xi"/>
+                                    <constraint firstItem="zVa-X6-s0d" firstAttribute="top" secondItem="55e-6O-Uuw" secondAttribute="top" constant="750" id="g6r-SG-bBZ"/>
+                                    <constraint firstItem="TrR-IR-0oj" firstAttribute="top" secondItem="55e-6O-Uuw" secondAttribute="top" constant="44" id="hf6-XB-qvx"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
@@ -744,6 +750,10 @@
                         <viewLayoutGuide key="safeArea" id="pzt-1C-uAg"/>
                     </view>
                     <navigationItem key="navigationItem" id="nZ0-yw-5lV"/>
+                    <connections>
+                        <outlet property="opponentCardCountLabel" destination="TrR-IR-0oj" id="dvu-xT-BRo"/>
+                        <outlet property="yourCardCountLabel" destination="zVa-X6-s0d" id="s4L-ao-cIA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AxI-WL-SAg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="jUv-5V-HUd" userLabel="Exit" sceneMemberID="exit"/>

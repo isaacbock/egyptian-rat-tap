@@ -10,13 +10,19 @@ import UIKit
 import GameKit
 
 class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
-
+    @IBOutlet weak var yourCardCountLabel: UILabel!
+    @IBOutlet weak var opponentCardCountLabel: UILabel!
+    
     var match: GKMatch?
+    private var timer: Timer?
+    
     private var ratTapModel: RatTapModel! {
         didSet {
             updateUI()
         }
     }
+    var yourTurn:Bool = true
+    var gestureRecognizerPile: UITapGestureRecognizer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +30,44 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         ratTapModel = RatTapModel()
         match?.delegate = self
         // Do any additional setup after loading the view.
-        
         setUpGame()
+        
+        let gestureRecognizerDeck = UITapGestureRecognizer(target: self, action: #selector(self.flipCard(_:)))
+        
+        gestureRecognizerPile = UITapGestureRecognizer(target: self, action: #selector(self.playerSlapped(_:)))
+        
+        // Create a card:
+        let pCard = PlayingCard(rank: "10", suit: "spade")
+
+        // Set initial card location:
+        pCard.center = CGPoint(x: self.view.center.x, y: self.view.center.y + 250);
+                 view.addSubview(pCard)
+                
+        let comCard = PlayingCard(rank: "10", suit: "spade")
+                
+        comCard.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 250);
+                view.addSubview(comCard)
+                
+        pCard.addGestureRecognizer(gestureRecognizerDeck)
+        guard let player2Name = match?.players.first?.displayName else { return }
+        
+        yourCardCountLabel.text = "\(GKLocalPlayer.local.displayName)'s Card Count: 26"
+        opponentCardCountLabel.text = "\(player2Name)'s Card Count: 26"
     }
     
     private func updateUI() {
         //perform UI updates
+    }
+    
+    @objc func playerSlapped(_ sender: UITapGestureRecognizer){
+        slap(isYou: true)
+    }
+    
+    @objc func flipCard(_ sender: UITapGestureRecognizer) {
+    }
+    
+    func slap(isYou: Bool) {
+    
     }
     
     private func sendData() {

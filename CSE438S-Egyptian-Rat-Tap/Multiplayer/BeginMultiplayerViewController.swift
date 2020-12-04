@@ -20,9 +20,7 @@ class BeginMultiplayerViewController: UIViewController, GKLocalPlayerListener {
         // Do any additional setup after loading the view.
         gameKitActions = GameKitActions()
         gameKitActions?.delegate = self
-        gameKitActions?.authenticatePlayer()
-        //gameKitActions?.presentMatchmaker()
-        
+        gameKitActions?.authenticatePlayer()        
         
     }
         
