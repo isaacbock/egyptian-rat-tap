@@ -22,6 +22,8 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         }
     }
     var yourTurn:Bool = true
+    var playerNum:Int = 0
+    var otherPlayerNum:Int = 0
     var gestureRecognizerPile: UITapGestureRecognizer?
     
     override func viewDidLoad() {
@@ -57,6 +59,31 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     
     private func updateUI() {
         //perform UI updates
+        print("here for \(GKLocalPlayer.local.displayName)")
+        if !yourTurn && ratTapModel.opponentFlipped {
+            print("here2 for \(GKLocalPlayer.local.displayName)")
+            guard let pop = ratTapModel.flippedCard else {return}
+            let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
+            
+            card.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 250);
+            view.addSubview(card)
+            
+            UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+            card.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+            })
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+               card.flip()
+            }
+            
+            guard let gesture = gestureRecognizerPile else {
+                return
+            }
+            card.addGestureRecognizer(gesture)
+            ratTapModel.opponentFlipped = false
+            yourTurn = true
+            sendData()
+        }
     }
     
     @objc func playerSlapped(_ sender: UITapGestureRecognizer){
@@ -64,6 +91,33 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     }
     
     @objc func flipCard(_ sender: UITapGestureRecognizer) {
+        if yourTurn {
+            var player = ratTapModel.players[playerNum]
+            let pop = player.playerDeck.removeFirst()
+            let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
+            yourCardCountLabel.text = "\(GKLocalPlayer.local.displayName)'s Card Count: \(player.playerDeck.count)"
+            
+            card.center = CGPoint(x: self.view.center.x, y: self.view.center.y + 250);
+            view.addSubview(card)
+            
+            UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+            card.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+            })
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                card.flip()
+            }
+            
+            ratTapModel.pile.append(pop)
+            guard let gesture = gestureRecognizerPile else {
+                return
+            }
+            card.addGestureRecognizer(gesture)
+            ratTapModel.opponentFlipped = true
+            ratTapModel.flippedCard = pop
+            yourTurn = false
+            sendData()
+        }
     }
     
     func slap(isYou: Bool) {
@@ -109,6 +163,17 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         ratTapModel.players.sort { (player1, player2) -> Bool in
     player1.name < player2.name
         }
+        
+        if getLocalPlayerType() == .one {
+            yourTurn = true
+            playerNum = 0
+            otherPlayerNum = 1
+        }
+        else {
+            yourTurn = false
+            playerNum = 1
+            otherPlayerNum = 0
+        }
 
         sendData()
     }
@@ -130,5 +195,56 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         print(ratTapModel.players[localPlayer.index()].playerDeck.count)
         sendData()
     }
+    
+    func checkPile(card: PlayingCard) {
+//        let pile = ratTapModel.pile
+//            if (pile.count <= 3){
+//                for i in 0..<pile.count{
+//                    let card = PlayingCard(rank: pile[i].rank.rankOnCard, suit: pile[i].suit.rawValue)
+//                    UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+//                        pile[i].center = CGPoint(x: self.view.center.x - CGFloat(50*(pile.count-1-i)), y: self.view.center.y)
+//                    })
+//                }
+//                guard let gesture = gestureRecognizerPile else {return}
+//                if (pile.count == 2){
+//                    pile[0].removeGestureRecognizer(gesture)
+//                }else if (pile.count == 3){
+//                    pile[1].removeGestureRecognizer(gesture)
+//                }
+//            }
+//
+//            if pile.count > 3{
+//                pile[0].removeFromSuperview()
+//                pile.remove(at: 0)
+//
+//                guard let gesture = gestureRecognizerPile else{
+//                    return
+//                }
+//                pile[1].removeGestureRecognizer(gesture)
+//
+//                UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+//                    self.pile[0].center = CGPoint(x: self.view.center.x-100, y: self.view.center.y)
+//                })
+//
+//                UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+//                    self.pile[1].center = CGPoint(x: self.view.center.x-50, y: self.view.center.y)
+//                })
+//
+//                UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+//                    self.pile[2].center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+//                })
+//            }
+//            slappable = checkSlap()
+//
+//            if slappable{
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+//                    self.slap(isHuman: false)
+//                }
+//            }
+//            print(slappable)
+//            print(faceCardCounter)
+//    //        faceCard()
+//            print(faceCardCounter)
+        }
 
 }

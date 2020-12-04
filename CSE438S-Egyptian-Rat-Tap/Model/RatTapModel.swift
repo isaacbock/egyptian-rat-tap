@@ -13,6 +13,8 @@ import GameKit
 struct RatTapModel: Codable {
     var players: [RatTapPlayer] = []
     var pile: [Card] = []
+    var opponentFlipped: Bool = false
+    var flippedCard: Card? = nil
     
     func encode() -> Data? {
         return try? JSONEncoder().encode(self)
