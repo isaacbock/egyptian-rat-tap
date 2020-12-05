@@ -20,6 +20,8 @@ class PlayViewController: UIViewController {
     var comCardCount: Int = 26
     var pCardCount: Int = 26
     var faceCardCounter: Int = 0
+    var faceCardPlayedByHuman:Bool = true
+    var faceCardPlayed:Bool = false
     
     @IBOutlet weak var comCardCountLabel: UILabel!
     @IBOutlet weak var pCardCountLabel: UILabel!
@@ -48,6 +50,7 @@ class PlayViewController: UIViewController {
         comCard.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 250);
         view.addSubview(comCard)
     
+        //set up labels
         pCardCountLabel.text = "Player Card Count: \(pCardCount)"
         comCardCountLabel.text = "Computer Card Count: \(comCardCount)"
 
@@ -56,6 +59,9 @@ class PlayViewController: UIViewController {
     //when a player plays a card (i.e., flips a card from their deck to the main pile)
     @objc func flipCard(_ sender: UITapGestureRecognizer) {
         if yourTurn {
+            print()
+            print("------------YOUR TURN------------")
+            
             //get card from your deck
             let pop = pDeck.removeFirst()
             pCardCount -= 1
@@ -75,16 +81,6 @@ class PlayViewController: UIViewController {
                 card.flip()
             }
             
-            //logic for face cards TO DO
-            if self.faceCardCounter > 0{
-               self.faceCardCounter -= 1
-           }else{
-               self.yourTurn = false
-               DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                   self.playComp()
-               }
-           }
-            
             //add card to pile in middle
             fullPile.append(pop)
             pile.append(card)
@@ -96,7 +92,28 @@ class PlayViewController: UIViewController {
             card.addGestureRecognizer(gesture)
             
             //checks pile
-            checkPile(card: card)
+            checkPile()
+            
+            //logic for face cards TO DO
+             if self.faceCardCounter > 0 && !faceCardPlayedByHuman{
+                self.faceCardCounter -= 1
+            }
+            
+             if faceCardCounter > 0 && !faceCardPlayedByHuman {
+                 print("human has to play another card")
+             }else{
+                if(faceCardPlayed && faceCardCounter == 0){
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        self.faceCardOver()
+                    }
+                }else {
+                    print("human turn over. switches to comp")
+                    self.yourTurn = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        self.playComp()
+                    }
+                }
+            }
         }
     }
     
@@ -105,6 +122,9 @@ class PlayViewController: UIViewController {
         //TO DO: Add in burn boolean to stop computer from playing if you burn a card.
         
         if !yourTurn && !slappable {
+            print()
+            print("------------COMPUTER TURN------------")
+            
             //get card from comp deck
             let pop = comDeck.removeFirst()
             comCardCount -= 1
@@ -134,23 +154,34 @@ class PlayViewController: UIViewController {
             }
             card.addGestureRecognizer(gesture)
             
-            //face card logic
-            if self.faceCardCounter > 0{
-                self.faceCardCounter -= 1
-                playComp()
-            }else{
-                self.yourTurn = true
-            }
-            
             //check pile
-            checkPile(card: card)
+            checkPile()
             
+            //face card logic
+            if faceCardCounter > 0 && faceCardPlayedByHuman{
+                faceCardCounter -= 1
+            }
+            if faceCardCounter > 0 && faceCardPlayedByHuman{
+                print("comp has to play another card")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.playComp()
+                }
+            }else{
+                if(faceCardPlayed && faceCardCounter == 0){
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        self.faceCardOver()
+                    }
+                }else {
+                    print("comp turn over.  humans turn")
+                    self.yourTurn = true
+                }
+            }
         }
     }
     
     
     // this function check to see if adjustments need to be made to pile after a card is added
-    func checkPile(card: PlayingCard) {
+    func checkPile() {
         //case 1: first three cards
         if (pile.count <= 3){
             //moves cards to the left
@@ -204,12 +235,12 @@ class PlayViewController: UIViewController {
                 self.slap(isHuman: false)
             }
         }
-        print(slappable)
+        print("slappable bool is \(slappable)")
         
         //TO DO: face card logic
-        print(faceCardCounter)
-//        faceCard()
-        print(faceCardCounter)
+        print("before calling faceCard function: \(faceCardCounter)")
+        faceCard()
+        print("after calling faceCard function: \(faceCardCounter)")
     }
     
     //checks if pile is slappable
@@ -247,39 +278,10 @@ class PlayViewController: UIViewController {
             slappable = false
             
             if(isHuman){
-                //add cards to your deck
-                pDeck.append(contentsOf: fullPile)
-                yourTurn = true
-                
-                //change card count
-                pCardCount += fullPile.count
-                pCardCountLabel.text = "Player Card Count: \(pCardCount)"
-                
-                //remove cards
-                fullPile.removeAll()
-                for i in 0..<pile.count{
-                    pile[i].removeFromSuperview()
-                }
-                pile.removeAll()
-                
+                pileWon(isHuman: true)
                 slapMessage(isHuman: isHuman)
-                
             } else {
-                //add cards to comp deck
-                comDeck.append(contentsOf: fullPile)
-                yourTurn = false
-                
-                //change card count
-                comCardCount += fullPile.count
-                comCardCountLabel.text = "Computer Card Count: \(comCardCount)"
-                
-                //remove cards
-                fullPile.removeAll()
-                for i in 0..<pile.count{
-                    pile[i].removeFromSuperview()
-                }
-                pile.removeAll()
-                
+                pileWon(isHuman: false)
                 slapMessage(isHuman: isHuman)
             }
         } else if (isHuman){
@@ -288,6 +290,34 @@ class PlayViewController: UIViewController {
             pCardCountLabel.text = "Player Card Count: \(pCardCount)"
             burnMessage()
         }
+    }
+    
+    //the middle pile was won, takes in a parameter of whether the human or comp won
+    func pileWon(isHuman: Bool){
+        if isHuman {
+            //add cards to your deck
+            pDeck.append(contentsOf: fullPile)
+            yourTurn = true
+            
+            //change card count
+            pCardCount += fullPile.count
+            pCardCountLabel.text = "Player Card Count: \(pCardCount)"
+        } else {
+            //add cards to comp deck
+            comDeck.append(contentsOf: fullPile)
+            yourTurn = false
+            
+            //change card count
+            comCardCount += fullPile.count
+            comCardCountLabel.text = "Computer Card Count: \(comCardCount)"
+        }
+
+        //remove cards
+        fullPile.removeAll()
+        for i in 0..<pile.count{
+            pile[i].removeFromSuperview()
+        }
+        pile.removeAll()
     }
     
     func slapMessage(isHuman:Bool) {
@@ -360,13 +390,34 @@ class PlayViewController: UIViewController {
         fullPile.insert(pop, at: 0)
     }
     
-//    func faceCard() {
-//        let lastCard = fullPile[fullPile.count-1]
-//        if(Int(lastCard.rank.rankOnCard)==nil){
-//            faceCardCounter = lastCard.rank.numOfFlips
-//        }
-//
-//    }
+    func faceCard() {
+        let lastCard = fullPile[fullPile.count-1]
+        if(Int(lastCard.rank.rankOnCard)==nil){
+            print("heyyyy")
+            faceCardPlayed = true
+            faceCardCounter = lastCard.rank.numOfFlips
+            if(yourTurn){
+                faceCardPlayedByHuman = true;
+            } else {
+                faceCardPlayedByHuman = false;
+            }
+        }
+    }
+
+    func faceCardOver(){
+        if faceCardPlayedByHuman {
+            pileWon(isHuman: true)
+        } else{
+            pileWon(isHuman: false)
+        }
+        faceCardPlayed = false
+    }
     
+    
+    //TO DO:
+    // fix face card logic...
+    //      - should have time to slap the deck before the cards are taken
+    //      - computer doesnt play after they win
+    // implement winning logic 
     
 }
