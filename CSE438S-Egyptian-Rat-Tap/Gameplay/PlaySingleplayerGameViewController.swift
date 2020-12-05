@@ -53,7 +53,7 @@ class PlayViewController: UIViewController {
         //set up labels
         pCardCountLabel.text = "Player Card Count: \(pCardCount)"
         comCardCountLabel.text = "Computer Card Count: \(comCardCount)"
-
+        switchTurn(toHuman:true)
     }
     
     //when a player plays a card (i.e., flips a card from their deck to the main pile)
@@ -91,7 +91,6 @@ class PlayViewController: UIViewController {
             }
             card.addGestureRecognizer(gesture)
             
-            //checks pile
             checkPile()
             
             //logic for face cards TO DO
@@ -108,7 +107,8 @@ class PlayViewController: UIViewController {
                     }
                 }else {
                     print("human turn over. switches to comp")
-                    self.yourTurn = false
+                    self.switchTurn(toHuman:false)
+                    
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                         self.playComp()
                     }
@@ -154,7 +154,6 @@ class PlayViewController: UIViewController {
             }
             card.addGestureRecognizer(gesture)
             
-            //check pile
             checkPile()
             
             //face card logic
@@ -173,7 +172,7 @@ class PlayViewController: UIViewController {
                     }
                 }else {
                     print("comp turn over.  humans turn")
-                    self.yourTurn = true
+                    self.switchTurn(toHuman: true)
                 }
             }
         }
@@ -297,7 +296,7 @@ class PlayViewController: UIViewController {
         if isHuman {
             //add cards to your deck
             pDeck.append(contentsOf: fullPile)
-            yourTurn = true
+            switchTurn(toHuman: true)
             
             //change card count
             pCardCount += fullPile.count
@@ -305,11 +304,15 @@ class PlayViewController: UIViewController {
         } else {
             //add cards to comp deck
             comDeck.append(contentsOf: fullPile)
-            yourTurn = false
+            switchTurn(toHuman: false)
             
             //change card count
             comCardCount += fullPile.count
             comCardCountLabel.text = "Computer Card Count: \(comCardCount)"
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self.playComp()
+            }
         }
 
         //remove cards
@@ -318,6 +321,8 @@ class PlayViewController: UIViewController {
             pile[i].removeFromSuperview()
         }
         pile.removeAll()
+        
+        faceCardPlayed = false
     }
     
     func slapMessage(isHuman:Bool) {
@@ -393,7 +398,6 @@ class PlayViewController: UIViewController {
     func faceCard() {
         let lastCard = fullPile[fullPile.count-1]
         if(Int(lastCard.rank.rankOnCard)==nil){
-            print("heyyyy")
             faceCardPlayed = true
             faceCardCounter = lastCard.rank.numOfFlips
             if(yourTurn){
@@ -410,14 +414,32 @@ class PlayViewController: UIViewController {
         } else{
             pileWon(isHuman: false)
         }
-        faceCardPlayed = false
     }
     
-    
+    func switchTurn(toHuman: Bool){
+        if(!toHuman){
+            yourTurn = false
+            comCardCountLabel.layer.shadowColor = UIColor.white.cgColor
+            comCardCountLabel.layer.shadowRadius = 4
+            comCardCountLabel.layer.shadowOpacity = 0.9
+            comCardCountLabel.layer.shadowOffset = CGSize(width: 0,height: 0)
+            comCardCountLabel.layer.masksToBounds = false
+            pCardCountLabel.layer.shadowRadius = 0
+        } else {
+            yourTurn = true
+            pCardCountLabel.layer.shadowColor = UIColor.white.cgColor
+            pCardCountLabel.layer.shadowRadius = 4
+            pCardCountLabel.layer.shadowOpacity = 0.9
+            pCardCountLabel.layer.shadowOffset = CGSize(width: 0,height: 0)
+            pCardCountLabel.layer.masksToBounds = false
+            comCardCountLabel.layer.shadowRadius = 0
+        }
+        
+
+    }
     //TO DO:
     // fix face card logic...
     //      - should have time to slap the deck before the cards are taken
-    //      - computer doesnt play after they win
     // implement winning logic 
     
 }
