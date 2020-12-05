@@ -22,6 +22,11 @@ class PlayViewController: UIViewController {
     var faceCardCounter: Int = 0
     var faceCardPlayedByHuman:Bool = true
     var faceCardPlayed:Bool = false
+    var collectFaceCardPile:Bool = false
+    
+    //End Message strings for slap message when win pile from face card (fc) or slap (s)...
+    let fc:String = "won pile"
+    let s:String = "slapped"
     
     @IBOutlet weak var comCardCountLabel: UILabel!
     @IBOutlet weak var pCardCountLabel: UILabel!
@@ -272,17 +277,23 @@ class PlayViewController: UIViewController {
     }
     
     func slap(isHuman: Bool) {
-        if(slappable){
+        if(slappable || collectFaceCardPile){
             faceCardCounter = 0
-            slappable = false
             
-            if(isHuman){
+            if(isHuman && slappable){
                 pileWon(isHuman: true)
-                slapMessage(isHuman: isHuman)
-            } else {
-                pileWon(isHuman: false)
-                slapMessage(isHuman: isHuman)
+                slapMessage(isHuman: isHuman, endMessage: s)
+            } else if (isHuman && collectFaceCardPile){
+                pileWon(isHuman: true)
+                slapMessage(isHuman: isHuman, endMessage: fc)
+            }else if (slappable){
+                self.pileWon(isHuman: false)
+                self.slapMessage(isHuman: isHuman, endMessage: s)
+            }else{
+                self.pileWon(isHuman: false)
+                self.slapMessage(isHuman: isHuman, endMessage: fc)
             }
+            slappable = false
         } else if (isHuman){
             //burn a card
             pCardCount-=1
@@ -309,10 +320,6 @@ class PlayViewController: UIViewController {
             //change card count
             comCardCount += fullPile.count
             comCardCountLabel.text = "Computer Card Count: \(comCardCount)"
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                self.playComp()
-            }
         }
 
         //remove cards
@@ -323,15 +330,16 @@ class PlayViewController: UIViewController {
         pile.removeAll()
         
         faceCardPlayed = false
+        collectFaceCardPile = false
     }
     
-    func slapMessage(isHuman:Bool) {
+    func slapMessage(isHuman:Bool, endMessage:String) {
         let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
         let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
         let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
         
         if(isHuman){
-            let attributedTitle = NSMutableAttributedString(string: "You slapped!", attributes: titleFont)
+            let attributedTitle = NSMutableAttributedString(string: "You \(endMessage)!", attributes: titleFont)
             let attributedMessage = NSMutableAttributedString(string: "You now have \(pCardCount) cards. You need \(52-pCardCount) more cards to win.", attributes: messageFont)
             alert.setValue(attributedTitle, forKey: "attributedTitle")
             alert.setValue(attributedMessage, forKey: "attributedMessage")
@@ -339,7 +347,7 @@ class PlayViewController: UIViewController {
                 print("player slap!")
             }))
         }else{
-            let attributedTitle = NSMutableAttributedString(string: "Your opponent slapped!", attributes: titleFont)
+            let attributedTitle = NSMutableAttributedString(string: "Your opponent \(endMessage)!", attributes: titleFont)
             let attributedMessage = NSMutableAttributedString(string: "They now have \(comCardCount) cards.", attributes: messageFont)
             alert.setValue(attributedTitle, forKey: "attributedTitle")
             alert.setValue(attributedMessage, forKey: "attributedMessage")
@@ -409,10 +417,15 @@ class PlayViewController: UIViewController {
     }
 
     func faceCardOver(){
-        if faceCardPlayedByHuman {
-            pileWon(isHuman: true)
-        } else{
-            pileWon(isHuman: false)
+        collectFaceCardPile = true
+       
+        if !faceCardPlayedByHuman {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+                self.slap(isHuman: false)
+            }
+            switchTurn(toHuman: false)
+        } else {
+            switchTurn(toHuman: true)
         }
     }
     
@@ -438,8 +451,8 @@ class PlayViewController: UIViewController {
 
     }
     //TO DO:
-    // fix face card logic...
-    //      - should have time to slap the deck before the cards are taken
-    // implement winning logic 
+    // implement winning logic
+    // implement levels of difficulty
+    //get rid of weird glitch where you can incorrectly slap if you slap too fast on your lil jack guy when u put it down and then the computer doesnt put down another face card guy 
     
 }
