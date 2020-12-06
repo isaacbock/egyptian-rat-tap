@@ -14,7 +14,7 @@ class BeginSinglePlayerViewController: UIViewController {
     @IBOutlet weak var mediumButton: UIButton!
     @IBOutlet weak var hardButton: UIButton!
     
-    var comDifficulty: Double = 3
+    var comDifficulty: Double = 4
 
     override func viewDidLoad() {
         super.viewDidLoad()

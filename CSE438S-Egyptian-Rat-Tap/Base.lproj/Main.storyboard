@@ -10,6 +10,9 @@
         <array key="Montserrat-Bold.ttf">
             <string>Montserrat-Bold</string>
         </array>
+        <array key="Montserrat-Regular.ttf">
+            <string>Montserrat-Regular</string>
+        </array>
     </customFonts>
     <scenes>
         <!--View Controller-->
@@ -386,6 +389,21 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UMJ-Fx-KKH">
+                                        <rect key="frame" x="25" y="60.999999999999993" width="30" height="28.666666666666664"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="i8W-gB-QFQ"/>
+                                            <constraint firstAttribute="width" constant="30" id="tOP-pm-EMg"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" backgroundImage="info.circle" catalog="system">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="9xV-Kf-am3" kind="presentation" id="pj0-gP-Eei"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
@@ -395,6 +413,8 @@
                                     <constraint firstAttribute="bottom" secondItem="ZQr-fv-6KH" secondAttribute="bottom" constant="42" id="IeP-SW-RyF"/>
                                     <constraint firstItem="ZQr-fv-6KH" firstAttribute="centerX" secondItem="qPP-0k-Ifn" secondAttribute="centerX" id="Msj-LA-Zut"/>
                                     <constraint firstAttribute="trailing" secondItem="fN4-TW-myH" secondAttribute="trailing" constant="25" id="XtQ-Dg-tao"/>
+                                    <constraint firstItem="UMJ-Fx-KKH" firstAttribute="leading" secondItem="AQz-L1-F7H" secondAttribute="leading" constant="25" id="pET-UG-UdY"/>
+                                    <constraint firstItem="UMJ-Fx-KKH" firstAttribute="top" secondItem="AQz-L1-F7H" secondAttribute="top" constant="60" id="xkM-mY-ckH"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
@@ -424,7 +444,96 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oIQ-jQ-eOP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="xEQ-cI-pX6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3096.8000000000002" y="1459.3596059113302"/>
+            <point key="canvasLocation" x="2967" y="1684"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="XGp-Xo-o18">
+            <objects>
+                <viewController id="9xV-Kf-am3" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Sjg-qe-1QZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SrU-dh-Wpc" customClass="BackgroundGradient" customModule="CSE438S_Egyptian_Rat_Tap" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RUF-iv-DBW">
+                                        <rect key="frame" x="25" y="50" width="325" height="634"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to Play" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcs-tM-z7N">
+                                                <rect key="frame" x="106" y="25" width="113" height="22"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="18"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FSk-cH-DyJ">
+                                                <rect key="frame" x="9" y="59" width="307" height="550"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <mutableString key="text">• The aim of the game is to collect all 52 cards.
+• Players alternate pulling the top card off their pile and placing it face-up in the middle.
+• If the card played is a number card, the next player puts down a card.
+• If the card played is a face card or an ace, the next player must play another face card or ace within their allotted chances (1 for J, 2 for Q, 3 for K, 4 for A). 
+• If the next player does not play a face card or an ace within their allotted chances, then the player that played the last face card or ace wins the round and can tap the middle to collect the pile.
+• The slap rule is the only rule that overrides the face card or ace rule.
+• The first person to tap the pile of cards when there is one of the following patterns wins the round:
+• Double – When two cards of equivalent value are laid down consecutively (e.g. 5, 5)
+• Sandwich – When two cards of equivalent value are laid down with one card of different value between them (e.g. 6, 8, 6)
+• Tens – When two cards played consecutively add up to 10 (e.g. 3, 7)
+• Marriage – When a queen is placed over or under a king (e.g. Q, K)
+• If you slap incorrectly, you automatically add one card to the bottom of the pile.
+• The game ends when one player obtains all 52 cards.</mutableString>
+                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="FSk-cH-DyJ" firstAttribute="leading" secondItem="RUF-iv-DBW" secondAttribute="leading" constant="9" id="HmD-ia-2pX"/>
+                                            <constraint firstItem="FSk-cH-DyJ" firstAttribute="centerX" secondItem="RUF-iv-DBW" secondAttribute="centerX" id="Y3W-J8-SWR"/>
+                                            <constraint firstItem="pcs-tM-z7N" firstAttribute="centerX" secondItem="RUF-iv-DBW" secondAttribute="centerX" id="lbE-Gm-BnI"/>
+                                            <constraint firstAttribute="bottom" secondItem="FSk-cH-DyJ" secondAttribute="bottom" constant="25" id="oOB-pR-hZO"/>
+                                            <constraint firstItem="FSk-cH-DyJ" firstAttribute="top" secondItem="pcs-tM-z7N" secondAttribute="bottom" constant="12" id="uDR-sZ-NHP"/>
+                                            <constraint firstItem="pcs-tM-z7N" firstAttribute="top" secondItem="RUF-iv-DBW" secondAttribute="top" constant="25" id="uYQ-zd-M2y"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="RUF-iv-DBW" firstAttribute="top" secondItem="SrU-dh-Wpc" secondAttribute="top" constant="50" id="CQh-iS-N7t"/>
+                                    <constraint firstItem="RUF-iv-DBW" firstAttribute="leading" secondItem="SrU-dh-Wpc" secondAttribute="leading" constant="25" id="DrU-xH-nnu"/>
+                                    <constraint firstAttribute="bottom" secondItem="RUF-iv-DBW" secondAttribute="bottom" constant="128" id="dG4-lz-j0H"/>
+                                    <constraint firstItem="RUF-iv-DBW" firstAttribute="centerX" secondItem="SrU-dh-Wpc" secondAttribute="centerX" id="iwa-oT-cfp"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="firstColor">
+                                        <color key="value" red="0.1137254902" green="0.56078431370000004" blue="0.69019607839999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="secondColor">
+                                        <color key="value" red="0.1176470588" green="0.3921568627" blue="0.72156862749999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="SrU-dh-Wpc" firstAttribute="centerX" secondItem="Sjg-qe-1QZ" secondAttribute="centerX" id="3DZ-0I-FT5"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="SrU-dh-Wpc" secondAttribute="bottom" constant="-88" id="KRi-H3-tnv"/>
+                            <constraint firstItem="SrU-dh-Wpc" firstAttribute="top" secondItem="HKP-lw-Gtv" secondAttribute="top" id="g39-Ei-4MD"/>
+                            <constraint firstItem="SrU-dh-Wpc" firstAttribute="leading" secondItem="HKP-lw-Gtv" secondAttribute="leading" id="xCV-v2-WTW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="HKP-lw-Gtv"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="W2Y-mL-Mgh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y4h-2t-Zdv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3884" y="1503.6945812807883"/>
         </scene>
         <!--Begin Multiplayer View Controller-->
         <scene sceneID="r4K-In-7fy">
@@ -782,6 +891,7 @@
         <segue reference="ZBn-Lu-h8b"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
     </resources>
 </document>
