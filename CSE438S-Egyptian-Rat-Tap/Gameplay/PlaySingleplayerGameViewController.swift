@@ -23,6 +23,7 @@ class PlayViewController: UIViewController {
     var faceCardPlayedByHuman:Bool = true
     var faceCardPlayed:Bool = false
     var collectFaceCardPile:Bool = false
+    var comSlapTime: Double = 4
     
     //End Message strings for slap message when win pile from face card (fc) or slap (s)...
     let fc:String = "won pile"
@@ -234,7 +235,7 @@ class PlayViewController: UIViewController {
         slappable = checkSlap()
         
         if slappable{
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+            DispatchQueue.main.asyncAfter(deadline: .now() + comSlapTime){
                 //computer slaps if human doesn't slap in time
                 self.slap(isHuman: false)
             }
@@ -452,7 +453,6 @@ class PlayViewController: UIViewController {
     }
     //TO DO:
     // implement winning logic
-    // implement levels of difficulty
     //get rid of weird glitch where you can incorrectly slap if you slap too fast on your lil jack guy when u put it down and then the computer doesnt put down another face card guy 
     
 }
