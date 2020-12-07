@@ -15,6 +15,7 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     
     var match: GKMatch?
     private var timer: Timer?
+    private var playingCardPile: [PlayingCard] = []
     
     private var ratTapModel: RatTapModel! {
         didSet {
@@ -61,12 +62,12 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         //perform UI updates
         print("here for \(GKLocalPlayer.local.displayName)")
         if !yourTurn && ratTapModel.opponentFlipped {
-            print("here2 for \(GKLocalPlayer.local.displayName)")
             guard let pop = ratTapModel.flippedCard else {return}
             let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
             
             card.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 250);
             view.addSubview(card)
+            playingCardPile.append(card)
             
             UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
             card.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
@@ -80,6 +81,7 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
                 return
             }
             card.addGestureRecognizer(gesture)
+            checkPile()
             ratTapModel.opponentFlipped = false
             yourTurn = true
             sendData()
@@ -94,6 +96,7 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         if yourTurn {
             var player = ratTapModel.players[playerNum]
             let pop = player.playerDeck.removeFirst()
+            ratTapModel.players[playerNum] = player
             let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
             yourCardCountLabel.text = "\(GKLocalPlayer.local.displayName)'s Card Count: \(player.playerDeck.count)"
             
@@ -109,10 +112,12 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             }
             
             ratTapModel.pile.append(pop)
+            playingCardPile.append(card)
             guard let gesture = gestureRecognizerPile else {
                 return
             }
             card.addGestureRecognizer(gesture)
+            checkPile()
             ratTapModel.opponentFlipped = true
             ratTapModel.flippedCard = pop
             yourTurn = false
@@ -186,54 +191,53 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         }
     }
     
-    private func addCardToPile(){
-        let localPlayer = getLocalPlayerType()
+//    private func addCardToPile(){
+//        let localPlayer = getLocalPlayerType()
+//
+//        let flippingCard = ratTapModel.players[localPlayer.index()].playerDeck.popLast()
+//        guard let card = flippingCard else{return }
+//        ratTapModel.pile.append(card)
+//
+//        print(ratTapModel.players[localPlayer.index()].playerDeck.count)
+//        sendData()
+//    }
     
-        let flippingCard = ratTapModel.players[localPlayer.index()].playerDeck.popLast()
-        guard let card = flippingCard else{return }
-        ratTapModel.pile.append(card)
-        print(ratTapModel.players[localPlayer.index()].playerDeck.count)
-        sendData()
-    }
-    
-    func checkPile(card: PlayingCard) {
-//        let pile = ratTapModel.pile
-//            if (pile.count <= 3){
-//                for i in 0..<pile.count{
-//                    let card = PlayingCard(rank: pile[i].rank.rankOnCard, suit: pile[i].suit.rawValue)
-//                    UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
-//                        pile[i].center = CGPoint(x: self.view.center.x - CGFloat(50*(pile.count-1-i)), y: self.view.center.y)
-//                    })
-//                }
-//                guard let gesture = gestureRecognizerPile else {return}
-//                if (pile.count == 2){
-//                    pile[0].removeGestureRecognizer(gesture)
-//                }else if (pile.count == 3){
-//                    pile[1].removeGestureRecognizer(gesture)
-//                }
-//            }
-//
-//            if pile.count > 3{
-//                pile[0].removeFromSuperview()
-//                pile.remove(at: 0)
-//
-//                guard let gesture = gestureRecognizerPile else{
-//                    return
-//                }
-//                pile[1].removeGestureRecognizer(gesture)
-//
-//                UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
-//                    self.pile[0].center = CGPoint(x: self.view.center.x-100, y: self.view.center.y)
-//                })
-//
-//                UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
-//                    self.pile[1].center = CGPoint(x: self.view.center.x-50, y: self.view.center.y)
-//                })
-//
-//                UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
-//                    self.pile[2].center = CGPoint(x: self.view.center.x, y: self.view.center.y)
-//                })
-//            }
+    func checkPile() {
+            if (playingCardPile.count <= 3){
+                for i in 0..<playingCardPile.count{
+                    UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+                        self.playingCardPile[i].center = CGPoint(x: self.view.center.x - CGFloat(50*(self.playingCardPile.count-1-i)), y: self.view.center.y)
+                    })
+                }
+                guard let gesture = gestureRecognizerPile else {return}
+                if (playingCardPile.count == 2){
+                    playingCardPile[0].removeGestureRecognizer(gesture)
+                }else if (playingCardPile.count == 3){
+                    playingCardPile[1].removeGestureRecognizer(gesture)
+                }
+            }
+
+            if playingCardPile.count > 3{
+                playingCardPile[0].removeFromSuperview()
+                playingCardPile.remove(at: 0)
+
+                guard let gesture = gestureRecognizerPile else{
+                    return
+                }
+                playingCardPile[1].removeGestureRecognizer(gesture)
+
+                UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+                    self.playingCardPile[0].center = CGPoint(x: self.view.center.x-100, y: self.view.center.y)
+                })
+
+                UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+                    self.playingCardPile[1].center = CGPoint(x: self.view.center.x-50, y: self.view.center.y)
+                })
+
+                UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+                    self.playingCardPile[2].center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+                })
+            }
 //            slappable = checkSlap()
 //
 //            if slappable{
