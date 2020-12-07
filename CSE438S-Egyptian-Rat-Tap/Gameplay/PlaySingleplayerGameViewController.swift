@@ -26,7 +26,7 @@ class PlayViewController: UIViewController {
     var comSlapTime: Double = 4
     
     //End Message strings for slap message when win pile from face card (fc) or slap (s)...
-    let fc:String = "won pile"
+    let fc:String = "won the pile"
     let s:String = "slapped"
     
     @IBOutlet weak var comCardCountLabel: UILabel!
@@ -208,8 +208,11 @@ class PlayViewController: UIViewController {
         //case 2: more than three cards have been played
         if pile.count > 3{
             //remove old card
-            pile[0].removeFromSuperview()
+            let oldCard = pile[0];
             pile.remove(at: 0)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                oldCard.removeFromSuperview()
+            }
             
             //removes recognizer from bottom card so only the top card has the recognizer
             guard let gesture = gestureRecognizerPile else{

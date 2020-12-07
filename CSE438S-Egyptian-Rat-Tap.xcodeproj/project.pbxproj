@@ -25,8 +25,6 @@
 		F1894A9F2560F581006FC3E6 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1894A9E2560F581006FC3E6 /* Montserrat-Regular.ttf */; };
 		F1894AA12560F58D006FC3E6 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1894AA02560F58D006FC3E6 /* Montserrat-Bold.ttf */; };
 		F1894AA42560F827006FC3E6 /* Montserrat-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1894AA32560F827006FC3E6 /* Montserrat-Italic.ttf */; };
-		F1894AA625610438006FC3E6 /* CreateGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AA525610438006FC3E6 /* CreateGameViewController.swift */; };
-		F1894AA82561056F006FC3E6 /* JoinGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AA72561056F006FC3E6 /* JoinGameViewController.swift */; };
 		F1894AAA25610686006FC3E6 /* BeginSinglePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AA925610686006FC3E6 /* BeginSinglePlayerViewController.swift */; };
 		F1894AAC25611F68006FC3E6 /* BeginMultiplayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AAB25611F68006FC3E6 /* BeginMultiplayerViewController.swift */; };
 		F1894AAE256120E5006FC3E6 /* PlaySingleplayerGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894AAD256120E5006FC3E6 /* PlaySingleplayerGameViewController.swift */; };
@@ -55,8 +53,6 @@
 		F1894A9E2560F581006FC3E6 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		F1894AA02560F58D006FC3E6 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		F1894AA32560F827006FC3E6 /* Montserrat-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Italic.ttf"; sourceTree = "<group>"; };
-		F1894AA525610438006FC3E6 /* CreateGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGameViewController.swift; sourceTree = "<group>"; };
-		F1894AA72561056F006FC3E6 /* JoinGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGameViewController.swift; sourceTree = "<group>"; };
 		F1894AA925610686006FC3E6 /* BeginSinglePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginSinglePlayerViewController.swift; sourceTree = "<group>"; };
 		F1894AAB25611F68006FC3E6 /* BeginMultiplayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginMultiplayerViewController.swift; sourceTree = "<group>"; };
 		F1894AAD256120E5006FC3E6 /* PlaySingleplayerGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySingleplayerGameViewController.swift; sourceTree = "<group>"; };
@@ -96,8 +92,6 @@
 		F118E4B52565D093005BAF24 /* Multiplayer */ = {
 			isa = PBXGroup;
 			children = (
-				F1894AA525610438006FC3E6 /* CreateGameViewController.swift */,
-				F1894AA72561056F006FC3E6 /* JoinGameViewController.swift */,
 				F1894AAB25611F68006FC3E6 /* BeginMultiplayerViewController.swift */,
 				7A5FFCBB256C17A700E170D1 /* GameKitActions.swift */,
 			);
@@ -269,10 +263,8 @@
 				F1894A892560ED60006FC3E6 /* AppDelegate.swift in Sources */,
 				F1894A8B2560ED60006FC3E6 /* SceneDelegate.swift in Sources */,
 				F130E15A256FB0F7007E4CB2 /* RoundedButton.swift in Sources */,
-				F1894AA82561056F006FC3E6 /* JoinGameViewController.swift in Sources */,
 				7A5FFCC1256CC3E700E170D1 /* RatTapModel.swift in Sources */,
 				EA69012F2568922D006308B5 /* Deck.swift in Sources */,
-				F1894AA625610438006FC3E6 /* CreateGameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
