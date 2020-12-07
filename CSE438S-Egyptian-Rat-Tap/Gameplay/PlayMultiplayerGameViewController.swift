@@ -14,7 +14,7 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     @IBOutlet weak var opponentCardCountLabel: UILabel!
     
     var match: GKMatch?
-    private var timer: Timer?
+    private weak var timer: Timer?
     private var playingCardPile: [PlayingCard] = []
     
     private var ratTapModel: RatTapModel! {
@@ -26,6 +26,8 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     var playerNum:Int = 0
     var otherPlayerNum:Int = 0
     var gestureRecognizerPile: UITapGestureRecognizer?
+    var slapTimer: Timer?
+    var slapTime: Float = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +62,6 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     
     private func updateUI() {
         //perform UI updates
-        print("here for \(GKLocalPlayer.local.displayName)")
         if !yourTurn && ratTapModel.opponentFlipped {
             guard let pop = ratTapModel.flippedCard else {return}
             let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
@@ -81,10 +82,16 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
                 return
             }
             card.addGestureRecognizer(gesture)
+            print("about to check pile for \(GKLocalPlayer.local.displayName)")
             checkPile()
             ratTapModel.opponentFlipped = false
             yourTurn = true
             sendData()
+        }
+        if yourTurn && ratTapModel.stopTimer {
+            slapTimer?.invalidate()
+            slapTimer = nil
+            slapTime = 0
         }
     }
     
@@ -126,7 +133,47 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     }
     
     func slap(isYou: Bool) {
+        if checkSlap() {
+            let yourTime = ratTapModel.players[playerNum].slapTime
+            slapTimer?.invalidate()
+            slapTimer = nil
+            slapTime = 0
+            let opponentTime = ratTapModel.players[otherPlayerNum].slapTime
+            print("your time: \(yourTime), opponent time: \(opponentTime)")
+            ratTapModel.stopTimer = true
+            if yourTime <= opponentTime {
+                print("\(GKLocalPlayer.local.displayName) won the pile")
+            } else {
+                guard let player2Name = match?.players.first?.displayName else { return }
+                print("\(player2Name) won the pile")
+            }
+            sendData()
+        }
+    }
     
+    //checks if pile is slappable
+    func checkSlap() -> Bool {
+        if(playingCardPile.count == 1){
+            return false
+        } else if (playingCardPile.count>2 && playingCardPile[0].rank==playingCardPile[2].rank){ //sandwich
+            return true
+        } else{
+            let card0 = playingCardPile[playingCardPile.count-2].rank
+            let card1 = playingCardPile[playingCardPile.count-1].rank
+            
+            if(card0 == card1){ //doubles
+                return true
+            } else if (card0=="K" && card1=="Q" || card0=="Q" && card1=="K"){ //marriage
+                return true
+            } else if (card0 != nil && card1 != nil){
+                let card0Num = Int(card0!) ?? 11
+                let card1Num = Int(card1!) ?? 11
+                if (card0Num + card1Num == 10){
+                    return true
+                }
+            }
+        }
+        return false
     }
     
     private func sendData() {
@@ -238,14 +285,26 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
                     self.playingCardPile[2].center = CGPoint(x: self.view.center.x, y: self.view.center.y)
                 })
             }
-//            slappable = checkSlap()
-//
-//            if slappable{
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 3){
-//                    self.slap(isHuman: false)
-//                }
-//            }
-//            print(slappable)
+            let slappable = checkSlap()
+
+            if slappable{
+                print("starting timer")
+                if slapTimer != nil {
+                    print("bruh")
+                }
+                DispatchQueue.main.async {
+                    self.slapTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                        print("timer fire")
+                        self.slapTime += 0.1
+                        var player = self.ratTapModel.players[self.playerNum]
+                        player.slapTime = self.slapTime
+                        self.ratTapModel.players[self.playerNum] = player
+                        self.sendData()
+                    }
+                }
+                
+            }
+            print(slappable)
 //            print(faceCardCounter)
 //    //        faceCard()
 //            print(faceCardCounter)

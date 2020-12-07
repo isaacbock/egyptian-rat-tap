@@ -12,7 +12,7 @@ import UIKit
 struct RatTapPlayer: Codable {
     var name: String
     var playerDeck: [Card] = []
-    
+    var slapTime: Float = 0
 }
 
 enum PlayerType: String, Codable, CaseIterable {

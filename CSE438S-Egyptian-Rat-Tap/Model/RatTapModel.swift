@@ -15,6 +15,7 @@ struct RatTapModel: Codable {
     var pile: [Card] = []
     var opponentFlipped: Bool = false
     var flippedCard: Card? = nil
+    var stopTimer: Bool = false
     
     func encode() -> Data? {
         return try? JSONEncoder().encode(self)
