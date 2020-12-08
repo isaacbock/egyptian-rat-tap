@@ -27,12 +27,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="lnP-S1-pNP">
-                                        <rect key="frame" x="118" y="615" width="139" height="97"/>
+                                        <rect key="frame" x="119" y="615" width="137" height="97"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghE-BF-r6e" customClass="RoundedButton" customModule="CSE438S_Egyptian_Rat_Tap" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="139" height="37"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="137" height="37"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
-                                                <state key="normal" title="Single-Player">
+                                                <state key="normal" title="Single Player">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -40,7 +40,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Uh-cB-jFX" customClass="RoundedButton" customModule="CSE438S_Egyptian_Rat_Tap" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="60" width="139" height="37"/>
+                                                <rect key="frame" x="0.0" y="60" width="137" height="37"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
                                                 <state key="normal" title="Multiplayer">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -169,6 +169,7 @@
                     <navigationItem key="navigationItem" id="w5B-qv-pqE"/>
                     <connections>
                         <outlet property="comCardCountLabel" destination="qPP-0k-Ifn" id="iA1-uN-bHI"/>
+                        <outlet property="exitButton" destination="fN4-TW-myH" id="zpm-xy-MSm"/>
                         <outlet property="pCardCountLabel" destination="ZQr-fv-6KH" id="rb7-JS-gZR"/>
                     </connections>
                 </viewController>
@@ -192,13 +193,13 @@
                                         <rect key="frame" x="25" y="50" width="325" height="634"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to Play" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcs-tM-z7N">
-                                                <rect key="frame" x="114" y="25" width="97.333333333333314" height="21"/>
+                                                <rect key="frame" x="106" y="25" width="113" height="22"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="18"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FSk-cH-DyJ">
-                                                <rect key="frame" x="9" y="58" width="307" height="551"/>
+                                                <rect key="frame" x="9" y="59" width="307" height="550"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <string key="text">• The aim of the game is to collect all 52 cards.
 • Players alternate pulling the top card off their pile and placing it face-up in the middle.

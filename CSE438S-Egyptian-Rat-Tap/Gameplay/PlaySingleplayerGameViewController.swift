@@ -31,6 +31,8 @@ class PlayViewController: UIViewController {
     
     @IBOutlet weak var comCardCountLabel: UILabel!
     @IBOutlet weak var pCardCountLabel: UILabel!
+    @IBOutlet weak var exitButton: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,6 +101,10 @@ class PlayViewController: UIViewController {
             
             checkPile()
             
+            if (faceCardPlayed && faceCardPlayedByHuman && comCardCount == 0) {
+                gameOver(isHuman: true)
+            }
+            
             //logic for face cards TO DO
              if self.faceCardCounter > 0 && !faceCardPlayedByHuman{
                 self.faceCardCounter -= 1
@@ -106,17 +112,22 @@ class PlayViewController: UIViewController {
             
              if faceCardCounter > 0 && !faceCardPlayedByHuman {
                  print("human has to play another card")
+                if (pCardCount == 0) {
+                    gameOver(isHuman: false)
+                }
              }else{
                 if(faceCardPlayed && faceCardCounter == 0){
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         self.faceCardOver()
                     }
                 }else {
-                    print("human turn over. switches to comp")
-                    self.switchTurn(toHuman:false)
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                        self.playComp()
+                    if (comCardCount > 0) {
+                        print("human turn over. switches to comp")
+                        self.switchTurn(toHuman:false)
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                            self.playComp()
+                        }
                     }
                 }
             }
@@ -162,14 +173,22 @@ class PlayViewController: UIViewController {
             
             checkPile()
             
+            if (faceCardPlayed && !faceCardPlayedByHuman && pCardCount == 0) {
+                gameOver(isHuman: false)
+            }
+            
             //face card logic
             if faceCardCounter > 0 && faceCardPlayedByHuman{
                 faceCardCounter -= 1
             }
             if faceCardCounter > 0 && faceCardPlayedByHuman{
                 print("comp has to play another card")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    self.playComp()
+                if (comCardCount == 0) {
+                    gameOver(isHuman: true)
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        self.playComp()
+                    }
                 }
             }else{
                 if(faceCardPlayed && faceCardCounter == 0){
@@ -177,8 +196,14 @@ class PlayViewController: UIViewController {
                         self.faceCardOver()
                     }
                 }else {
-                    print("comp turn over.  humans turn")
-                    self.switchTurn(toHuman: true)
+                    if (pCardCount > 0) {
+                        print("comp turn over.  humans turn")
+                        self.switchTurn(toHuman: true)
+                    } else {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                            self.playComp()
+                        }
+                    }
                 }
             }
         }
@@ -300,9 +325,13 @@ class PlayViewController: UIViewController {
             slappable = false
         } else if (isHuman){
             //burn a card
-            pCardCount-=1
-            pCardCountLabel.text = "Player Card Count: \(pCardCount)"
-            burnMessage()
+            if (pCardCount > 0) {
+                pCardCount-=1
+                pCardCountLabel.text = "Player Card Count: \(pCardCount)"
+                burnMessage()
+            } else {
+                gameOver(isHuman: false)
+            }
         }
     }
     
@@ -316,6 +345,9 @@ class PlayViewController: UIViewController {
             //change card count
             pCardCount += fullPile.count
             pCardCountLabel.text = "Player Card Count: \(pCardCount)"
+            if (pCardCount == 52) {
+                gameOver(isHuman: true)
+            }
         } else {
             //add cards to comp deck
             comDeck.append(contentsOf: fullPile)
@@ -324,6 +356,9 @@ class PlayViewController: UIViewController {
             //change card count
             comCardCount += fullPile.count
             comCardCountLabel.text = "Computer Card Count: \(comCardCount)"
+            if (comCardCount == 52) {
+                gameOver(isHuman: false)
+            }
         }
 
         //remove cards
@@ -335,6 +370,34 @@ class PlayViewController: UIViewController {
         
         faceCardPlayed = false
         collectFaceCardPile = false
+    }
+    
+    func gameOver(isHuman: Bool) {
+        if isHuman {
+                let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+                let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
+                let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
+                let attributedTitle = NSMutableAttributedString(string: "You won!", attributes: titleFont)
+                let attributedMessage = NSMutableAttributedString(string: "Game over.", attributes: messageFont)
+                alert.setValue(attributedTitle, forKey: "attributedTitle")
+                alert.setValue(attributedMessage, forKey: "attributedMessage")
+                alert.addAction(UIAlertAction(title: "Exit game", style: .cancel, handler: { action in
+                    self.exitButton.sendActions(for: .touchUpInside)
+                }))
+            present(alert, animated:true)
+        } else {
+                let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+                let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
+                let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
+                let attributedTitle = NSMutableAttributedString(string: "Your opponent won.", attributes: titleFont)
+                let attributedMessage = NSMutableAttributedString(string: "Game over.", attributes: messageFont)
+                alert.setValue(attributedTitle, forKey: "attributedTitle")
+                alert.setValue(attributedMessage, forKey: "attributedMessage")
+                alert.addAction(UIAlertAction(title: "Exit game", style: .cancel, handler: { action in
+                    self.exitButton.sendActions(for: .touchUpInside)
+                }))
+            present(alert, animated:true)
+        }
     }
     
     func slapMessage(isHuman:Bool, endMessage:String) {
@@ -455,7 +518,6 @@ class PlayViewController: UIViewController {
 
     }
     //TO DO:
-    // implement winning logic
     //get rid of weird glitch where you can incorrectly slap if you slap too fast on your lil jack guy when u put it down and then the computer doesnt put down another face card guy 
     
 }
