@@ -28,6 +28,9 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     var gestureRecognizerPile: UITapGestureRecognizer?
     var slapTimer: Timer?
     var slapTime: Float = 0
+    //End Message strings for slap message when win pile from face card (fc) or slap (s)...
+    let fc:String = "won the pile"
+    let s:String = "slapped"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,11 +95,19 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             slapTimer?.invalidate()
             slapTimer = nil
             slapTime = 0
+            slapMessage(won: false, endMessage: self.s)
+            //remove cards
+            for i in 0..<playingCardPile.count{
+                playingCardPile[i].removeFromSuperview()
+            }
+            playingCardPile.removeAll()
+            ratTapModel.stopTimer = false
+            sendData()
         }
     }
     
     @objc func playerSlapped(_ sender: UITapGestureRecognizer){
-        slap(isYou: true)
+        slap()
     }
     
     @objc func flipCard(_ sender: UITapGestureRecognizer) {
@@ -132,7 +143,8 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         }
     }
     
-    func slap(isYou: Bool) {
+    func slap() {
+//        if checkSlap() && !ratTapModel.stopTimer {
         if checkSlap() {
             let yourTime = ratTapModel.players[playerNum].slapTime
             slapTimer?.invalidate()
@@ -147,8 +159,24 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
                 guard let player2Name = match?.players.first?.displayName else { return }
                 print("\(player2Name) won the pile")
             }
+            pileWon()
             sendData()
         }
+    }
+    
+    func pileWon() {
+        var player = ratTapModel.players[playerNum]
+        player.playerDeck.append(contentsOf: ratTapModel.pile)
+        ratTapModel.players[playerNum] = player
+        yourCardCountLabel.text = "\(GKLocalPlayer.local.displayName)'s Card Count: \(player.playerDeck.count)"
+        //remove cards
+        for i in 0..<playingCardPile.count{
+            playingCardPile[i].removeFromSuperview()
+        }
+        playingCardPile.removeAll()
+        ratTapModel.pile = []
+        slapMessage(won: true, endMessage: self.s)
+        sendData()
     }
     
     //checks if pile is slappable
@@ -238,17 +266,6 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         }
     }
     
-//    private func addCardToPile(){
-//        let localPlayer = getLocalPlayerType()
-//
-//        let flippingCard = ratTapModel.players[localPlayer.index()].playerDeck.popLast()
-//        guard let card = flippingCard else{return }
-//        ratTapModel.pile.append(card)
-//
-//        print(ratTapModel.players[localPlayer.index()].playerDeck.count)
-//        sendData()
-//    }
-    
     func checkPile() {
             if (playingCardPile.count <= 3){
                 for i in 0..<playingCardPile.count{
@@ -309,5 +326,34 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
 //    //        faceCard()
 //            print(faceCardCounter)
         }
+    
+    func slapMessage(won: Bool, endMessage:String) {
+        let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
+        let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
+        
+        if won {
+            let player = ratTapModel.players[playerNum]
+            let attributedTitle = NSMutableAttributedString(string: "You \(endMessage)!", attributes: titleFont)
+            let attributedMessage = NSMutableAttributedString(string: "You now have \(player.playerDeck.count) cards. You need \(52-player.playerDeck.count) more cards to win.", attributes: messageFont)
+            alert.setValue(attributedTitle, forKey: "attributedTitle")
+            alert.setValue(attributedMessage, forKey: "attributedMessage")
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { action in
+                print("player slap!")
+            }))
+        }
+        else{
+            let opponent = ratTapModel.players[otherPlayerNum]
+            let attributedTitle = NSMutableAttributedString(string: "Your opponent \(endMessage)!", attributes: titleFont)
+            let attributedMessage = NSMutableAttributedString(string: "They now have \(opponent.playerDeck.count) cards.", attributes: messageFont)
+            alert.setValue(attributedTitle, forKey: "attributedTitle")
+            alert.setValue(attributedMessage, forKey: "attributedMessage")
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { action in
+                print("opponent slap!")
+            }))
+        }
+                
+        present(alert, animated:true)
+    }
 
 }
