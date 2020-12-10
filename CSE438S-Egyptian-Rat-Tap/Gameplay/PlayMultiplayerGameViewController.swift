@@ -37,28 +37,24 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         
         ratTapModel = RatTapModel()
         match?.delegate = self
-        // Do any additional setup after loading the view.
         setUpGame()
         
         let gestureRecognizerDeck = UITapGestureRecognizer(target: self, action: #selector(self.flipCard(_:)))
-        
         gestureRecognizerPile = UITapGestureRecognizer(target: self, action: #selector(self.playerSlapped(_:)))
         
-        // Create a card:
+        // Create a dummy card:
         let pCard = PlayingCard(rank: "10", suit: "spade")
-
-        // Set initial card location:
         pCard.center = CGPoint(x: self.view.center.x, y: self.view.center.y + 250);
                  view.addSubview(pCard)
-                
+        pCard.addGestureRecognizer(gestureRecognizerDeck)
+        
+        //opponents card
         let comCard = PlayingCard(rank: "10", suit: "spade")
-                
         comCard.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 250);
                 view.addSubview(comCard)
                 
-        pCard.addGestureRecognizer(gestureRecognizerDeck)
+        //labels
         guard let player2Name = match?.players.first?.displayName else { return }
-        
         yourCardCountLabel.text = "\(GKLocalPlayer.local.displayName)'s Card Count: 26"
         opponentCardCountLabel.text = "\(player2Name)'s Card Count: 26"
     }
@@ -88,7 +84,8 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             print("about to check pile for \(GKLocalPlayer.local.displayName)")
             checkPile()
             ratTapModel.opponentFlipped = false
-            yourTurn = true
+            switchTurn(toYou: true)
+//            yourTurn = true
             sendData()
         }
         if yourTurn && ratTapModel.stopTimer {
@@ -138,7 +135,8 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             checkPile()
             ratTapModel.opponentFlipped = true
             ratTapModel.flippedCard = pop
-            yourTurn = false
+            switchTurn(toYou: false)
+//            yourTurn = false
             sendData()
         }
     }
@@ -245,12 +243,14 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         }
         
         if getLocalPlayerType() == .one {
-            yourTurn = true
+            //yourTurn = true
+            switchTurn(toYou: true)
             playerNum = 0
             otherPlayerNum = 1
         }
         else {
-            yourTurn = false
+            //yourTurn = false
+            switchTurn(toYou: false)
             playerNum = 1
             otherPlayerNum = 0
         }
@@ -354,6 +354,28 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         }
                 
         present(alert, animated:true)
+    }
+    
+    func switchTurn(toYou: Bool){
+        if(!toYou){
+            yourTurn = false
+            opponentCardCountLabel.layer.shadowColor = UIColor.white.cgColor
+            opponentCardCountLabel.layer.shadowRadius = 4
+            opponentCardCountLabel.layer.shadowOpacity = 0.9
+            opponentCardCountLabel.layer.shadowOffset = CGSize(width: 0,height: 0)
+            opponentCardCountLabel.layer.masksToBounds = false
+            yourCardCountLabel.layer.shadowRadius = 0
+        } else {
+            yourTurn = true
+            yourCardCountLabel.layer.shadowColor = UIColor.white.cgColor
+            yourCardCountLabel.layer.shadowRadius = 4
+            yourCardCountLabel.layer.shadowOpacity = 0.9
+            yourCardCountLabel.layer.shadowOffset = CGSize(width: 0,height: 0)
+            yourCardCountLabel.layer.masksToBounds = false
+            opponentCardCountLabel.layer.shadowRadius = 0
+        }
+        
+
     }
 
 }
