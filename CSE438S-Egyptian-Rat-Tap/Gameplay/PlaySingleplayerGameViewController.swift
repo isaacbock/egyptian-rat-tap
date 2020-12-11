@@ -117,9 +117,7 @@ class PlayViewController: UIViewController {
                 }
              }else{
                 if(faceCardPlayed && faceCardCounter == 0){
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         self.faceCardOver()
-                    }
                 }else {
                     if (comCardCount > 0) {
                         print("human turn over. switches to comp")
@@ -171,16 +169,17 @@ class PlayViewController: UIViewController {
             }
             card.addGestureRecognizer(gesture)
             
-            checkPile()
-            
             if (faceCardPlayed && !faceCardPlayedByHuman && pCardCount == 0) {
                 gameOver(isHuman: false)
             }
+            
+            checkPile()
             
             //face card logic
             if faceCardCounter > 0 && faceCardPlayedByHuman{
                 faceCardCounter -= 1
             }
+            
             if faceCardCounter > 0 && faceCardPlayedByHuman{
                 print("comp has to play another card")
                 if (comCardCount == 0) {
@@ -192,9 +191,7 @@ class PlayViewController: UIViewController {
                 }
             }else{
                 if(faceCardPlayed && faceCardCounter == 0){
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         self.faceCardOver()
-                    }
                 }else {
                     if (pCardCount > 0) {
                         print("comp turn over.  humans turn")
@@ -484,10 +481,13 @@ class PlayViewController: UIViewController {
     }
 
     func faceCardOver(){
+        
+        print("face card over")
+        
         collectFaceCardPile = true
        
         if !faceCardPlayedByHuman {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+            DispatchQueue.main.asyncAfter(deadline: .now() + comSlapTime){
                 self.slap(isHuman: false)
             }
             switchTurn(toHuman: false)
