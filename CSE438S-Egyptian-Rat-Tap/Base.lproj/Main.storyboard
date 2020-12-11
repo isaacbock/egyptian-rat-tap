@@ -683,6 +683,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="nZ0-yw-5lV"/>
                     <connections>
+                        <outlet property="exitButton" destination="5V9-pb-7FY" id="MyB-Nq-wJr"/>
                         <outlet property="opponentCardCountLabel" destination="TrR-IR-0oj" id="dvu-xT-BRo"/>
                         <outlet property="yourCardCountLabel" destination="zVa-X6-s0d" id="s4L-ao-cIA"/>
                     </connections>

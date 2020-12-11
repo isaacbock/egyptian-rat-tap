@@ -13,7 +13,6 @@
 		7A5FFCC3256CC40E00E170D1 /* RatTapPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5FFCC2256CC40E00E170D1 /* RatTapPlayer.swift */; };
 		7AF15159256AE1BE00CD11AE /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AF15158256AE1BE00CD11AE /* GameKit.framework */; };
 		EA69012F2568922D006308B5 /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA69012E2568922D006308B5 /* Deck.swift */; };
-		EAD5219E25718BB90036B394 /* PlayFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD5219D25718BB90036B394 /* PlayFunctions.swift */; };
 		F130E15A256FB0F7007E4CB2 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F130E159256FB0F7007E4CB2 /* RoundedButton.swift */; };
 		F1894A892560ED60006FC3E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894A882560ED60006FC3E6 /* AppDelegate.swift */; };
 		F1894A8B2560ED60006FC3E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1894A8A2560ED60006FC3E6 /* SceneDelegate.swift */; };
@@ -39,7 +38,6 @@
 		7A5FFCC2256CC40E00E170D1 /* RatTapPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatTapPlayer.swift; sourceTree = "<group>"; };
 		7AF15158256AE1BE00CD11AE /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		EA69012E2568922D006308B5 /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
-		EAD5219D25718BB90036B394 /* PlayFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayFunctions.swift; sourceTree = "<group>"; };
 		F130E159256FB0F7007E4CB2 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		F1894A852560ED60006FC3E6 /* CSE438S-Egyptian-Rat-Tap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CSE438S-Egyptian-Rat-Tap.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1894A882560ED60006FC3E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,7 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				EA69012E2568922D006308B5 /* Deck.swift */,
-				EAD5219D25718BB90036B394 /* PlayFunctions.swift */,
 				F1894AAD256120E5006FC3E6 /* PlaySingleplayerGameViewController.swift */,
 				7A5FFCBD256CC34000E170D1 /* PlayMultiplayerGameViewController.swift */,
 			);
@@ -254,7 +251,6 @@
 				F1894A8D2560ED60006FC3E6 /* ViewController.swift in Sources */,
 				7A5FFCBC256C17A800E170D1 /* GameKitActions.swift in Sources */,
 				7A5FFCBE256CC34000E170D1 /* PlayMultiplayerGameViewController.swift in Sources */,
-				EAD5219E25718BB90036B394 /* PlayFunctions.swift in Sources */,
 				F1894AAE256120E5006FC3E6 /* PlaySingleplayerGameViewController.swift in Sources */,
 				F1894A9D2560EE6E006FC3E6 /* BackgroundGradient.swift in Sources */,
 				F1894AAA25610686006FC3E6 /* BeginSinglePlayerViewController.swift in Sources */,

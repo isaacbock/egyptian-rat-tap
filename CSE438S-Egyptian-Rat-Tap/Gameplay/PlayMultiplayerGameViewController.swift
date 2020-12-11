@@ -17,6 +17,7 @@ import GameKit
 class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     @IBOutlet weak var yourCardCountLabel: UILabel!
     @IBOutlet weak var opponentCardCountLabel: UILabel!
+    @IBOutlet weak var exitButton: UIButton!
     
     var match: GKMatch?
     private weak var timer: Timer?
@@ -111,8 +112,18 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             ratTapModel.stopTimer = false
             sendData()
         }
+        
+        //OTHER PLAYER BURNS
+        if ratTapModel.opponentBurned{
+            burnMessage(you: false)
+            ratTapModel.opponentBurned = false
+            sendData()
+        }
+        
+        //UPDATE OPPONENT'S LABEL
         if ratTapModel.players.count>0{
-        opponentCardCountLabel.text = "\(ratTapModel.players[otherPlayerNum].name)'s Card Count: \(ratTapModel.players[otherPlayerNum].playerDeck.count)"
+            yourCardCountLabel.text = "\(GKLocalPlayer.local.displayName)'s Card Count: \(ratTapModel.players[playerNum].playerDeck.count)"
+            opponentCardCountLabel.text = "\(ratTapModel.players[otherPlayerNum].name)'s Card Count: \(ratTapModel.players[otherPlayerNum].playerDeck.count)"
         }
     }
     
@@ -172,6 +183,14 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             }
             pileWon()
             sendData()
+        } else {
+            if (ratTapModel.players[playerNum].playerDeck.count > 0) {
+                burnMessage(you: true)
+                ratTapModel.opponentBurned = true
+                sendData()
+            } else {
+                gameOver(isHuman: false)
+            }
         }
     }
     
@@ -367,29 +386,37 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         present(alert, animated:true)
     }
     
-    func burnMessage(){
-           let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
-           let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
-           let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
+    func burnMessage(you: Bool){
+        var player: String = ""
+        if you{
+            player = "You have"
+        }else{
+            player = "Opponent has"
+        }
+        let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
+        let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
 
-           let attributedTitle = NSMutableAttributedString(string: "Incorrect slap!", attributes: titleFont)
-           let attributedMessage = NSMutableAttributedString(string: "You have to burn a card.", attributes: messageFont)
-           alert.setValue(attributedTitle, forKey: "attributedTitle")
-           alert.setValue(attributedMessage, forKey: "attributedMessage")
-           alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { action in
-              self.burn()
-           }))
+        let attributedTitle = NSMutableAttributedString(string: "Incorrect slap!", attributes: titleFont)
+        let attributedMessage = NSMutableAttributedString(string: "\(player) to burn a card.", attributes: messageFont)
+        alert.setValue(attributedTitle, forKey: "attributedTitle")
+        alert.setValue(attributedMessage, forKey: "attributedMessage")
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { action in
+             self.burn(you: you)
+        }))
 
-           present(alert, animated:true)
-       }
+        present(alert, animated:true)
+    }
        
        //when a player misslaps, they have to burn a card
-       func burn(){
+    func burn(you: Bool){
+        if you{
            //get card and animate
            var player = ratTapModel.players[playerNum]
            let pop = player.playerDeck.removeFirst()
            ratTapModel.players[playerNum] = player
-        
+           ratTapModel.flippedCard = pop
+            
            let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
            card.center = CGPoint(x: self.view.center.x, y: self.view.center.y + 250);
            view.addSubview(card)
@@ -405,10 +432,58 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
                    card.removeFromSuperview()
                }
            }
-
+            
            //add to main pile
           ratTapModel.pile.insert(pop, at:0)
-          
+          sendData()
+        } else {
+            guard let pop = ratTapModel.flippedCard else {return}
+            let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
+            card.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 250);
+            view.addSubview(card)
+            
+            view.insertSubview(card, belowSubview: playingCardPile[0])
+            
+            card.flip()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+                card.center = CGPoint(x: self.view.center.x, y: self.view.center.y)})
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    card.removeFromSuperview()
+                }
+            }
+            
+            sendData()
+        }
+       }
+    
+    func gameOver(isHuman: Bool) {
+           if isHuman {
+                   let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+                   let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
+                   let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
+                   let attributedTitle = NSMutableAttributedString(string: "You won!", attributes: titleFont)
+                   let attributedMessage = NSMutableAttributedString(string: "Game over.", attributes: messageFont)
+                   alert.setValue(attributedTitle, forKey: "attributedTitle")
+                   alert.setValue(attributedMessage, forKey: "attributedMessage")
+                   alert.addAction(UIAlertAction(title: "Exit game", style: .cancel, handler: { action in
+                       self.exitButton.sendActions(for: .touchUpInside)
+                   }))
+               present(alert, animated:true)
+           } else {
+                   let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+                   let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
+                   let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
+                   let attributedTitle = NSMutableAttributedString(string: "Your opponent won.", attributes: titleFont)
+                   let attributedMessage = NSMutableAttributedString(string: "Game over.", attributes: messageFont)
+                   alert.setValue(attributedTitle, forKey: "attributedTitle")
+                   alert.setValue(attributedMessage, forKey: "attributedMessage")
+                   alert.addAction(UIAlertAction(title: "Exit game", style: .cancel, handler: { action in
+                       self.exitButton.sendActions(for: .touchUpInside)
+                   }))
+               present(alert, animated:true)
+           }
        }
     
     func switchTurn(toYou: Bool){
