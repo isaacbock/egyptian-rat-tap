@@ -21,10 +21,10 @@ enum PlayerType: String, Codable, CaseIterable {
     
     func index() -> Int {
         switch self {
-case .one:
-    return 0
-case .two:
-    return 1
-    }
+        case .one:
+            return 0
+        case .two:
+            return 1
+        }
     }
 }
