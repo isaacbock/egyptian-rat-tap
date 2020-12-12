@@ -16,7 +16,6 @@ struct RatTapModel: Codable {
     var opponentFlipped: Bool = false
     var flippedCard: Card? = nil
     var stopTimer: Bool = false
-    var opponentBurned: Bool = false
     var slappableBegan: Double = 0
     
     func encode() -> Data? {

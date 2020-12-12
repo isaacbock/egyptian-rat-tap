@@ -15,6 +15,7 @@ struct RatTapPlayer: Codable {
     var slapTime: Double = 0
     var lostSlap: Bool = false
     var wonSlap: Bool = false
+    var opponentBurned: Bool = false
 }
 
 enum PlayerType: String, Codable, CaseIterable {

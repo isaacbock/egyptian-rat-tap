@@ -96,13 +96,6 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             sendData()
         }
         
-        //OTHER PLAYER BURNS
-        if ratTapModel.opponentBurned{
-            burnMessage(you: false)
-            ratTapModel.opponentBurned = false
-            sendData()
-        }
-        
         //UPDATE OPPONENT'S LABEL
         if ratTapModel.players.count>0{
             yourCardCountLabel.text = "\(GKLocalPlayer.local.displayName)'s Card Count: \(ratTapModel.players[playerNum].playerDeck.count)"
@@ -112,6 +105,14 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         if ratTapModel.players.count > 1 {
             var player = ratTapModel.players[playerNum]
             var otherPlayer = ratTapModel.players[otherPlayerNum]
+            //OTHER PLAYER BURNS
+            if player.opponentBurned {
+                burnMessage(you: false)
+                player.opponentBurned = false
+                ratTapModel.players[playerNum] = player
+                sendData()
+            }
+            
             if player.slapTime != 0 && otherPlayer.slapTime != 0 {
                 // BOTH SLAP TIMES SET: CHECK WHO WON, DISPLAY YOUR MESSAGE
                 let yourTime = player.slapTime
@@ -221,7 +222,9 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         } else {
             if (ratTapModel.players[playerNum].playerDeck.count > 0) {
                 burnMessage(you: true)
-                ratTapModel.opponentBurned = true
+                var otherPlayer = ratTapModel.players[otherPlayerNum]
+                otherPlayer.opponentBurned = true
+                ratTapModel.players[otherPlayerNum] = otherPlayer
                 sendData()
             } else {
                 gameOver(isHuman: false)
