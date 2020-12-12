@@ -303,42 +303,8 @@
                                             <action selector="userReady:" destination="Fkh-gM-y3T" eventType="touchUpInside" id="udU-MO-MB5"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="CFF-Xd-vHZ">
-                                        <rect key="frame" x="50" y="615.66666666666663" width="275" height="24.666666666666629"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="X20-oI-jMV">
-                                                <rect key="frame" x="0.0" y="0.0" width="129" height="24.666666666666668"/>
-                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="0yJ-No-QC7">
-                                                <rect key="frame" x="146" y="0.0" width="129" height="24.666666666666668"/>
-                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="ECn-ef-seN">
-                                        <rect key="frame" x="50" y="660.33333333333337" width="275" height="24.666666666666629"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="Jei-Zp-smH">
-                                                <rect key="frame" x="0.0" y="0.0" width="129" height="24.666666666666668"/>
-                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="gna-Qy-WXu">
-                                                <rect key="frame" x="146" y="0.0" width="129" height="24.666666666666668"/>
-                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I0h-cV-eA1">
-                                        <rect key="frame" x="25" y="112" width="325" height="471"/>
+                                        <rect key="frame" x="25" y="120" width="325" height="569"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to Play" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJn-Jt-f2U">
                                                 <rect key="frame" x="106" y="25" width="113" height="22"/>
@@ -347,7 +313,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Zmb-HQ-j2U">
-                                                <rect key="frame" x="9" y="59" width="307" height="404"/>
+                                                <rect key="frame" x="9" y="59" width="307" height="502"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <string key="text">• The aim of the game is to collect all 52 cards.
 • Players alternate pulling the top card off their pile and placing it face-up in the middle.
@@ -385,20 +351,14 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstItem="ECn-ef-seN" firstAttribute="leading" secondItem="jlM-vp-qFh" secondAttribute="leading" constant="50" id="1hG-99-OKI"/>
                                     <constraint firstAttribute="trailing" secondItem="I0h-cV-eA1" secondAttribute="trailing" constant="25" id="4VS-iC-Nih"/>
                                     <constraint firstItem="I0h-cV-eA1" firstAttribute="leading" secondItem="jlM-vp-qFh" secondAttribute="leading" constant="25" id="6Pq-a7-8rJ"/>
-                                    <constraint firstItem="fa3-dg-ZoB" firstAttribute="top" secondItem="ECn-ef-seN" secondAttribute="bottom" constant="40" id="8tK-BF-7xt"/>
                                     <constraint firstAttribute="trailing" secondItem="qh0-ts-B6m" secondAttribute="trailing" constant="25" id="969-wa-lis"/>
-                                    <constraint firstItem="CFF-Xd-vHZ" firstAttribute="leading" secondItem="jlM-vp-qFh" secondAttribute="leading" constant="50" id="CYr-PA-8K9"/>
-                                    <constraint firstItem="CFF-Xd-vHZ" firstAttribute="top" secondItem="I0h-cV-eA1" secondAttribute="bottom" constant="32.666666666666629" id="D7a-ZS-qqH"/>
-                                    <constraint firstAttribute="trailing" secondItem="ECn-ef-seN" secondAttribute="trailing" constant="50" id="hjf-09-mvd"/>
-                                    <constraint firstAttribute="trailing" secondItem="CFF-Xd-vHZ" secondAttribute="trailing" constant="50" id="n7d-db-dJ1"/>
+                                    <constraint firstItem="fa3-dg-ZoB" firstAttribute="top" secondItem="I0h-cV-eA1" secondAttribute="bottom" constant="36" id="HC9-V4-UbN"/>
                                     <constraint firstItem="qh0-ts-B6m" firstAttribute="top" secondItem="jlM-vp-qFh" secondAttribute="top" constant="60" id="qG4-gI-Kv4"/>
-                                    <constraint firstItem="ECn-ef-seN" firstAttribute="top" secondItem="CFF-Xd-vHZ" secondAttribute="bottom" constant="20" id="qUd-zi-9J4"/>
                                     <constraint firstAttribute="bottom" secondItem="fa3-dg-ZoB" secondAttribute="bottom" constant="50" id="qvh-z8-2zR"/>
                                     <constraint firstItem="fa3-dg-ZoB" firstAttribute="centerX" secondItem="jlM-vp-qFh" secondAttribute="centerX" id="rrH-YO-SKZ"/>
-                                    <constraint firstItem="I0h-cV-eA1" firstAttribute="top" secondItem="qh0-ts-B6m" secondAttribute="bottom" constant="22" id="xIt-wy-xQC"/>
+                                    <constraint firstItem="I0h-cV-eA1" firstAttribute="top" secondItem="qh0-ts-B6m" secondAttribute="bottom" constant="30" id="xIt-wy-xQC"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="firstColor">

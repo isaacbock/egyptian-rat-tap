@@ -22,9 +22,6 @@ class BeginMultiplayerViewController: UIViewController, GKLocalPlayerListener {
         gameKitActions?.delegate = self
         gameKitActions?.authenticatePlayer()
         
-        
-        // I can't get this line to run correctly here, but it does still work when called in userReady(). Not sure why but also I don't think I fully understand the authentication process... What I'm trying to do though is immediately open the matchmaker view. -Isaac
-        gameKitActions?.presentMatchmaker()
     }
         
     @IBAction func userReady(_ sender: Any) {
