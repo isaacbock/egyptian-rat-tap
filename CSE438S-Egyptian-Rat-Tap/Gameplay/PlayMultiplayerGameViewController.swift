@@ -32,8 +32,10 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     var playerNum:Int = 0
     var otherPlayerNum:Int = 0
     var gestureRecognizerPile: UITapGestureRecognizer?
+    var gestureRecognizerDeck: UITapGestureRecognizer?
     var slapTimer: Timer?
     var slapTime: Float = 0
+    var flippedCard: Card? = nil
     //End Message strings for slap message when win pile from face card (fc) or slap (s)...
     let fc:String = "won the pile"
     let s:String = "slapped"
@@ -45,14 +47,15 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         match?.delegate = self
         setUpGame()
         
-        let gestureRecognizerDeck = UITapGestureRecognizer(target: self, action: #selector(self.flipCard(_:)))
+        gestureRecognizerDeck = UITapGestureRecognizer(target: self, action: #selector(self.flipCard(_:)))
         gestureRecognizerPile = UITapGestureRecognizer(target: self, action: #selector(self.playerSlapped(_:)))
         
         // Create a dummy card:
         let pCard = PlayingCard(rank: "10", suit: "spade")
         pCard.center = CGPoint(x: self.view.center.x, y: self.view.center.y + 250);
                  view.addSubview(pCard)
-        pCard.addGestureRecognizer(gestureRecognizerDeck)
+        guard let flipGesture = gestureRecognizerDeck else {return}
+        pCard.addGestureRecognizer(flipGesture)
         
         //opponents card
         let comCard = PlayingCard(rank: "10", suit: "spade")
@@ -72,8 +75,12 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         if !yourTurn && ratTapModel.opponentFlipped {
             ratTapModel.opponentFlipped = false
             guard let pop = ratTapModel.flippedCard else {return}
+            // LOCAL RECENTLY FLIPPED CARD COMPARISON ENSURES THE SAME CARD ISN'T FLIPPED TWICE ON AN OPPONENT SLAP
+            if flippedCard != nil && pop.rank == flippedCard?.rank && pop.suit == flippedCard?.suit {return}
+            flippedCard = pop
             ratTapModel.flippedCard = nil
             sendData()
+            switchTurn(toYou: true)
             let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
             
             card.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 250);
@@ -92,7 +99,7 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
                 return
             }
             card.addGestureRecognizer(gesture)
-            switchTurn(toYou: true)
+//            switchTurn(toYou: true)
             checkPile()
             sendData()
         }
@@ -196,11 +203,15 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
                 return
             }
             card.addGestureRecognizer(gesture)
+            guard let flipGesture = gestureRecognizerDeck else {return}
+            card.removeGestureRecognizer(flipGesture)
             ratTapModel.opponentFlipped = true
             ratTapModel.flippedCard = pop
+            flippedCard = pop
             sendData()
             checkPile()
             checkSlappable()
+//            switchTurn(toYou: false)
             sendData()
             switchTurn(toYou: false)
         }
@@ -216,9 +227,11 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             var otherPlayer = ratTapModel.players[otherPlayerNum]
             if otherPlayer.slapTime == 0 {
                 // OTHER PLAYER HAS NOT SLAPPED YET
+                // THIS SHOULD HELP WITH SIMULTANEOUS SLAPS
                 otherPlayer.slapTime = yourTime + 1
             }
             ratTapModel.players[otherPlayerNum] = otherPlayer
+            ratTapModel.opponentFlipped = false
             sendData()
         } else {
             if (ratTapModel.players[playerNum].playerDeck.count > 0) {
