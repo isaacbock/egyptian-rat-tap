@@ -71,8 +71,9 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         //ANIMATING THE OPPONENT'S CARD FLIPPING
         if !yourTurn && ratTapModel.opponentFlipped {
             ratTapModel.opponentFlipped = false
-            sendData()
             guard let pop = ratTapModel.flippedCard else {return}
+            ratTapModel.flippedCard = nil
+            sendData()
             let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
             
             card.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 250);
@@ -221,11 +222,12 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             sendData()
         } else {
             if (ratTapModel.players[playerNum].playerDeck.count > 0) {
-                burnMessage(you: true)
                 var otherPlayer = ratTapModel.players[otherPlayerNum]
                 otherPlayer.opponentBurned = true
                 ratTapModel.players[otherPlayerNum] = otherPlayer
+                ratTapModel.opponentFlipped = false
                 sendData()
+                burnMessage(you: true)
             } else {
                 gameOver(isHuman: false)
             }
