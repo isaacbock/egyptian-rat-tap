@@ -524,6 +524,7 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     }
     
     func faceCard() {
+        if ratTapModel.pile.count == 0 {return}
         let lastCard = ratTapModel.pile[ratTapModel.pile.count-1]
         if(Int(lastCard.rank.rankOnCard)==nil){
             faceCardPlayed = true
@@ -588,8 +589,10 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
            let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
            card.center = CGPoint(x: self.view.center.x, y: self.view.center.y + 250);
            view.addSubview(card)
-
-           view.insertSubview(card, belowSubview: playingCardPile[0])
+            
+            if playingCardPile.count > 0 {
+                view.insertSubview(card, belowSubview: playingCardPile[0])
+            }
 
            card.flip()
 
@@ -610,7 +613,9 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             card.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 250);
             view.addSubview(card)
             
-            view.insertSubview(card, belowSubview: playingCardPile[0])
+            if playingCardPile.count > 0 {
+                view.insertSubview(card, belowSubview: playingCardPile[0])
+            }
             
             card.flip()
             
