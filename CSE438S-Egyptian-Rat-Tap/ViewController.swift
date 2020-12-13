@@ -8,6 +8,8 @@
 
 import UIKit
 
+var opponentQuit: Bool = false
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -64,6 +66,30 @@ class ViewController: UIViewController {
     @IBAction func unwind(_ unwindSegue: UIStoryboardSegue) {
         _ = unwindSegue.source
         // Use data from the view controller which initiated the unwind segue
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if(opponentQuit){
+            opponentQuitMessage()
+            opponentQuit=false
+        }
+    }
+    
+    
+    func opponentQuitMessage(){
+        let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
+        let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
+
+        let attributedTitle = NSMutableAttributedString(string: "Your opponent left the game.", attributes: titleFont)
+        let attributedMessage = NSMutableAttributedString(string: "You win by default.", attributes: messageFont)
+        alert.setValue(attributedTitle, forKey: "attributedTitle")
+        alert.setValue(attributedMessage, forKey: "attributedMessage")
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { action in
+             print("your opponent quit")
+        }))
+
+        present(alert, animated:true)
     }
 
 }

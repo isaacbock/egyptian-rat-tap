@@ -43,6 +43,8 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     let fc:String = "won the pile"
     let s:String = "slapped"
     
+    var quitter: String? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -474,7 +476,6 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
                     self.playingCardPile[2].center = CGPoint(x: self.view.center.x, y: self.view.center.y)
                 })
             }
-//            faceCard()
         }
     
     func checkSlappable() {
@@ -669,8 +670,25 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             yourCardCountLabel.layer.masksToBounds = false
             opponentCardCountLabel.layer.shadowRadius = 0
         }
-        
-
     }
-
-}
+    }
+    
+    @IBAction func quit(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.quitter = GKLocalPlayer.local.displayName
+            self.match?.disconnect()
+        }
+        print("you quit the game")
+       }
+    
+    func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
+       if quitter == nil {
+        quitter = ratTapModel.players[otherPlayerNum].name
+        }
+        if(quitter != GKLocalPlayer.local.displayName){
+            opponentQuit=true
+            DispatchQueue.main.async {
+                self.exitButton.sendActions(for: .touchUpInside)
+            }
+        }
+    }
