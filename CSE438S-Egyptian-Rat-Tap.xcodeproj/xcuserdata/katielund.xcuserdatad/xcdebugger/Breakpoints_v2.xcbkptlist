@@ -126,9 +126,9 @@
             filePath = "CSE438S-Egyptian-Rat-Tap/Gameplay/PlayMultiplayerGameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "677"
-            endingLineNumber = "677"
-            landmarkName = "switchTurn(toYou:)"
+            startingLineNumber = "676"
+            endingLineNumber = "676"
+            landmarkName = "quit(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

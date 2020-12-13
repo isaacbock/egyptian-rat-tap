@@ -671,7 +671,6 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             opponentCardCountLabel.layer.shadowRadius = 0
         }
     }
-    }
     
     @IBAction func quit(_ sender: Any) {
         DispatchQueue.main.async {
@@ -692,3 +691,4 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             }
         }
     }
+}
