@@ -338,9 +338,11 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             yourCardCountLabel.text = "\(GKLocalPlayer.local.displayName)'s Card Count: \(yourPlayer.playerDeck.count)"
             ratTapModel.pile = []
             slapMessage(won: true, endMessage: endMessage)
+            switchTurn(toYou:true)
         }
         else {
             slapMessage(won: false, endMessage: endMessage)
+            switchTurn(toYou:false)
         }
         // REMOVE CARDS
         for i in 0..<playingCardPile.count{
