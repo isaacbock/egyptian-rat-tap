@@ -35,6 +35,10 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     var gestureRecognizerDeck: UITapGestureRecognizer?
     var slapTime: Float = 0
     var flippedCard: Card? = nil
+    var faceCardPlayed: Bool = false
+    var faceCardPlayedByYou: Bool = false
+    var faceCardCounter: Int = 0
+    var collectFaceCardPile: Bool = false
     //End Message strings for slap message when win pile from face card (fc) or slap (s)...
     let fc:String = "won the pile"
     let s:String = "slapped"
@@ -71,7 +75,7 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     private func updateUI() {
         
         //ANIMATING THE OPPONENT'S CARD FLIPPING
-        if !yourTurn && ratTapModel.opponentFlipped {
+        if (!faceCardPlayed || faceCardPlayedByYou) && !yourTurn && ratTapModel.opponentFlipped {
             ratTapModel.opponentFlipped = false
             guard let pop = ratTapModel.flippedCard else {return}
             // LOCAL RECENTLY FLIPPED CARD COMPARISON ENSURES THE SAME CARD ISN'T FLIPPED TWICE ON AN OPPONENT SLAP
@@ -79,7 +83,32 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             flippedCard = pop
             ratTapModel.flippedCard = nil
             sendData()
-            switchTurn(toYou: true)
+            faceCard()
+            print("faceCardCounter from updateUI: \(faceCardCounter)")
+
+            if faceCardPlayed {
+                faceCardCounter -= 1
+            }
+            if faceCardPlayed && faceCardCounter < 0 {
+                var yourPlayer = ratTapModel.players[playerNum]
+                yourPlayer.playerDeck.append(contentsOf: ratTapModel.pile)
+                ratTapModel.players[playerNum] = yourPlayer
+                sendData()
+                yourCardCountLabel.text = "\(GKLocalPlayer.local.displayName)'s Card Count: \(yourPlayer.playerDeck.count)"
+                ratTapModel.pile = []
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.pileWon(isYou: true, player: self.ratTapModel.players[self.playerNum], endMessage: self.fc)
+                    self.yourCardCountLabel.text = "\(GKLocalPlayer.local.displayName)'s Card Count: \(self.ratTapModel.players[self.playerNum].playerDeck.count + self.ratTapModel.pile.count)"
+                }
+                self.faceCardPlayed = false
+                self.faceCardPlayedByYou = false
+                self.faceCardCounter = 0
+            }
+            
+            if !faceCardPlayed || !faceCardPlayedByYou {
+                switchTurn(toYou: true)
+            }
+//            switchTurn(toYou: true)
             let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
             
             card.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 250);
@@ -138,7 +167,7 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
                 }
                 else if yourTime < opponentTime {
                     print("\(GKLocalPlayer.local.displayName) won the pile")
-                    pileWon(isYou: true, player: player)
+                    pileWon(isYou: true, player: player, endMessage: self.s)
                     // NOTIFY OTHER PLAYER THEY LOST
                     otherPlayer.lostSlap = true
                     ratTapModel.players[otherPlayerNum] = otherPlayer
@@ -146,7 +175,7 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
                 } else {
                     guard let player2Name = match?.players.first?.displayName else { return }
                     print("\(player2Name) won the pile")
-                    pileWon(isYou: false, player: nil)
+                    pileWon(isYou: false, player: nil, endMessage: self.s)
                     // NOTIFY OTHER PLAYER THEY WON
                     otherPlayer.wonSlap = true
                     ratTapModel.players[otherPlayerNum] = otherPlayer
@@ -156,14 +185,20 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             
             // YOU LOST SLAP
             if player.lostSlap {
-                pileWon(isYou: false, player: nil)
+                faceCardPlayedByYou = false
+                faceCardPlayed = false
+                faceCardCounter = 0
+                pileWon(isYou: false, player: nil, endMessage: self.s)
                 player.lostSlap = false
                 ratTapModel.players[playerNum] = player
                 sendData()
             }
             // YOU WON SLAP
             if player.wonSlap {
-                pileWon(isYou: true, player: player)
+                faceCardPlayedByYou = false
+                faceCardPlayed = false
+                faceCardCounter = 0
+                pileWon(isYou: true, player: player, endMessage: self.s)
                 player.wonSlap = false
                 ratTapModel.players[playerNum] = player
                 sendData()
@@ -209,15 +244,43 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             flippedCard = pop
             sendData()
             checkPile()
+            faceCard()
+            print("faceCardCounter from flipCard: \(faceCardCounter)")
             checkSlappable()
-//            switchTurn(toYou: false)
             sendData()
-            switchTurn(toYou: false)
+            //facecard if
+            if !faceCardPlayed || faceCardPlayedByYou {
+                switchTurn(toYou: false)
+            }
+            //            if faceCardCounter > 0 && !faceCardPlayedByYou {
+            if faceCardPlayed && faceCardCounter >= 0 {
+                faceCardCounter -= 1
+            }
+            if faceCardPlayed && faceCardCounter < 0 && !faceCardPlayedByYou {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.faceCardOver()
+                }
+            }
+            
+        }
+        
+    }
+    
+    func faceCardOver() {
+        collectFaceCardPile = true
+        faceCardPlayed = false
+        faceCardPlayedByYou = false
+        faceCardCounter = 0
+        if !faceCardPlayedByYou {
+            slap()
         }
     }
     
     func slap() {
         if checkSlap() {
+            faceCardPlayedByYou = false
+            faceCardPlayed = false
+            faceCardCounter = 0
             // GET UNIX TIMESTAMP FOR NOW
             let yourTime = Date().timeIntervalSince1970
             var player = ratTapModel.players[playerNum]
@@ -232,6 +295,11 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             ratTapModel.players[otherPlayerNum] = otherPlayer
             ratTapModel.opponentFlipped = false
             sendData()
+        } else if collectFaceCardPile {
+            pileWon(isYou: false, player: nil, endMessage: self.fc)
+//            slapMessage(won: false, endMessage: fc)
+            collectFaceCardPile = false
+            switchTurn(toYou: false)
         } else {
             if (ratTapModel.players[playerNum].playerDeck.count > 0) {
                 var otherPlayer = ratTapModel.players[otherPlayerNum]
@@ -246,18 +314,31 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         }
     }
     
-    func pileWon(isYou: Bool, player: RatTapPlayer?) {
-        if isYou {
+    func pileWon(isYou: Bool, player: RatTapPlayer?, endMessage: String) {
+        if collectFaceCardPile && !isYou {
+            let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+            let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
+            let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
+            let opponent = ratTapModel.players[otherPlayerNum]
+            let attributedTitle = NSMutableAttributedString(string: "Your opponent \(endMessage)!", attributes: titleFont)
+            let attributedMessage = NSMutableAttributedString(string: "They now have \(opponent.playerDeck.count + ratTapModel.pile.count) cards.", attributes: messageFont)
+            alert.setValue(attributedTitle, forKey: "attributedTitle")
+            alert.setValue(attributedMessage, forKey: "attributedMessage")
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { action in
+            }))
+            present(alert, animated:true)
+        }
+        else if isYou {
             guard var yourPlayer = player else {return}
             yourPlayer.playerDeck.append(contentsOf: ratTapModel.pile)
             ratTapModel.players[playerNum] = yourPlayer
             sendData()
             yourCardCountLabel.text = "\(GKLocalPlayer.local.displayName)'s Card Count: \(yourPlayer.playerDeck.count)"
             ratTapModel.pile = []
-            slapMessage(won: true, endMessage: self.s)
+            slapMessage(won: true, endMessage: endMessage)
         }
         else {
-            slapMessage(won: false, endMessage: self.s)
+            slapMessage(won: false, endMessage: endMessage)
         }
         // REMOVE CARDS
         for i in 0..<playingCardPile.count{
@@ -269,6 +350,7 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     
     //checks if pile is slappable
     func checkSlap() -> Bool {
+        if collectFaceCardPile {return false}
         if(playingCardPile.count <= 1){
             return false
         } else if (playingCardPile.count>2 && playingCardPile[0].rank==playingCardPile[2].rank){ //sandwich
@@ -392,6 +474,7 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
                     self.playingCardPile[2].center = CGPoint(x: self.view.center.x, y: self.view.center.y)
                 })
             }
+//            faceCard()
         }
     
     func checkSlappable() {
@@ -435,6 +518,21 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         }
                 
         present(alert, animated:true)
+    }
+    
+    func faceCard() {
+        let lastCard = ratTapModel.pile[ratTapModel.pile.count-1]
+        if(Int(lastCard.rank.rankOnCard)==nil){
+            faceCardPlayed = true
+            faceCardCounter = lastCard.rank.numOfFlips
+            if yourTurn {
+                faceCardPlayedByYou = true;
+                print("Face card played by you")
+            } else {
+                faceCardPlayedByYou = false;
+                print("Face card played by opponent")
+            }
+        }
     }
     
     func tieMessage() {
