@@ -255,9 +255,11 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             yourCardCountLabel.text = "\(GKLocalPlayer.local.displayName)'s Card Count: \(yourPlayer.playerDeck.count)"
             ratTapModel.pile = []
             slapMessage(won: true, endMessage: self.s)
+            switchTurn(toYou:true)
         }
         else {
             slapMessage(won: false, endMessage: self.s)
+            switchTurn(toYou:false)
         }
         // REMOVE CARDS
         for i in 0..<playingCardPile.count{
@@ -571,8 +573,30 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             yourCardCountLabel.layer.masksToBounds = false
             opponentCardCountLabel.layer.shadowRadius = 0
         }
-        
-
     }
+    
+    @IBAction func quit(_ sender: Any) {
+        match?.disconnect()
+        print("you quit the game")
+       }
+    
+    func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
+        
+    }
+    
+    func opponentQuitMessage(){
+        let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
+        let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
 
+        let attributedTitle = NSMutableAttributedString(string: "Your opponent left the game.", attributes: titleFont)
+        let attributedMessage = NSMutableAttributedString(string: "You win by default .", attributes: messageFont)
+        alert.setValue(attributedTitle, forKey: "attributedTitle")
+        alert.setValue(attributedMessage, forKey: "attributedMessage")
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { action in
+             self.exitButton.sendActions(for: .touchUpInside)
+        }))
+
+        present(alert, animated:true)
+    }
 }

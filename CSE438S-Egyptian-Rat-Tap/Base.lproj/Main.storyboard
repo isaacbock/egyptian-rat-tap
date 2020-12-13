@@ -595,6 +595,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
+                                            <action selector="quit:" destination="RLh-v5-ViD" eventType="touchUpInside" id="TmQ-gD-02r"/>
                                             <segue destination="jUv-5V-HUd" kind="unwind" unwindAction="unwind:" id="6qf-fX-XI4"/>
                                         </connections>
                                     </button>
