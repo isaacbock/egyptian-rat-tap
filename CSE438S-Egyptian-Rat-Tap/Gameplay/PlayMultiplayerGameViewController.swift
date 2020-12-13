@@ -576,27 +576,20 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     }
     
     @IBAction func quit(_ sender: Any) {
-        match?.disconnect()
+        DispatchQueue.main.async {
+          // offending code goes in here
+            self.match?.disconnect()
+        }
         print("you quit the game")
        }
     
     func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
-        
-    }
-    
-    func opponentQuitMessage(){
-        let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
-        let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
-        let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
-
-        let attributedTitle = NSMutableAttributedString(string: "Your opponent left the game.", attributes: titleFont)
-        let attributedMessage = NSMutableAttributedString(string: "You win by default .", attributes: messageFont)
-        alert.setValue(attributedTitle, forKey: "attributedTitle")
-        alert.setValue(attributedMessage, forKey: "attributedMessage")
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { action in
-             self.exitButton.sendActions(for: .touchUpInside)
-        }))
-
-        present(alert, animated:true)
+        if(player != GKLocalPlayer.local){
+            print("opponent quit")
+            opponentQuit=true
+            DispatchQueue.main.async {
+                self.exitButton.sendActions(for: .touchUpInside)
+            }
+        }
     }
 }
