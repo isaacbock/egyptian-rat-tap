@@ -66,7 +66,6 @@ class ViewController: UIViewController {
     @IBAction func unwind(_ unwindSegue: UIStoryboardSegue) {
         _ = unwindSegue.source
         // Use data from the view controller which initiated the unwind segue
-       // opponentQuitMessage()
     }
     
     override func viewDidAppear(_ animated: Bool) {

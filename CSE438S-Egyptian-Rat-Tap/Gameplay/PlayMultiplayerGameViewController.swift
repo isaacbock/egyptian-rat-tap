@@ -39,6 +39,8 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     let fc:String = "won the pile"
     let s:String = "slapped"
     
+    var quitter: String? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -577,15 +579,17 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     
     @IBAction func quit(_ sender: Any) {
         DispatchQueue.main.async {
-          // offending code goes in here
+            self.quitter = GKLocalPlayer.local.displayName
             self.match?.disconnect()
         }
         print("you quit the game")
        }
     
     func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
-        if(player != GKLocalPlayer.local){
-            print("opponent quit")
+       if quitter == nil {
+        quitter = ratTapModel.players[otherPlayerNum].name
+        }
+        if(quitter != GKLocalPlayer.local.displayName){
             opponentQuit=true
             DispatchQueue.main.async {
                 self.exitButton.sendActions(for: .touchUpInside)
