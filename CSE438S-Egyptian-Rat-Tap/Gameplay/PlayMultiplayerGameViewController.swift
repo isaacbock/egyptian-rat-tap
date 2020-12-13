@@ -33,7 +33,6 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     var otherPlayerNum:Int = 0
     var gestureRecognizerPile: UITapGestureRecognizer?
     var gestureRecognizerDeck: UITapGestureRecognizer?
-    var slapTimer: Timer?
     var slapTime: Float = 0
     var flippedCard: Card? = nil
     //End Message strings for slap message when win pile from face card (fc) or slap (s)...
