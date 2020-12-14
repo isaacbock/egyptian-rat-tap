@@ -77,6 +77,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="MKN-hp-3Na"/>
+                    <connections>
+                        <outlet property="multiplayerButton" destination="9Uh-cB-jFX" id="HSe-dG-Rep"/>
+                        <outlet property="singlePlayerButton" destination="ghE-BF-r6e" id="amF-1h-qm2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

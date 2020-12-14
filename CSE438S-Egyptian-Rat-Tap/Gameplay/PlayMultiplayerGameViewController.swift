@@ -157,8 +157,6 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
                 } else {
                     gameOver(youWin: true)
                 }
-                ratTapModel.players[playerNum] = player
-                sendData()
             }
             
             if player.slapTime != 0 && otherPlayer.slapTime != 0 {
@@ -262,7 +260,10 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             sendData()
             //facecard if
             if !faceCardPlayed || faceCardPlayedByYou {
-                switchTurn(toYou: false)
+                let otherPlayer = ratTapModel.players[otherPlayerNum]
+                if otherPlayer.playerDeck.count > 0 {
+                    switchTurn(toYou: false)
+                }
             }
             if faceCardPlayed && faceCardPlayedByYou {
                 var otherPlayer = ratTapModel.players[otherPlayerNum]
@@ -371,8 +372,6 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             sendData()
             yourCardCountLabel.text = "\(GKLocalPlayer.local.displayName)'s Card Count: \(yourPlayer.playerDeck.count)"
             ratTapModel.pile = []
-            slapMessage(won: true, endMessage: endMessage)
-            switchTurn(toYou:true)
             if (yourPlayer.playerDeck.count == 52) {
                 var otherPlayer = ratTapModel.players[otherPlayerNum]
                 otherPlayer.gameOver = true
@@ -381,6 +380,8 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
                 sendData()
                 gameOver(youWin: true)
             }
+            slapMessage(won: true, endMessage: endMessage)
+            switchTurn(toYou:true)
         }
         else {
             slapMessage(won: false, endMessage: endMessage)
@@ -674,7 +675,9 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
        }
     
     func gameOver(youWin: Bool) {
+        gameEnd = true
            if youWin {
+                   opponentWon = false
                    let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
                    let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
                    let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
@@ -687,6 +690,7 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
                    }))
                present(alert, animated:true)
            } else {
+                   opponentWon = true
                    let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
                    let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
                    let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]

@@ -9,9 +9,14 @@
 import UIKit
 
 var opponentQuit: Bool = false
+var gameEnd: Bool = false
+var opponentWon: Bool = false
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var singlePlayerButton: RoundedButton!
+    @IBOutlet weak var multiplayerButton: RoundedButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -69,7 +74,14 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if(opponentQuit){
+        if (gameEnd) {
+            if (opponentWon) {
+                playAgainMessage(youWon: false)
+            } else {
+                playAgainMessage(youWon: true)
+            }
+            gameEnd = false
+        } else if(opponentQuit){
             opponentQuitMessage()
             opponentQuit=false
         }
@@ -87,6 +99,35 @@ class ViewController: UIViewController {
         alert.setValue(attributedMessage, forKey: "attributedMessage")
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { action in
              print("your opponent quit")
+        }))
+
+        present(alert, animated:true)
+    }
+    
+    func playAgainMessage(youWon: Bool) {
+        let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
+        let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
+
+        if (youWon) {
+            let attributedTitle = NSMutableAttributedString(string: "You won the game!", attributes: titleFont)
+            let attributedMessage = NSMutableAttributedString(string: "Congratulations. Play again?", attributes: messageFont)
+            alert.setValue(attributedTitle, forKey: "attributedTitle")
+            alert.setValue(attributedMessage, forKey: "attributedMessage")
+        } else {
+            let attributedTitle = NSMutableAttributedString(string: "Your opponent won the game.", attributes: titleFont)
+            let attributedMessage = NSMutableAttributedString(string: "Better luck next time. Play again?", attributes: messageFont)
+            alert.setValue(attributedTitle, forKey: "attributedTitle")
+            alert.setValue(attributedMessage, forKey: "attributedMessage")
+        }
+        alert.addAction(UIAlertAction(title: "Play Single Player", style: .default, handler: { action in
+             self.singlePlayerButton.sendActions(for: .touchUpInside)
+        }))
+        alert.addAction(UIAlertAction(title: "Play Multiplayer", style: .default, handler: { action in
+             self.multiplayerButton.sendActions(for: .touchUpInside)
+        }))
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { action in
+             
         }))
 
         present(alert, animated:true)

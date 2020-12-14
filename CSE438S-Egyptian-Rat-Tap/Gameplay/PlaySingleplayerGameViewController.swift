@@ -372,7 +372,9 @@ class PlayViewController: UIViewController {
     }
     
     func gameOver(isHuman: Bool) {
+        gameEnd = true
         if isHuman {
+                opponentWon = false
                 let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
                 let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
                 let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
@@ -385,6 +387,7 @@ class PlayViewController: UIViewController {
                 }))
             present(alert, animated:true)
         } else {
+                opponentWon = true
                 let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
                 let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
                 let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
