@@ -26,16 +26,6 @@ class BeginMultiplayerViewController: UIViewController, GKLocalPlayerListener {
         
     @IBAction func userReady(_ sender: Any) {
         gameKitActions?.presentMatchmaker()
-        
-        // TO-DO:
-        // update some variable to track that current user is ready
-        
-        // TO-DO: update text label of user to show checkmark or some other ready indicator
-        
-        // TO-DO: if all users are ready {
-            // start game
-//            performSegue(withIdentifier: "beginMultiplayerGame", sender: self)
-        // }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
