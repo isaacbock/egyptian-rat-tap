@@ -27,10 +27,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="lnP-S1-pNP">
-                                        <rect key="frame" x="129" y="617" width="117" height="95"/>
+                                        <rect key="frame" x="119" y="615" width="137" height="97"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghE-BF-r6e" customClass="RoundedButton" customModule="CSE438S_Egyptian_Rat_Tap" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="117" height="36"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="137" height="37"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
                                                 <state key="normal" title="Single Player">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -40,7 +40,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Uh-cB-jFX" customClass="RoundedButton" customModule="CSE438S_Egyptian_Rat_Tap" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="59" width="117" height="36"/>
+                                                <rect key="frame" x="0.0" y="60" width="137" height="37"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
                                                 <state key="normal" title="Multiplayer">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -113,13 +113,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Card Count:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQr-fv-6KH">
-                                        <rect key="frame" x="119.33333333333333" y="751.33333333333337" width="136.33333333333337" height="18.666666666666629"/>
+                                        <rect key="frame" x="109.33333333333333" y="750.33333333333337" width="156.33333333333337" height="19.666666666666629"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Computer Card Count:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qPP-0k-Ifn">
-                                        <rect key="frame" x="106.00000000000001" y="42" width="163.33333333333337" height="18.666666666666671"/>
+                                        <rect key="frame" x="93.666666666666686" y="42" width="188" height="18.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -319,19 +319,19 @@
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Zmb-HQ-j2U">
                                                 <rect key="frame" x="9" y="59" width="307" height="502"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                <string key="text">• The aim of the game is to collect all 52 cards.
+                                                <mutableString key="text">• The aim of the game is to collect all 52 cards.
 • Players alternate pulling the top card off their pile and placing it face-up in the middle.
 • If the card played is a number card, the next player puts down a card.
 • If the card played is a face card or an ace, the next player must play another face card or ace within their allotted chances (1 for J, 2 for Q, 3 for K, 4 for A). 
-• If the next player does not play a face card or an ace within their allotted chances, then the player that played the last face card or ace wins the round and can tap the middle to collect the pile.
-• The slap rule is the only rule that overrides the face card or ace rule.
+• If the next player does not play a face card or an ace within their allotted chances, then the player that played the last face card or ace wins the round and the pile is automatically collected.
+• The slap rule is the only rule that can sometimes override the face card or ace rule.
 • The first person to tap the pile of cards when there is one of the following patterns wins the round:
 • Double – When two cards of equivalent value are laid down consecutively (e.g. 5, 5)
 • Sandwich – When two cards of equivalent value are laid down with one card of different value between them (e.g. 6, 8, 6)
 • Tens – When two cards played consecutively add up to 10 (e.g. 3, 7)
 • Marriage – When a queen is placed over or under a king (e.g. Q, K)
 • If you slap incorrectly, you automatically add one card to the bottom of the pile.
-• The game ends when one player obtains all 52 cards.</string>
+• The game ends when one player obtains all 52 cards.</mutableString>
                                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -604,13 +604,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Card Count:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zVa-X6-s0d">
-                                        <rect key="frame" x="125.66666666666666" y="750" width="123.66666666666666" height="20"/>
+                                        <rect key="frame" x="116.66666666666669" y="750" width="142" height="20"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opponent Card Count:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TrR-IR-0oj">
-                                        <rect key="frame" x="106.00000000000001" y="44" width="163.33333333333337" height="20"/>
+                                        <rect key="frame" x="93" y="44" width="189" height="20"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>

@@ -9,10 +9,6 @@
 import UIKit
 import GameKit
 
-//TO DO:
-//  - face card logic
-//  - burn logic
-//  - winning logic
 
 class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     @IBOutlet weak var yourCardCountLabel: UILabel!
@@ -75,7 +71,6 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     
     //perform UI updates
     private func updateUI() {
-        print("\(GKLocalPlayer.local.displayName) – update UI")
         
         //ANIMATING THE OPPONENT'S CARD FLIPPING
         if (!faceCardPlayed || faceCardPlayedByYou) && !yourTurn && ratTapModel.opponentFlipped {
@@ -109,7 +104,10 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             }
             
             if !faceCardPlayed || !faceCardPlayedByYou {
-                switchTurn(toYou: true)
+                let yourPlayer = ratTapModel.players[playerNum]
+                if yourPlayer.playerDeck.count > 0 {
+                    switchTurn(toYou: true)
+                }
             }
 //            switchTurn(toYou: true)
             let card = PlayingCard(rank: pop.rank.rankOnCard, suit: pop.suit.rawValue)
@@ -223,7 +221,6 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
     }
     
     @objc func flipCard(_ sender: UITapGestureRecognizer) {
-        print("\(GKLocalPlayer.local.displayName) – flip card")
         if yourTurn {
             var player = ratTapModel.players[playerNum]
             let pop = player.playerDeck.removeFirst()
@@ -265,8 +262,6 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
                 let otherPlayer = ratTapModel.players[otherPlayerNum]
                 if otherPlayer.playerDeck.count > 0 {
                     switchTurn(toYou: false)
-                } else {
-                    print("\(GKLocalPlayer.local.displayName) – not switching turn")
                 }
             }
             if faceCardPlayed && faceCardPlayedByYou {
