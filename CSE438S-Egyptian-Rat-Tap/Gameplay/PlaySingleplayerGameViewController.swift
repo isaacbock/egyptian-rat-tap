@@ -101,7 +101,8 @@ class PlayViewController: UIViewController {
             
             checkPile()
             
-            if (faceCardPlayed && faceCardPlayedByHuman && comCardCount == 0) {
+            // add not slappable logic??
+            if (faceCardPlayed && faceCardPlayedByHuman && comCardCount == 0 && !slappable) {
                 gameOver(isHuman: true)
             }
             
@@ -169,11 +170,12 @@ class PlayViewController: UIViewController {
             }
             card.addGestureRecognizer(gesture)
             
+            checkPile()
+            
+            // add not slappable logic??
             if (faceCardPlayed && !faceCardPlayedByHuman && pCardCount == 0) {
                 gameOver(isHuman: false)
             }
-            
-            checkPile()
             
             //face card logic
             if faceCardCounter > 0 && faceCardPlayedByHuman{

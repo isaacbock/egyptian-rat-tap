@@ -151,6 +151,16 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
                 sendData()
             }
             
+            if (player.gameOver) {
+                if (player.opponentWon) {
+                    gameOver(youWin: false)
+                } else {
+                    gameOver(youWin: true)
+                }
+                ratTapModel.players[playerNum] = player
+                sendData()
+            }
+            
             if player.slapTime != 0 && otherPlayer.slapTime != 0 {
                 // BOTH SLAP TIMES SET: CHECK WHO WON, DISPLAY YOUR MESSAGE
                 let yourTime = player.slapTime
@@ -254,7 +264,26 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             if !faceCardPlayed || faceCardPlayedByYou {
                 switchTurn(toYou: false)
             }
-            //            if faceCardCounter > 0 && !faceCardPlayedByYou {
+            if faceCardPlayed && faceCardPlayedByYou {
+                var otherPlayer = ratTapModel.players[otherPlayerNum]
+                if otherPlayer.playerDeck.count == 0 {
+                    otherPlayer.gameOver = true
+                    otherPlayer.opponentWon = true
+                    ratTapModel.players[otherPlayerNum] = otherPlayer
+                    sendData()
+                    gameOver(youWin: true)
+                }
+            }
+            if faceCardCounter > 0 && !faceCardPlayedByYou {
+                if (player.playerDeck.count == 0) {
+                    var otherPlayer = ratTapModel.players[otherPlayerNum]
+                    otherPlayer.gameOver = true
+                    otherPlayer.opponentWon = false
+                    ratTapModel.players[otherPlayerNum] = otherPlayer
+                    sendData()
+                    gameOver(youWin: false)
+                }
+            }
             if faceCardPlayed && faceCardCounter >= 0 {
                 faceCardCounter -= 1
             }
@@ -311,7 +340,12 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
                 sendData()
                 burnMessage(you: true)
             } else {
-                gameOver(isHuman: false)
+                var otherPlayer = ratTapModel.players[otherPlayerNum]
+                otherPlayer.gameOver = true
+                otherPlayer.opponentWon = false
+                ratTapModel.players[otherPlayerNum] = otherPlayer
+                sendData()
+                gameOver(youWin: false)
             }
         }
     }
@@ -339,6 +373,14 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             ratTapModel.pile = []
             slapMessage(won: true, endMessage: endMessage)
             switchTurn(toYou:true)
+            if (yourPlayer.playerDeck.count == 52) {
+                var otherPlayer = ratTapModel.players[otherPlayerNum]
+                otherPlayer.gameOver = true
+                otherPlayer.opponentWon = true
+                ratTapModel.players[otherPlayerNum] = otherPlayer
+                sendData()
+                gameOver(youWin: true)
+            }
         }
         else {
             slapMessage(won: false, endMessage: endMessage)
@@ -631,8 +673,8 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
         }
        }
     
-    func gameOver(isHuman: Bool) {
-           if isHuman {
+    func gameOver(youWin: Bool) {
+           if youWin {
                    let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
                    let titleFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 18)! ]
                    let messageFont:[NSAttributedString.Key : AnyObject] = [ NSAttributedString.Key.font : UIFont(name: "Montserrat-Regular", size: 14)! ]
