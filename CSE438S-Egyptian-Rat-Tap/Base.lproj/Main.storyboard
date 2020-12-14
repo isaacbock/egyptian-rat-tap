@@ -319,7 +319,7 @@
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Zmb-HQ-j2U">
                                                 <rect key="frame" x="9" y="59" width="307" height="502"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                <mutableString key="text">• The aim of the game is to collect all 52 cards.
+                                                <string key="text">• The aim of the game is to collect all 52 cards.
 • Players alternate pulling the top card off their pile and placing it face-up in the middle.
 • If the card played is a number card, the next player puts down a card.
 • If the card played is a face card or an ace, the next player must play another face card or ace within their allotted chances (1 for J, 2 for Q, 3 for K, 4 for A). 
@@ -331,7 +331,7 @@
 • Tens – When two cards played consecutively add up to 10 (e.g. 3, 7)
 • Marriage – When a queen is placed over or under a king (e.g. Q, K)
 • If you slap incorrectly, you automatically add one card to the bottom of the pile.
-• The game ends when one player obtains all 52 cards.</mutableString>
+• The game ends when one player obtains all 52 cards.</string>
                                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>

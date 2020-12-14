@@ -324,7 +324,11 @@ class PlayViewController: UIViewController {
             slappable = false
         } else if (isHuman){
             //burn a card
-            if (pCardCount > 0) {
+            if (pCardCount > 1) {
+                pCardCount-=1
+                pCardCountLabel.text = "Player Card Count: \(pCardCount)"
+                burnMessage()
+            } else if (pCardCount == 1 && !yourTurn) {
                 pCardCount-=1
                 pCardCountLabel.text = "Player Card Count: \(pCardCount)"
                 burnMessage()

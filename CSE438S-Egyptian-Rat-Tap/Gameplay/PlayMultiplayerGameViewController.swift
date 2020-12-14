@@ -332,7 +332,14 @@ class PlayMultiplayerGameViewController: UIViewController, GKMatchDelegate {
             collectFaceCardPile = false
             switchTurn(toYou: false)
         } else {
-            if (ratTapModel.players[playerNum].playerDeck.count > 0) {
+            if (ratTapModel.players[playerNum].playerDeck.count > 1) {
+                var otherPlayer = ratTapModel.players[otherPlayerNum]
+                otherPlayer.opponentBurned = true
+                ratTapModel.players[otherPlayerNum] = otherPlayer
+                ratTapModel.opponentFlipped = false
+                sendData()
+                burnMessage(you: true)
+            } else if (ratTapModel.players[playerNum].playerDeck.count == 1 && !yourTurn) {
                 var otherPlayer = ratTapModel.players[otherPlayerNum]
                 otherPlayer.opponentBurned = true
                 ratTapModel.players[otherPlayerNum] = otherPlayer
